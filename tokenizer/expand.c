@@ -60,10 +60,114 @@ void	quote_removal(t_token *tok)
 	tok->word = new_word;
 	quote_removal(tok->next);
 }
+////////////
 
-void expand(t_token *tok)
+// while (*p != '\'')
+// {
+// 	if (*p == '\0')
+// 		fatal_error("TODO:single quote\n");
+// 	append_char(&new_word, *p++);
+// }
+
+void	expand_doller(char **dst, char **rest, char *p)
 {
-	quote_removal(tok);
+	char    *name;
+    char    *value;
+
+    name = calloc(1, sizeof(char));
+    if (name == NULL)
+        fatal_error("calloc");
+    if (*p != '$')
+        fatal_error("Expected dollar sign");
+    p++;
+    if (!isalpha(*p) && *p != '_')
+        fatal_error("Variable must starts with alphabetic character or underscore.");
+    append_char(&name,*p++);
+    while (isalpha(*p) != 0 || *p == '_' || isdigit(*p) != 0)
+        append_char(&name,*p++);
+    value = getenv(name);
+    free(name);
+    if (value)
+        while (*value)
+            append_char(dst, *value++);
+    *rest = p;
+}
+
+void	expand_doller_dq(char **dst, char **rest, char *p)
+{
+	char    *name;
+    char    *value;
+
+    name = calloc(1, sizeof(char));
+    if (name == NULL)
+        fatal_error("calloc");
+    if (*p != '$')
+        fatal_error("Expected dollar sign");
+    p++;
+    if (!isalpha(*p) && *p != '_')
+        fatal_error("Variable must starts with alphabetic character or underscore.");
+    append_char(&name,*p++);
+    while ((isalpha(*p) != 0 || *p == '_' || isdigit(*p) != 0) && *p != '\"')
+        append_char(&name,*p++);
+    value = getenv(name);
+    free(name);
+    if (value)
+        while (*value)
+            append_char(dst, *value++);
+    *rest = p;
+}
+
+char	*expand_args(char *args)
+{
+	char *new_word;
+
+	new_word = NULL;
+	while (*args != '\0')
+	{
+		if (*args == '\'')
+		{
+			args++;
+			while (*args != '\'')
+			{
+				if (*args == '\0')
+					fatal_error("single quote\n");
+				append_char(&new_word, *args++);
+			}
+			args++;
+		}
+		else if (*args == '\"')
+		{
+			args++;
+			while (*args != '\"')
+			{
+				if (*args == '\0')
+					fatal_error("double quote\n");
+				if (*args == '$')
+					expand_doller_dq(&new_word, &args, args);
+				else
+					append_char(&new_word, *args++);
+			}
+			args++;
+		}
+		else if (*args == '$')
+			expand_doller(&new_word, &args, args);
+		else
+			append_char(&new_word, *args++);
+	}
+	return (new_word);
+}
+
+void expand(t_node *node)
+{
+	char	*origin;
+
+	origin = node->command->args->word;
+	while (node != NULL)
+	{
+		node->command->args->word = expand_args(node->command->args->word);
+		//free (origin);
+		node = node->next;
+	}
 }
 
 /*#include <stdio.h>

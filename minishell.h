@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/12 17:33:21 by user             ###   ########.fr       */
+/*   Updated: 2023/02/14 22:06:08 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <errno.h>
+#include <ctype.h>
 
 
 /**** token *****/
@@ -103,7 +104,7 @@ char	**ft_split(char const *s, char c);
 int exec(t_node *node);
 int     abusolute_path(char *line);
 bool    is_metacharactert(char c);
-void    expand(t_token *tok);
+void	expand(t_node *node);
 void    tokenize_error(const char *location, char **rest, char *line);
 void	free_token(t_token *head);
 
