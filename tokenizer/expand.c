@@ -160,11 +160,11 @@ char	*expand_args(char *args, char *args_free)
 
 void expand(t_node *node)
 {
-	char		*origin;
+	//char		*origin;
 	t_redirect	*redirect;
 	t_token		*token;
 
-	origin = node->command->args->word;
+	//origin = node->command->args->word;
 	while (node != NULL)
 	{
 		token = node->command->args;

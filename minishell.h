@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/15 15:42:39 by user             ###   ########.fr       */
+/*   Updated: 2023/02/15 23:27:32 by kazuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 #include <sys/wait.h>
 #include <assert.h>
 #include <readline/readline.h>
-#include <readline/history.h>
+//#include <readline/history.h>
 #include <errno.h>
 #include <ctype.h>
+#include "./libft/libft.h"
 
 
 /**** token *****/
@@ -98,6 +99,26 @@ struct s_node {
 	t_node_kind	kind;
 	t_node		*next;
 };
+
+/********* MAP ***********/
+
+typedef struct	s_item {
+	char			*name;
+	char			*value;
+	struct	s_item	*next;;
+}				t_item;
+
+typedef struct	s_map{
+	t_item	*item_head;
+}				t_map;
+
+t_item		*item_new(char *name, char *value);
+t_map		*map_new(void);
+char		*map_get(t_map *map, const char *name);
+void		map_set(t_map **map, char *name, char *value);
+void		map_unset(t_map **map, char *name);
+
+/*************************/
 
 t_token *tokenizer(char *line);
 int     interpret(t_command *command);

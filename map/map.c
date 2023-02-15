@@ -1,4 +1,4 @@
-#include "../include/map.h"
+#include "../minishell.h"
 #include <stdlib.h>
 #include <string.h>
 
