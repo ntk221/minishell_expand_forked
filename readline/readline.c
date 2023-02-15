@@ -30,13 +30,7 @@ int main()
 			//expand(tok);
 			node = parse(tok);
 			expand(node);
-			while (node != NULL)
-			{
-				printf("this is |%s|\n", node->command->args->word);
-				node = node->next;
-			}
-			// expand(node);
-			// exec(node);
+			exec(node);
 			if (tok != NULL)
 				free_token(tok);
 		}

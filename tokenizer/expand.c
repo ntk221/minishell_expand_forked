@@ -117,7 +117,7 @@ void	expand_doller_dq(char **dst, char **rest, char *p)
     *rest = p;
 }
 
-char	*expand_args(char *args)
+char	*expand_args(char *args, char *args_free)
 {
 	char *new_word;
 
@@ -154,18 +154,35 @@ char	*expand_args(char *args)
 		else
 			append_char(&new_word, *args++);
 	}
+	free(args_free);
 	return (new_word);
 }
 
 void expand(t_node *node)
 {
-	char	*origin;
+	char		*origin;
+	t_redirect	*redirect;
+	t_token		*token;
 
 	origin = node->command->args->word;
 	while (node != NULL)
 	{
-		node->command->args->word = expand_args(node->command->args->word);
-		//free (origin);
+		token = node->command->args;
+		while (token != NULL)
+		{
+			token->word = expand_args(token->word, token->word);
+			token = token->next;
+		}
+		if (node->command->redirect != NULL)
+		{
+			redirect = *(node->command->redirect);
+			while (redirect != NULL)
+			{
+				if (redirect->type != HEREDOC)
+					redirect->file_path = expand_args(redirect->file_path, redirect->file_path);
+				redirect = redirect->next;
+			}
+		}
 		node = node->next;
 	}
 }
