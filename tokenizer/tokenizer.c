@@ -2,6 +2,40 @@
 
 bool	syntax_error = false;
 
+static	char	*input_char(const char *insert, char *inserted)
+{
+	while ((*insert) != '\0')
+	{
+		*inserted = *insert;
+		insert = insert + 1;
+		inserted = inserted + 1;
+	}
+	return (inserted);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t		len;
+	char		*dust;
+	char		*dust_first;
+
+	if ((s1 == NULL) && (s2 == NULL))
+		return (NULL);
+	if (s1 == NULL)
+		return (strdup(s2));
+	if (s2 == NULL)
+		return (strdup(s1));
+	len = strlen(s1) + strlen(s2);
+	dust = (char *)malloc(sizeof(char) * (len + 1));
+	if (!(dust))
+		return (NULL);
+	dust_first = dust;
+	dust = input_char(s1, dust);
+	dust = input_char(s2, dust);
+	*dust = '\0';
+	return (dust_first);
+}
+
 void	tokenize_error(const char *location, char **rest, char *line)
 {
 	syntax_error = true;
@@ -85,13 +119,50 @@ t_token *new_token(char *word, t_token_kind kind)
 	return (tok);
 }
 
+void append_string_test(char **s, char c)
+{
+	size_t	size;
+	char	*new;
+
+	size = 2;
+	if (*s)
+		size += strlen(*s);
+	new = malloc(size);
+	if (new == NULL)
+		fatal_error("malloc");
+	if (*s)
+		ft_strlcpy(new, *s, size);
+	new[size - 2] = c;
+	new[size - 1] = '\0';
+	// if (*s)
+	// 	free(*s);
+	*s = new;
+}
+
+char	*token_append(int flag)
+{
+	char	*return_str;
+
+	return_str = NULL;
+	if (flag == SINGLE)
+		return_str = readline("single > ");
+	else if (flag == DOUBLE)
+		return_str = readline("doublele > ");
+	return_str = ft_strjoin("\n", return_str);
+	return (return_str);
+}
+
 t_token *word(char **rest, char *line)
 {
-    const char *start = line;
-    char *word;
+    char *start;
+    char *returnword;
+	char *append_line;
+	bool flag;
+
+	start = line;
+	flag = false;
     while (*line != '\0' && !is_metacharactert(*line) && !is_blank(*line))
 	{
-        //line++;
 		if (*line == '\'')
 		{
 			line++;
@@ -99,13 +170,23 @@ t_token *word(char **rest, char *line)
 			{
 				if (*line == '\0')
 				{
-					tokenize_error("single quote\n", rest, line); //singlequote is not closed
+					append_line = NULL;
+					append_line = ft_strjoin(append_line, token_append(SINGLE));
+					while (strchr(append_line, '\'') == NULL)
+						append_line = ft_strjoin(append_line, token_append(SINGLE));
+					start = ft_strjoin(start, append_line);
+					flag = false;
 					break;
 				}
 				else
 					line++;
 			}
 			line++;
+			if (flag == false)
+			{
+				flag = true;
+				line = start;
+			}
 		}
 		else if (*line == '\"')
 		{
@@ -114,21 +195,32 @@ t_token *word(char **rest, char *line)
 			{
 				if (*line == '\0')
 				{
+					append_line = NULL;
+					append_line = ft_strjoin(append_line, token_append(DOUBLE));
+					while (strchr(append_line, '\"') == NULL)
+						append_line = ft_strjoin(append_line, token_append(DOUBLE));
+					start = ft_strjoin(start, append_line);
+					flag = false;
 					break;
 				}
 				else
 					line++;
 			}
 			line++;
+			if (flag == false)
+			{
+				flag = true;
+				line = start;
+			}
 		}
 		else
 			line++;
 	}
-    word = strndup(start, line - start);
-    if (word == NULL)
+    returnword = strndup(start, line - start);
+    if (returnword == NULL)
         fatal_error("strndup");
     *rest = line;
-    return (new_token(word, TK_WORD));
+    return (new_token(returnword, TK_WORD));
 }
 
 t_token *operator(char **rest, char *line)

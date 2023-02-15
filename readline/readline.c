@@ -27,7 +27,6 @@ int main()
 		else
 		{
 			tok = tokenizer(line);
-			//expand(tok);
 			node = parse(tok);
 			expand(node);
 			exec(node);

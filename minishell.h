@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/14 22:06:08 by user             ###   ########.fr       */
+/*   Updated: 2023/02/15 15:42:39 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 #define OUT 1
 #define APPEND 2
 #define HEREDOC 3
+
+#define SINGLE 1
+#define DOUBLE 2
 
 typedef struct s_token t_token;
 
@@ -114,6 +117,8 @@ void	prepare_pipe(t_node *node);
 void	prepare_pipe_child(t_node *node);
 void	prepare_pipe_parent(t_node *node);
 pid_t	exec_pipeline(t_node *node);
+
+void append_char(char **s, char c);
 
 
 t_node	*parse(t_token *tok);
