@@ -1,18 +1,5 @@
 #include "../minishell.h"
 
-static size_t	ft_strlen(const char *string_row)
-{
-	size_t	counter;
-
-	counter = 0;
-	while (*string_row != '\0')
-	{
-		counter = counter + 1;
-		string_row = string_row + 1;
-	}
-	return (counter);
-}
-
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	const char	*src_firstaddress;

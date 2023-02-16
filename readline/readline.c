@@ -82,7 +82,7 @@ bool  is_builtin(char *line)
   {
 	if (strncmp(set[i], line, ft_strlen(set[i])) == 0)
 	{
-		puts("found!");
+		//puts("found!");
 		return true;
 	}
     i++;
@@ -111,28 +111,56 @@ void	ms_env(void)
 	}
 }
 
-void	ms_export(char *line)
+char **command_to_array(t_command *command)
+{
+	char	**cmd_array;
+	size_t	array_num;
+	size_t	position;
+	t_token	*args;
+
+	array_num = 0;
+	args = command->args;
+	while (args != NULL && args->word != NULL)
+	{
+		array_num++;
+		args = args->next;
+	}
+	cmd_array = (char **)malloc(sizeof(char *) * (array_num + 1));
+	args = command->args;
+	position = 0;
+	while (position != array_num)
+	{
+		cmd_array[position] = ft_strdup(args->word);
+		position++;
+		args = args->next;
+	}
+	cmd_array[position] = NULL;
+	return (cmd_array);
+}
+
+void	ms_export(char *line, t_command *command)
 {
 	char	**commands;
 	char	**name_and_value;
 
-	commands = ft_split(line, ' ');
+	(void)line;
+	commands = command_to_array(command);
 	if (commands != 0 && commands[0] != NULL)
 	{
 		name_and_value = ft_split(commands[1], '=');
+		printf("%s\n", name_and_value[0]);
+		printf("%s\n", name_and_value[1]);
 		if (name_and_value[0] && name_and_value[1])
 		{
+			printf("check\n");
 			map_set(&g_env, name_and_value[0], name_and_value[1]);
+			printf("check\n");
 			return ;
 		}
 		else
-		{
-			// free
 			return ;
-		}
 	}
 	puts("TODO: print usage");
-	// free
 }
 
 void	ms_pwd(void)
@@ -140,12 +168,12 @@ void	ms_pwd(void)
 	printf("%s\n", map_get(g_env, "PWD"));
 }
 
-void	ms_cd(char *line)
+void	ms_cd(char *line, t_command *command)
 {
 	char	**commands;
 	char	*path;
 
-	commands = ft_split(line, ' ');
+	commands = command_to_array(command);
 	// TODO: ~ を解釈する
 	if (commands == 0 || commands[1] == NULL)
 	{
@@ -208,16 +236,16 @@ void	ms_echo(char *line)
 		printf("%s\n", commands[1]);
 }
 
-void	do_builtin(char *line)
+void	do_builtin(char *line, t_command *command)
 {
 	if (strcmp(line, "env") == 0)
 		ms_env();
 	else if (strncmp(line, "export", 6) == 0)
-		ms_export(line);
+		ms_export(line, command);
 	else if (strcmp(line, "pwd") == 0)
 		ms_pwd();
 	else if (strncmp(line, "cd", 2) == 0)
-		ms_cd(line);
+		ms_cd(line, command);
 	else if (strncmp(line, "exit", 4) == 0)
 		ms_exit(line);
 	else if (strncmp(line, "unset", 5) == 0)
@@ -232,28 +260,34 @@ int main()
 	t_token	*tok;
   	t_node  *node;
 	//t_node	*fnode;
+	extern char **environ;
 
 	rl_outstream = stderr;
+	env_init(&g_env, environ);
 	while (1)
 	{
 		line = readline("minishell$ ");
 		if (line == NULL)
 			break;
-		line = ft_strtrim(line, " ");
 		if (*line)
 			add_history(line);
 		if (line[0] == '/' || line[0] == '.')
 			abusolute_path(line);
-		else if (is_builtin(line))
-			do_builtin(line);
+		// else if (is_builtin(line))
+		// 	do_builtin(line);
 		else
 		{
 			tok = tokenizer(line);
 			node = parse(tok);
 			expand(node);
-			exec(node);
-			if (tok != NULL)
-				free_token(tok);
+			if (is_builtin(node->command->args->word) && node->next == NULL)
+				do_builtin(node->command->args->word, node->command);
+			else
+			{
+				exec(node);
+				if (tok != NULL)
+					free_token(tok);
+			}
 		}
 		free(line);
 	}

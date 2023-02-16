@@ -125,68 +125,68 @@ void	append_item(t_item **target, t_item *item)
 
 #ifdef TEST
 
-#include <assert.h>
-void	test_item(void)
-{
-	t_item *target = item_new("hoge", "huga");
+// #include <assert.h>
+// void	test_item(void)
+// {
+// 	t_item *target = item_new("hoge", "huga");
 
-	t_item *item2 = item_new("hello", "world");
-	append_item(&target, item2);
-	assert(strcmp(target->name, "hoge") == 0);
-	assert(strcmp(target->next->name, "hello") == 0);
+// 	t_item *item2 = item_new("hello", "world");
+// 	append_item(&target, item2);
+// 	assert(strcmp(target->name, "hoge") == 0);
+// 	assert(strcmp(target->next->name, "hello") == 0);
 
-	t_item *item3 = item_new("FOO", "BAR");
-	append_item(&target, item3);
-	assert(strcmp(target->next->next->name, "FOO") == 0);
-	printf("%s\n", target->next->next->name);
-}
+// 	t_item *item3 = item_new("FOO", "BAR");
+// 	append_item(&target, item3);
+// 	assert(strcmp(target->next->next->name, "FOO") == 0);
+// 	printf("%s\n", target->next->next->name);
+// }
 
-int main(void)
-{
-    t_item  *item = item_new("hoge", "huga");
-    assert(strcmp(item->name, "hoge") == 0);
-    assert(strcmp(item->value, "huga") == 0);
-    t_map *map = map_new();
-    assert(map->item_head == NULL);
-    map_set(&map, "hoge", "huga");
-    assert(strcmp(map->item_head->name, "hoge") == 0);
-    map_set(&map, "hello", "world");
-    assert(strcmp(map->item_head->name, "hoge") == 0);
-    assert(strcmp(map->item_head->next->name, "hello") == 0);
+// int main(void)
+// {
+//     t_item  *item = item_new("hoge", "huga");
+//     assert(strcmp(item->name, "hoge") == 0);
+//     assert(strcmp(item->value, "huga") == 0);
+//     t_map *map = map_new();
+//     assert(map->item_head == NULL);
+//     map_set(&map, "hoge", "huga");
+//     assert(strcmp(map->item_head->name, "hoge") == 0);
+//     map_set(&map, "hello", "world");
+//     assert(strcmp(map->item_head->name, "hoge") == 0);
+//     assert(strcmp(map->item_head->next->name, "hello") == 0);
 
-    map_set(&map, "hoge", "HELLO");
-    char *value = map_get(map, "hoge");
-    assert(strcmp(value, "HELLO") == 0);
+//     map_set(&map, "hoge", "HELLO");
+//     char *value = map_get(map, "hoge");
+//     assert(strcmp(value, "HELLO") == 0);
 
-    /* map_get */
-    value = map_get(map, "hello");
-    assert(strcmp(value, "world") == 0);
+//     /* map_get */
+//     value = map_get(map, "hello");
+//     assert(strcmp(value, "world") == 0);
 
-    t_item *itr = map->item_head;
-    /*while (itr)
-    {
-        printf("%s\n", itr->name);
-        itr = itr->next;
-    }*/
+//     t_item *itr = map->item_head;
+//     /*while (itr)
+//     {
+//         printf("%s\n", itr->name);
+//         itr = itr->next;
+//     }*/
 
-    /* map_unset */
-    map_set(&map, "FOO", "BAR");
-    map_unset(&map, "hello");
-    value = map_get(map, "hello");
-    // printf("%s\n", value);
-    assert(value == NULL);
-    assert(strcmp(map->item_head->name, "hoge") == 0);
-    assert(strcmp(map->item_head->next->name, "FOO") == 0);
-    // printf("%s\n", map->item_head->next->name);
+//     /* map_unset */
+//     map_set(&map, "FOO", "BAR");
+//     map_unset(&map, "hello");
+//     value = map_get(map, "hello");
+//     // printf("%s\n", value);
+//     assert(value == NULL);
+//     assert(strcmp(map->item_head->name, "hoge") == 0);
+//     assert(strcmp(map->item_head->next->name, "FOO") == 0);
+//     // printf("%s\n", map->item_head->next->name);
 
-    // 先頭をunset
-    map_unset(&map, "hoge");
+//     // 先頭をunset
+//     map_unset(&map, "hoge");
 
-    /*itr = map->item_head;
-    while (itr)
-    {
-        printf("%s\n", itr->name);
-        itr = itr->next;
-    }*/
-}
+//     /*itr = map->item_head;
+//     while (itr)
+//     {
+//         printf("%s\n", itr->name);
+//         itr = itr->next;
+//     }*/
+// }
 #endif

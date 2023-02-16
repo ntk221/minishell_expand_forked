@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/15 23:27:32 by kazuki           ###   ########.fr       */
+/*   Updated: 2023/02/16 15:52:19 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 typedef struct s_token t_token;
 
-extern bool    syntax_error;
+//extern bool    syntax_error;
 
 typedef enum e_token_kind {
     TK_WORD,
@@ -144,5 +144,15 @@ void append_char(char **s, char c);
 
 t_node	*parse(t_token *tok);
 void cpy_pipe(int dst[2], int src[2]);
+
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlen(const char *string_row);
+char	*ft_strtrim(char const *s1, char const *set);
+void	ft_putstr_fd(char *s, int fd);
+
+bool 	is_builtin(char *line);
+void	do_builtin(char *line, t_command *command);
+
+void	env_init(t_map **env, char **envp);
 
 #endif

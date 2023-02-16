@@ -1,6 +1,8 @@
 NAME	=	minishell
 SRCS	=	exec_func/exec_func.c tokenizer/tokenizer.c tokenizer/expand.c tokenizer/error.c\
-			utils/split.c parser.c\
+			utils/split.c utils/putstr_fd.c utils/strlcat.c utils/strlcpy.c utils/strlen.c utils/strtrim.c utils/putchar_fd.c utils/strchr.c\
+			utils/strdup.c\
+			parser.c\
 			readline/readline.c\
 			map/map.c
 OBJS	=	$(SRCS:%.c=%.o)
