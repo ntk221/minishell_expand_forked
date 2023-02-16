@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 22:53:43 by user             ###   ########.fr       */
+/*   Updated: 2023/02/16 23:29:57 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void	map_unset(t_map **map, char *name);
 
 /************* builtin command ************/
 
+bool 	is_builtin(char *line);
+
 void	ms_cd(char *line, t_command *command);
 void	ms_env(void);
 void	ms_echo(char *line, t_command *command);
@@ -139,7 +141,11 @@ t_token *operator(char **rest, char *line);
 
 /***************** parser ****************/
 
+t_node	*parse(t_token *tok);
+bool	parse_redirect(t_redirect **redirect, t_token **tok);
+void	parse_word(t_token **args, t_token *tok);
 
+void	append_tok(t_token **tokens, t_token *tok);
 
 /*****************************************/
 
@@ -168,6 +174,7 @@ bool	is_word(const char *s);
 
 /**************** utils ****************/
 
+void	ft_putstr_fd(char *s, int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
@@ -181,7 +188,6 @@ t_token *tokenizer(char *line);
 int     interpret(t_command *command);
 int exec(t_node *node);
 int     abusolute_path(char *line);
-bool    is_metacharactert(char c);
 void	expand(t_node *node);
 void	free_token(t_token *head);
 
@@ -194,13 +200,7 @@ pid_t	exec_pipeline(t_node *node);
 
 void append_char(char **s, char c);
 
-
-t_node	*parse(t_token *tok);
 void cpy_pipe(int dst[2], int src[2]);
-
-void	ft_putstr_fd(char *s, int fd);
-
-bool 	is_builtin(char *line);
 
 void	env_init(t_map **env, char **envp);
 bool	startswith(const char *s, const char *keyword);

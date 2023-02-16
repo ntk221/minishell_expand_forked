@@ -53,11 +53,6 @@ void	append_tok(t_token **tokens, t_token *tok)
 
 bool	parse_redirect(t_redirect **redirect, t_token **tok);
 
-void	parse_word(t_token **args, t_token *tok)
-{
-	append_tok(args, tok);
-}
-
 t_node	*parse(t_token *tok)
 {
 	t_node		*node;
@@ -120,33 +115,4 @@ t_node	*parse(t_token *tok)
 		redirection_node->next = NULL;
 	node->next = NULL;
 	return (fnode);
-}
-
-/*************** 追加したパース用の関数 ****************/
-
-bool	parse_redirect(t_redirect **redirect, t_token **tok)
-{
-	*redirect = malloc(sizeof(t_redirect));
-	// error
-	if (strcmp((*tok)->word, ">") == 0 && strcmp((*tok)->next->word, ">") == 0)
-	{
-		(*redirect)->type = APPEND;
-		*tok = (*tok)->next;
-	}
-	else if (strcmp((*tok)->word, "<") == 0 && strcmp((*tok)->next->word, "<") == 0)
-	{
-		(*redirect)->type = HEREDOC;
-		*tok = (*tok)->next;
-	}
-	else if (strcmp((*tok)->word, "<") == 0)
-		(*redirect)->type = IN;
-	else
-		(*redirect)->type = OUT;
-
-	// tok の next が word だったら redirect の filepathにそれを設定する
-	if ((*tok)->next->kind == TK_WORD)
-		(*redirect)->file_path = strdup((*tok)->next->word);
-	else
-		fatal_error("redirection end or not?\n");
-	return true;
 }
