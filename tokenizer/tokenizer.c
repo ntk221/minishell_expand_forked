@@ -2,58 +2,6 @@
 
 bool	syntax_error = false;
 
-static	char	*input_char(const char *insert, char *inserted)
-{
-	while ((*insert) != '\0')
-	{
-		*inserted = *insert;
-		insert = insert + 1;
-		inserted = inserted + 1;
-	}
-	return (inserted);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t		len;
-	char		*dust;
-	char		*dust_first;
-
-	if ((s1 == NULL) && (s2 == NULL))
-		return (NULL);
-	if (s1 == NULL)
-		return (strdup(s2));
-	if (s2 == NULL)
-		return (strdup(s1));
-	len = strlen(s1) + strlen(s2);
-	dust = (char *)malloc(sizeof(char) * (len + 1));
-	if (!(dust))
-		return (NULL);
-	dust_first = dust;
-	dust = input_char(s1, dust);
-	dust = input_char(s2, dust);
-	*dust = '\0';
-	return (dust_first);
-}
-
-void	tokenize_error(const char *location, char **rest, char *line)
-{
-	syntax_error = true;
-	dprintf(STDERR_FILENO, "Fatal Error: %s", location);
-	while(*line)
-		line++;
-	*rest = line;
-}
-
-bool	is_metacharactert(char c)
-{
-	return (c && strchr("|&;()<>\t\n", c));
-}
-
-bool	is_blank(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n');
-}
 
 bool	consume_blank(char **rest, char *line)
 {
@@ -68,43 +16,9 @@ bool	consume_blank(char **rest, char *line)
 	return (false);
 }
 
-bool is_word(const char *s)
-{
-	return (*s && !is_metacharactert(*s) && !is_blank(*s));
-}
-
 bool	startswith(const char *s, const char *keyword)
 {
 	return (memcmp(s, keyword, strlen(keyword)) == 0);
-}
-
-bool	is_redirect(const char *s)
-{
-	static char *const	redirect[] = {"<", ">"};
-	size_t				i;
-
-	i = 0;
-	while (i < sizeof(redirect) / sizeof(*redirect))
-	{
-		if (startswith(s, redirect[i]))
-			return (true);
-		i++;
-	}
-	return (false);
-}
-
-bool	is_operator(const char *s)
-{
-	static char *const operators[] = {"||", "&", "&&", ";", ";;", "(", ")", "|", "\n"};
-	size_t	i = 0;
-
-	while (i < sizeof(operators) / sizeof(*operators))
-	{
-		if (startswith(s, operators[i]))
-			return (true);
-		i++;
-	}
-	return (false);
 }
 
 t_token *new_token(char *word, t_token_kind kind)

@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 20:48:09 by user             ###   ########.fr       */
+/*   Updated: 2023/02/16 22:14:06 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 //#include <readline/history.h>
 #include <errno.h>
 #include <ctype.h>
+#include <stdbool.h>
 #include "./libft/libft.h"
-
 
 /**** token *****/
 
@@ -132,6 +132,12 @@ char	**command_to_array(t_command *command);
 
 /******************************************/
 
+/*************** torkenizer **************/
+
+void    tokenize_error(const char *location, char **rest, char *line);
+
+/*****************************************/
+
 /************* signal handler ************/
 
 void  sigint_handler();
@@ -144,16 +150,33 @@ void	do_builtin(char *line, t_command *command);
 
 /***************************************/
 
-t_token *tokenizer(char *line);
-int     interpret(t_command *command);
+/************* role checker ************/
+
+bool	is_blank(char c);
+bool	is_metacharactert(char c);
+bool	is_operator(const char *s);
+bool	is_redirect(const char *s);
+bool	is_word(const char *s);
+
+/***************************************/
+
+/**************** utils ****************/
+
+char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlen(const char *string_row);
+char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
+
+/***************************************/
+
+t_token *tokenizer(char *line);
+int     interpret(t_command *command);
 int exec(t_node *node);
 int     abusolute_path(char *line);
 bool    is_metacharactert(char c);
 void	expand(t_node *node);
-void    tokenize_error(const char *location, char **rest, char *line);
 void	free_token(t_token *head);
 
 void    fatal_error(const char *msg) __attribute__((noreturn));
@@ -169,14 +192,11 @@ void append_char(char **s, char c);
 t_node	*parse(t_token *tok);
 void cpy_pipe(int dst[2], int src[2]);
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlen(const char *string_row);
-char	*ft_strtrim(char const *s1, char const *set);
 void	ft_putstr_fd(char *s, int fd);
 
 bool 	is_builtin(char *line);
-void	do_builtin(char *line, t_command *command);
 
 void	env_init(t_map **env, char **envp);
+bool	startswith(const char *s, const char *keyword);
 
 #endif

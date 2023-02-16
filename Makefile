@@ -1,10 +1,14 @@
 NAME	=	minishell
-SRCS	=	exec_func/exec_func.c tokenizer/tokenizer.c tokenizer/expand.c tokenizer/error.c\
-			utils/split.c utils/putstr_fd.c utils/strlcat.c utils/strlcpy.c utils/strlen.c utils/strtrim.c utils/putchar_fd.c utils/strchr.c\
-			utils/strdup.c\
+SRCS	=	exec_func/exec_func.c exec_func/exec_builtin.c\
+			tokenizer/tokenizer.c tokenizer/expand.c tokenizer/error.c\
+			word_rolechecker/is_blank.c word_rolechecker/is_metacharacter.c\
+			word_rolechecker/is_operator.c word_rolechecker/is_redirect.c word_rolechecker/is_word.c\
+			utils/split.c utils/putstr_fd.c utils/strlcat.c utils/strlcpy.c utils/strlen.c\
+			utils/strtrim.c utils/putchar_fd.c utils/strchr.c utils/strdup.c\
+			utils/strjoin.c\
 			builtin_command/builtin_cd.c builtin_command/builtin_echo.c builtin_command/builtin_env.c\
 			builtin_command/builtin_exit.c builtin_command/builtin_export.c builtin_command/builtin_pwd.c\
-			builtin_command/builtin_unset.c builtin_command/command_to_array.c builtin_command/exec_builtin.c\
+			builtin_command/builtin_unset.c builtin_command/command_to_array.c\
 			signalhandler/sigint_handler.c\
 			parser.c\
 			readline/readline.c\

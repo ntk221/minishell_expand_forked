@@ -1,6 +1,4 @@
 #include "../minishell.h"
-#include <stdlib.h>
-#include <string.h>
 
 /**
  * @brief キーと値を受け取って，その組を返す.  

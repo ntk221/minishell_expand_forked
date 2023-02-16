@@ -52,7 +52,6 @@ void	env_init(t_map **env, char **envp)
 
 	i = 0;
 	*env = malloc(sizeof(t_map));
-	// error
 	while (envp[i] != NULL)
 	{
 		name = get_name(envp[i]);
@@ -64,20 +63,22 @@ void	env_init(t_map **env, char **envp)
 
 bool  is_builtin(char *line)
 {
-  char		*set[] = {"export", "env", "pwd", "cd", "exit", "unset", "echo", NULL};
-  size_t	i;
-
-  i = 0;
-  while (set[i])
-  {
-	if (strncmp(set[i], line, ft_strlen(set[i])) == 0)
-	{
-		//puts("found!");
-		return true;
-	}
-    i++;
-  }
-    return false;
+	if (strncmp("export", line, ft_strlen("export")) == 0)
+		return (true);
+	else if (strncmp("env", line, ft_strlen("env")) == 0)
+		return (true);
+	else if (strncmp("pwd", line, ft_strlen("pwd")) == 0)
+		return (true);
+	else if (strncmp("cd", line, ft_strlen("cd")) == 0)
+		return (true);
+	else if (strncmp("exit", line, ft_strlen("exit")) == 0)
+		return (true);
+	else if (strncmp("unset", line, ft_strlen("unset")) == 0)
+		return (true);
+	else if (strncmp("echo", line, ft_strlen("echo")) == 0)
+		return (true);
+	else
+    	return (false);
 }
 
 int main()
@@ -85,7 +86,6 @@ int main()
 	char	  *line;
 	t_token	*tok;
   	t_node  *node;
-	//t_node	*fnode;
 	extern char **environ;
 
 	rl_outstream = stderr;
@@ -99,8 +99,6 @@ int main()
 			add_history(line);
 		if (line[0] == '/' || line[0] == '.')
 			abusolute_path(line);
-		// else if (is_builtin(line))
-		// 	do_builtin(line);
 		else
 		{
 			tok = tokenizer(line);
@@ -109,11 +107,9 @@ int main()
 			if (is_builtin(node->command->args->word) && node->next == NULL)
 				do_builtin(node->command->args->word, node->command);
 			else
-			{
 				exec(node);
-				if (tok != NULL)
-					free_token(tok);
-			}
+			if (tok != NULL)
+				free_token(tok);
 		}
 		free(line);
 	}
