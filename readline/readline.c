@@ -18,15 +18,6 @@ t_map	*g_env;
 		free_command_node(node);
 }*/
 
-void  sigint_handler()
-{
-  write(1, "\n", 1);
-  rl_on_new_line();
-  //rl_replace_line("", 0); 
-  rl_redisplay(); 
-}
-
-#include <string.h>
 char  *get_name(char *name_and_value)
 {
 	size_t	len;
@@ -87,24 +78,6 @@ bool  is_builtin(char *line)
     i++;
   }
     return false;
-}
-
-void	do_builtin(char *line, t_command *command)
-{
-	if (strcmp(line, "env") == 0)
-		ms_env();
-	else if (strncmp(line, "export", 6) == 0)
-		ms_export(line, command);
-	else if (strcmp(line, "pwd") == 0)
-		ms_pwd();
-	else if (strncmp(line, "cd", 2) == 0)
-		ms_cd(line, command);
-	else if (strncmp(line, "exit", 4) == 0)
-		ms_exit(line, command);
-	else if (strncmp(line, "unset", 5) == 0)
-		ms_unset(line, command);
-	else if (strncmp(line, "echo", 4) == 0)
-		ms_echo(line, command);
 }
 
 int main()

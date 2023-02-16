@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 20:34:03 by user             ###   ########.fr       */
+/*   Updated: 2023/02/16 20:48:09 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,18 @@ void	ms_unset(char *line, t_command *command);
 char	**command_to_array(t_command *command);
 
 /******************************************/
+
+/************* signal handler ************/
+
+void  sigint_handler();
+
+/*****************************************/
+
+/************* execfunction ************/
+
+void	do_builtin(char *line, t_command *command);
+
+/***************************************/
 
 t_token *tokenizer(char *line);
 int     interpret(t_command *command);
