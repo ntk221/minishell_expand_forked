@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 22:14:06 by user             ###   ########.fr       */
+/*   Updated: 2023/02/16 22:41:34 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,11 @@ char	**command_to_array(t_command *command);
 /*************** torkenizer **************/
 
 void    tokenize_error(const char *location, char **rest, char *line);
+t_token *new_token(char *word, t_token_kind kind);
+char	*token_append(int flag);
+t_token	*redirect(char **rest, char *line);
+t_token *word(char **rest, char *line);
+t_token *operator(char **rest, char *line);
 
 /*****************************************/
 
