@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 22:41:34 by user             ###   ########.fr       */
+/*   Updated: 2023/02/16 22:53:43 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,6 @@ typedef struct s_redirect t_redirect;
 
 typedef struct s_node	t_node;
 
-// typedef enum e_redirect_type
-// {
-// 	IN,
-// 	OUT,
-// } t_redirect_type;
-
 typedef struct	s_redirect
 {
 	int					type;
@@ -112,11 +106,11 @@ typedef struct	s_map{
 	t_item	*item_head;
 }				t_map;
 
-t_item		*item_new(char *name, char *value);
-t_map		*map_new(void);
-char		*map_get(t_map *map, const char *name);
-void		map_set(t_map **map, char *name, char *value);
-void		map_unset(t_map **map, char *name);
+t_item	*item_new(char *name, char *value);
+t_map	*map_new(void);
+char	*map_get(t_map *map, const char *name);
+void	map_set(t_map **map, char *name, char *value);
+void	map_unset(t_map **map, char *name);
 
 /************* builtin command ************/
 
@@ -143,9 +137,16 @@ t_token *operator(char **rest, char *line);
 
 /*****************************************/
 
+/***************** parser ****************/
+
+
+
+/*****************************************/
+
+
 /************* signal handler ************/
 
-void  sigint_handler();
+void 	sigint_handler();
 
 /*****************************************/
 
