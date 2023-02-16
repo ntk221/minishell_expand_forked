@@ -148,13 +148,9 @@ void	ms_export(char *line, t_command *command)
 	if (commands != 0 && commands[0] != NULL)
 	{
 		name_and_value = ft_split(commands[1], '=');
-		printf("%s\n", name_and_value[0]);
-		printf("%s\n", name_and_value[1]);
 		if (name_and_value[0] && name_and_value[1])
 		{
-			printf("check\n");
 			map_set(&g_env, name_and_value[0], name_and_value[1]);
-			printf("check\n");
 			return ;
 		}
 		else
@@ -173,6 +169,7 @@ void	ms_cd(char *line, t_command *command)
 	char	**commands;
 	char	*path;
 
+	(void)line;
 	commands = command_to_array(command);
 	// TODO: ~ を解釈する
 	if (commands == 0 || commands[1] == NULL)
@@ -193,11 +190,12 @@ void	ms_cd(char *line, t_command *command)
 	// free
 }
 
-void	ms_exit(char *line)
+void	ms_exit(char *line, t_command *command)
 {
 	char	**commands;
 
-	commands = ft_split(line, ' ');
+	(void)line;
+	commands = command_to_array(command);
 	if (commands[1] == NULL)
 	{
 		printf("exit\n");
@@ -213,21 +211,23 @@ void	ms_exit(char *line)
 	
 }
 
-void	ms_unset(char *line)
+void	ms_unset(char *line, t_command *command)
 {
 	char	**commands;
 
-	commands = ft_split(line, ' ');
+	(void)line;
+	commands = command_to_array(command);
 	if (commands == NULL || commands[1] == NULL)
 		return ;
 	map_unset(&g_env, commands[1]);
 }
 
-void	ms_echo(char *line)
+void	ms_echo(char *line, t_command *command)
 {
 	char	**commands;
 
-	commands = ft_split(line, ' ');
+	(void)line;
+	commands = command_to_array(command);
 	if (commands == NULL || commands[1] == NULL)
 		return ;
 	if (strcmp(commands[1], "-n") == 0)
@@ -247,11 +247,11 @@ void	do_builtin(char *line, t_command *command)
 	else if (strncmp(line, "cd", 2) == 0)
 		ms_cd(line, command);
 	else if (strncmp(line, "exit", 4) == 0)
-		ms_exit(line);
+		ms_exit(line, command);
 	else if (strncmp(line, "unset", 5) == 0)
-		ms_unset(line);
+		ms_unset(line, command);
 	else if (strncmp(line, "echo", 4) == 0)
-		ms_echo(line);
+		ms_echo(line, command);
 }
 
 int main()
