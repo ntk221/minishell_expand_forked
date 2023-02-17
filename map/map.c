@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/18 05:30:12 by satushi           #+#    #+#             */
+/*   Updated: 2023/02/18 05:30:48 by satushi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 /**
@@ -7,10 +19,11 @@
 
 t_item	*item_new(char *name, char *value)
 {
-	t_item *item;
+	t_item	*item;
+
 	item = malloc(sizeof(t_item));
 	if (!item)
-	    return (NULL);
+		return (NULL);
 	item->name = strdup(name);
 	item->value = strdup(value);
 	item->next = NULL;
@@ -25,7 +38,7 @@ t_map	*map_new(void)
 
 	map = malloc(sizeof(t_map));
 	if (!map)
-	    return (NULL);
+		return (NULL);
 	map->item_head = NULL;
 	return (map);
 }
@@ -65,7 +78,6 @@ void	map_set(t_map **map, char *name, char *value)
  * @param char *name 
  */
 
-#include <stdio.h>
 void	map_unset(t_map **map, char *name)
 {
 	t_item	*prev;
@@ -95,21 +107,20 @@ void	map_unset(t_map **map, char *name)
 	}
 }
 
-char    *map_get(t_map *map, const char *name)
+char	*map_get(t_map *map, const char *name)
 {
-    t_item  *itr;
+	t_item	*itr;
 
-    itr = map->item_head;
-    while (itr != NULL)
-    {
-        if (strcmp(itr->name, name) == 0)
-            return (itr->value);
-        itr = itr->next;
-    }
-    return (NULL);
+	itr = map->item_head;
+	while (itr != NULL)
+	{
+		if (strcmp(itr->name, name) == 0)
+			return (itr->value);
+		itr = itr->next;
+	}
+	return (NULL);
 }
 
-#include <stdio.h>
 void	append_item(t_item **target, t_item *item)
 {
 	if ((*target) == NULL)
@@ -117,7 +128,6 @@ void	append_item(t_item **target, t_item *item)
 		(*target) = item;
 		return ;
 	}
-
 	append_item(&(*target)->next, item);
 }
 

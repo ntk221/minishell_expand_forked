@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
+/*   Updated: 2023/02/18 05:34:39 by satushi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /**************************************************
  * 
  *	SHELL GRAMMER
  * .  Simple Commands 
- * 		A simple command is a sequence of optional variable assignments followed by blank-separated words and redirections,
+ * 		A simple command is a sequence of optional variable 
+ * 		assignments followed by blank-separated words and redirections,
  * 		and terminated by a control operator(パイプとか?).
  * 
  *************************************************/
@@ -26,7 +39,6 @@ t_node	*new_node(t_node_kind kind)
 	node->kind = kind;
 	node->command = calloc(1, sizeof(t_command));
 	node->next = calloc(1, sizeof(node->next));
-
 	node->command->redirect = NULL;
 	return (node);
 }
@@ -102,7 +114,8 @@ t_node	*parse(t_token *tok)
 			node->command->in_fd[1] = -1;
 			node->command->out_fd[0] = -1;
 			node->command->out_fd[1] = STDOUT_FILENO;
-			node->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
+			node->command->redirect = \
+			(t_redirect **)malloc(sizeof(t_redirect *) * 1);
 			first_action = true;
 			tok = tok->next;
 		}
