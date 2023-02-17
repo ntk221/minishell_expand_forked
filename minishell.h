@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 23:29:57 by user             ###   ########.fr       */
+/*   Updated: 2023/02/17 22:02:32 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ bool 	is_builtin(char *line);
 
 void	ms_cd(char *line, t_command *command);
 void	ms_env(void);
-void	ms_echo(char *line, t_command *command);
+int		ms_echo(char *line, t_command *command);
 void	ms_exit(char *line, t_command *command);
 void	ms_export(char *line, t_command *command);
 void	ms_pwd(void);
@@ -158,7 +158,7 @@ void 	sigint_handler();
 
 /************* execfunction ************/
 
-void	do_builtin(char *line, t_command *command);
+int		do_builtin(char *line, t_command *command);
 
 /***************************************/
 

@@ -267,7 +267,7 @@ pid_t exec_pipeline(t_node *node)
         prepare_pipe_child(node);
         redirect_reconect(node->command);
         if (is_builtin(node->command->args->word))
-            do_builtin(node->command->args->word, node->command);
+            exit(do_builtin(node->command->args->word, node->command));
         else
         {
             argv = args_to_argv(node->command->args);
@@ -276,9 +276,12 @@ pid_t exec_pipeline(t_node *node)
             fatal_error("excve");
         }
     }
-    prepare_pipe_parent(node);//ここから親プロセス    
-    if (node->next)
-        return (exec_pipeline(node->next));
+    else
+    {
+        prepare_pipe_parent(node);//ここから親プロセス    
+        if (node->next)
+            return (exec_pipeline(node->next));
+    }
     return (pid);
 }
 
