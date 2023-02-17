@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 02:07:18 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:11:19 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ char *searchpath(const char *filename)
     }
     return (NULL);
 }
-
-char    **line_to_argv(char *line);
-char    **args_to_argv(t_token *args);
 
 int    stashfd(int fd)
 {
