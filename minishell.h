@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 01:46:49 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:03:10 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,10 @@ void 	sigint_handler();
 
 /************* execfunction ************/
 
+int		exec(t_node *node);
+
 int		do_builtin(char *line, t_command *command);
+int		abusolute_path(char *line);
 
 void	ready_redirectionfile(t_node *node);
 void    redirect_reconect(t_command *command);
@@ -169,6 +172,8 @@ void	prepare_pipe(t_node *node);
 void	prepare_pipe_child(t_node *node);
 void	prepare_pipe_parent(t_node *node);
 int		wait_pipeline(pid_t last_pid);
+
+char    **args_to_argv(t_token *args);
 
 /************* role checker ************/
 
@@ -194,8 +199,6 @@ void    fatal_error(const char *msg) __attribute__((noreturn));
 
 t_token *tokenizer(char *line);
 // int     interpret(t_command *command);
-int		exec(t_node *node);
-int     abusolute_path(char *line);
 void	free_token(t_token *head);
 
 pid_t	exec_pipeline(t_node *node);
