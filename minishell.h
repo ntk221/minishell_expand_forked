@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 01:19:31 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 01:25:23 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,8 +200,6 @@ void	prepare_pipe_parent(t_node *node);
 pid_t	exec_pipeline(t_node *node);
 
 void append_char(char **s, char c);
-
-void cpy_pipe(int dst[2], int src[2]);
 
 void	env_init(t_map **env, char **envp);
 bool	startswith(const char *s, const char *keyword);
