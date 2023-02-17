@@ -6,13 +6,13 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:03:13 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 01:11:31 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 05:22:58 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void append_char(char **s, char c)
+void	append_char(char **s, char c)
 {
 	size_t	size;
 	char	*new;

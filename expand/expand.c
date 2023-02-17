@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 01:09:04 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 05:23:56 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*expand_args(char *args, char *args_free)
 {
-	char *new_word;
+	char	*new_word;
 
 	new_word = NULL;
 	while (*args != '\0')
@@ -47,7 +47,7 @@ char	*expand_args(char *args, char *args_free)
 	return (new_word);
 }
 
-void expand(t_node *node)
+void	expand(t_node *node)
 {
 	t_redirect	*redirect;
 	t_token		*token;
@@ -66,7 +66,8 @@ void expand(t_node *node)
 			while (redirect != NULL)
 			{
 				if (redirect->type != HEREDOC)
-					redirect->file_path = expand_args(redirect->file_path, redirect->file_path);
+					redirect->file_path = expand_args(redirect->file_path, \
+					redirect->file_path);
 				redirect = redirect->next;
 			}
 		}
