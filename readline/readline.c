@@ -106,10 +106,9 @@ int main()
 				tok = tokenizer(line);
 				node = parse(tok);
 				expand(node);
-				if (node->next == NULL && is_builtin(node->command->args->word))
-					do_builtin(node->command->args->word, node->command);
-				else
-					exec(node);
+				// if (node->next == NULL && is_builtin(node->command->args->word))
+				// 	do_builtin(node->command->args->word, node->command);
+				exec(node);
 				if (tok != NULL)
 					free_token(tok);
 			}

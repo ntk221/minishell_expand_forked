@@ -43,3 +43,10 @@ assert 'echo hoge'
 # redirect
 assert 'cat < in'
 assert '< in cat'
+
+assert 'echo hello | cat'
+assert 'echo hello | cat | cat < in | cat < new.txt'
+assert 'echo hello | ls | pwd | cd ../ | ls '
+assert 'echo hello | cat < $PATH'
+assert 'echo hello | cat < new1.txt'
+assert 'echo hello | cat < new1.txt | cat < new1.txt | cat < new1.txt | cat < new1.txt'

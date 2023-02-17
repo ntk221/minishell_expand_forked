@@ -176,9 +176,9 @@ void ready_redirectionfile(t_node *node)
             if (redirect->type == HEREDOC)
                 fd = heredoc(redirect->file_path);
             if (redirect->type == OUT)
-                fd = open(redirect->file_path, O_WRONLY | O_CREAT | O_TRUNC);
+                fd = open(redirect->file_path, O_CREAT | O_WRONLY | O_TRUNC, 0644);
             if (redirect->type == APPEND)
-                fd = open(redirect->file_path, O_CREAT | O_WRONLY | O_APPEND);
+                fd = open(redirect->file_path, O_CREAT | O_WRONLY | O_APPEND, 0644);
             redirect->redirectfile = fd;
             //redirect->redirectfile = stashfd(fd);
             redirect = redirect->next;
