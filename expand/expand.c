@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 01:04:30 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 01:09:04 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ char	*expand_args(char *args, char *args_free)
 		{
 			args++;
 			while (*args != '\'')
-			{
-				if (*args == '\0')
-					fatal_error("single quote\n");
 				append_char(&new_word, *args++);
-			}
 			args++;
 		}
 		else if (*args == '\"')
@@ -35,8 +31,6 @@ char	*expand_args(char *args, char *args_free)
 			args++;
 			while (*args != '\"')
 			{
-				if (*args == '\0')
-					fatal_error("double quote\n");
 				if (*args == '$')
 					expand_doller_dq(&new_word, &args, args);
 				else
