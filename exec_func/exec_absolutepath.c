@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:56:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 02:07:48 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 05:12:04 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,42 @@
 
 static	char	**line_to_argv(char *line)
 {
-    char    **argv;
+	char	**argv;
 
-    for (int i = 0; line[i] != '\0'; i++)
-    {
-        if (isspace(line[i]))
-        {
-            argv = ft_split(line, ' ');
-            return (argv);
-        }
-    }
-    argv = malloc(sizeof(char *) * 2);
-    argv[0] = line;
-    argv[1] = NULL;
-    return (argv);
+	for (int i = 0; line[i] != '\0'; i++)
+	{
+		if (isspace(line[i]))
+		{
+			argv = ft_split(line, ' ');
+			return (argv);
+		}
+	}
+	argv = malloc(sizeof(char *) * 2);
+	argv[0] = line;
+	argv[1] = NULL;
+	return (argv);
 }
 
-int abusolute_path(char *line)
+int	abusolute_path(char *line)
 {
-    char    **argv;
-    pid_t pid;
-	int wstatus;
-	extern char **environ;
+	char		**argv;
+	pid_t		pid;
+	int			wstatus;
+	extern char	**environ;
 
-    pid = fork();
-    if (pid < 0)
-        fatal_error("fork");
-    else if (pid == 0)
-    {
-        argv = line_to_argv(line);
-        execve(argv[0], argv, environ);
-        fatal_error("execve\n");
-        return (1);
-    }
-    else
-    {
-        wait(&wstatus);
-        return (WEXITSTATUS(wstatus));
-    }
+	pid = fork();
+	if (pid < 0)
+		fatal_error("fork");
+	else if (pid == 0)
+	{
+		argv = line_to_argv(line);
+		execve(argv[0], argv, environ);
+		fatal_error("execve\n");
+		return (1);
+	}
+	else
+	{
+		wait(&wstatus);
+		return (WEXITSTATUS(wstatus));
+	}
 }
