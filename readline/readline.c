@@ -95,21 +95,24 @@ int main()
 		line = readline("minishell$ ");
 		if (line == NULL)
 			break;
-		if (*line)
-			add_history(line);
-		if (line[0] == '/' || line[0] == '.')
-			abusolute_path(line);
-		else
+		if (*line != 0)
 		{
-			tok = tokenizer(line);
-			node = parse(tok);
-			expand(node);
-			if (is_builtin(node->command->args->word) && node->next == NULL)
-				do_builtin(node->command->args->word, node->command);
+			if (*line)
+				add_history(line);
+			if (line[0] == '/' || line[0] == '.')
+				abusolute_path(line);
 			else
-				exec(node);
-			if (tok != NULL)
-				free_token(tok);
+			{
+				tok = tokenizer(line);
+				node = parse(tok);
+				expand(node);
+				if (node->next == NULL && is_builtin(node->command->args->word))
+					do_builtin(node->command->args->word, node->command);
+				else
+					exec(node);
+				if (tok != NULL)
+					free_token(tok);
+			}
 		}
 		free(line);
 	}

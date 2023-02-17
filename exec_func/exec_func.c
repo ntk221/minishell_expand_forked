@@ -191,6 +191,8 @@ void    redirect_reconect(t_command *command)
 {
     t_redirect  *redirect;
 
+    if (command->redirect == NULL)
+        return ;
     redirect = *(command->redirect);
     while (redirect != NULL)
     {
@@ -228,6 +230,7 @@ void	prepare_pipe(t_node *node)
 void	prepare_pipe_child(t_node *node)
 {
 	close(node->command->out_fd[0]);
+    //close(node->command->in_fd[1]);
 	dup2(node->command->in_fd[0], STDIN_FILENO);
 	if (node->command->in_fd[0] != STDIN_FILENO)
 		close(node->command->in_fd[0]);
@@ -238,6 +241,8 @@ void	prepare_pipe_child(t_node *node)
 
 void	prepare_pipe_parent(t_node *node)
 {
+    close(node->command->in_fd[1]);
+    close(node->command->out_fd[0]);
 	if (node->command->in_fd[0] != STDIN_FILENO)
 		close(node->command->in_fd[0]); //前の出力を持ってくる
 	if (node->next != NULL) //次がnullなら別にpipeでつなぐ必要はない
@@ -261,10 +266,15 @@ pid_t exec_pipeline(t_node *node)
     {
         prepare_pipe_child(node);
         redirect_reconect(node->command);
-        argv = args_to_argv(node->command->args);
-        path = argv[0];
-        execve(searchpath(path), argv, environ);
-        fatal_error("excve");
+        if (is_builtin(node->command->args->word))
+            do_builtin(node->command->args->word, node->command);
+        else
+        {
+            argv = args_to_argv(node->command->args);
+            path = argv[0];
+            execve(searchpath(path), argv, environ);
+            fatal_error("excve");
+        }
     }
     prepare_pipe_parent(node);//ここから親プロセス    
     if (node->next)

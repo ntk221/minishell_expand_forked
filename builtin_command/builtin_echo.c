@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:19:18 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 20:19:53 by user             ###   ########.fr       */
+/*   Updated: 2023/02/17 15:34:38 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	ms_echo(char *line, t_command *command)
 	if (commands == NULL || commands[1] == NULL)
 		return ;
 	if (strcmp(commands[1], "-n") == 0)
-		ft_putstr_fd(commands[2], 1);
+		write(1, commands[2], ft_strlen(commands[2]));
 	else
-		printf("%s\n", commands[1]);
+	{
+		write(1, commands[1], ft_strlen(commands[1]));
+		write(1, "\n", ft_strlen("\n"));
+	}
 }
