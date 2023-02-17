@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/18 05:42:10 by satushi           #+#    #+#             */
+/*   Updated: 2023/02/18 05:42:41 by satushi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 bool	consume_blank(char **rest, char *line)
@@ -18,10 +30,10 @@ bool	startswith(const char *s, const char *keyword)
 	return (memcmp(s, keyword, strlen(keyword)) == 0);
 }
 
-t_token *tokenizer(char *line)
+t_token	*tokenizer(char *line)
 {
 	t_token	head;
-	t_token *tok;
+	t_token	*tok;
 
 	head.next = NULL;
 	tok = &head;

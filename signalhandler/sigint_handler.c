@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sigint_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:39:39 by user              #+#    #+#             */
-/*   Updated: 2023/02/17 23:54:16 by kazuki           ###   ########.fr       */
+/*   Updated: 2023/02/18 05:36:27 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	sigint_handler()
+void	sigint_handler(void)
 {
 	write(1, "\n", 1);
 	rl_on_new_line();

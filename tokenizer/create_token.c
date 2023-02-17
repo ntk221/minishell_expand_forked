@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   create_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:32:06 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 22:32:40 by user             ###   ########.fr       */
+/*   Updated: 2023/02/18 05:41:24 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_token *new_token(char *word, t_token_kind kind)
+t_token	*new_token(char *word, t_token_kind kind)
 {
-	t_token *tok;
+	t_token	*tok;
 
 	tok = calloc(1, sizeof(*tok));
 	if (tok == NULL)
