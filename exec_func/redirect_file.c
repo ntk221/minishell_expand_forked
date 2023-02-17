@@ -6,11 +6,35 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:32:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 01:33:25 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 01:36:42 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static  int heredoc(const char *deli)
+{
+    char *line;
+    int pfd[2];
+
+    if (pipe(pfd) < 0)
+        return (25555);
+    while (1)
+    {
+        line = readline("input > ");
+        if (line == NULL)
+            break;
+        else if (strcmp(line, deli) == 0)
+        {
+            free(line);
+            break;
+        }
+        dprintf(pfd[1], "%s\n", line);
+        free(line);
+    }
+    close (pfd[1]);
+    return (pfd[0]);
+}
 
 void ready_redirectionfile(t_node *node)
 {
