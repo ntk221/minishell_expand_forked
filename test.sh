@@ -44,14 +44,12 @@ assert 'echo hoge'
 assert 'cat < in'
 assert '< in cat'
 
-<<<<<<< HEAD
 assert 'echo hello | cat'
 assert 'echo hello | cat | cat < in | cat < new.txt'
 assert 'echo hello | ls | pwd | cd ../ | ls '
 assert 'echo hello | cat < $PATH'
 assert 'echo hello | cat < new1.txt'
 assert 'echo hello | cat < new1.txt | cat < new1.txt | cat < new1.txt | cat < new1.txt'
-=======
 # pipe
 assert 'echo hoge | cat'
 assert 'echo hoge | cat | grep hoge'
@@ -61,4 +59,4 @@ assert 'echo hoge | cat | grep "hoge"'
 export hoge=HOGE
 assert 'echo $hoge'
 assert 'echo $$hoge'
->>>>>>> c42bd58634204efe166d81a850c914494a36c63f
+

@@ -16,7 +16,7 @@ SRCS	=	exec_func/exec_func.c exec_func/exec_builtin.c\
 			main.c
 OBJS	=	$(SRCS:%.c=%.o)
 CC  	=	gcc
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Qunused-arguments -Wextra
 RLDIR	=	$(shell brew --prefix readline)
 
 all:$(NAME)
