@@ -6,11 +6,29 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:56:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 01:57:47 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:07:48 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static	char	**line_to_argv(char *line)
+{
+    char    **argv;
+
+    for (int i = 0; line[i] != '\0'; i++)
+    {
+        if (isspace(line[i]))
+        {
+            argv = ft_split(line, ' ');
+            return (argv);
+        }
+    }
+    argv = malloc(sizeof(char *) * 2);
+    argv[0] = line;
+    argv[1] = NULL;
+    return (argv);
+}
 
 int abusolute_path(char *line)
 {

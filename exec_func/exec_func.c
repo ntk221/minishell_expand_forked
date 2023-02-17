@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 02:01:39 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:07:18 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,6 @@ int    stashfd(int fd)
         fatal_error("close");
     return (stashfd);
 }
-
-// char    **line_to_argv(char *line)
-// {
-//     char    **argv;
-
-//     for (int i = 0; line[i] != '\0'; i++)
-//     {
-//         if (isspace(line[i]))
-//         {
-//             argv = ft_split(line, ' ');
-//             return (argv);
-//         }
-//     }
-//     argv = malloc(sizeof(char *) * 2);
-//     argv[0] = line;
-//     argv[1] = NULL;
-//     return (argv);
-// }
 
 pid_t exec_pipeline(t_node *node)
 {
