@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 01:34:16 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 01:46:49 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ void    redirect_reconect(t_command *command);
 void	prepare_pipe(t_node *node);
 void	prepare_pipe_child(t_node *node);
 void	prepare_pipe_parent(t_node *node);
+int		wait_pipeline(pid_t last_pid);
 
 /************* role checker ************/
 
@@ -192,7 +193,7 @@ char	**ft_split(char const *s, char c);
 void    fatal_error(const char *msg) __attribute__((noreturn));
 
 t_token *tokenizer(char *line);
-int     interpret(t_command *command);
+// int     interpret(t_command *command);
 int		exec(t_node *node);
 int     abusolute_path(char *line);
 void	free_token(t_token *head);

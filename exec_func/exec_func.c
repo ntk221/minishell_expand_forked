@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_func.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
+/*   Updated: 2023/02/18 01:46:24 by satushi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 char *searchpath(const char *filename)
@@ -50,32 +62,6 @@ int    stashfd(int fd)
     return (stashfd);
 }
 
-int interpret(t_command *command)
-{
-    extern char **environ;
-    pid_t pid;
-    int wstatus;
-    char **argv;
-    char *command_name;
-
-    pid = fork();
-    if (pid < 0)
-        fatal_error("fork");
-    else if (pid == 0)
-    {
-        argv = args_to_argv(command->args); 
-        command_name = argv[0];
-        execve(searchpath(command_name), argv, environ);
-        fatal_error("execve\n");
-        return (1);
-    }
-    else
-    {
-        wait(&wstatus);
-        return (WEXITSTATUS(wstatus));
-    }
-}
-
 char    **line_to_argv(char *line)
 {
     char    **argv;
@@ -93,8 +79,6 @@ char    **line_to_argv(char *line)
     argv[1] = NULL;
     return (argv);
 }
-
-#include <stdio.h>
 
 int abusolute_path(char *line)
 {
@@ -120,56 +104,24 @@ int abusolute_path(char *line)
     }
 }
 
-// void ready_redirectionfile(t_node *node)
-// {
-//     int         fd;
-//     t_redirect  *redirect;
+char    **args_to_argv(t_token *args)
+{
+    size_t  len;
+    char    **argv;
 
-//     while (node != NULL)
-//     {
-//         redirect = *(node->command->redirect);
-//         while (redirect != NULL)
-//         {
-//             if (redirect->type == IN)
-//                 fd = open(redirect->file_path, O_RDONLY);
-//             if (redirect->type == HEREDOC)
-//                 fd = heredoc(redirect->file_path);
-//             if (redirect->type == OUT)
-//                 fd = open(redirect->file_path, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-//             if (redirect->type == APPEND)
-//                 fd = open(redirect->file_path, O_CREAT | O_WRONLY | O_APPEND, 0644);
-//             redirect->redirectfile = fd;
-//             //redirect->redirectfile = stashfd(fd);
-//             redirect = redirect->next;
-//         }
-//         node = node->next;
-//     }
-// }
-
-// void    redirect_reconect(t_command *command)
-// {
-//     t_redirect  *redirect;
-
-//     if (command->redirect == NULL)
-//         return ;
-//     redirect = *(command->redirect);
-//     while (redirect != NULL)
-//     {
-//         if (redirect->type == IN || redirect->type == HEREDOC)
-//         {
-//             dup2(redirect->redirectfile, 0);
-//             close(redirect->redirectfile);
-//             command->now_in = redirect->redirectfile;
-//         }
-//         if (redirect->type == OUT || redirect->type == APPEND)
-//         {
-//             dup2(redirect->redirectfile, 1);
-//             close(redirect->redirectfile);
-//             command->now_out = redirect->redirectfile;
-//         }
-//         redirect = redirect->next;
-//     }
-// }
+    len = 0;
+    for (t_token *itr = args; itr != NULL; itr = itr->next)
+        len++;
+    argv = malloc(sizeof(char *) * (len + 1));
+    size_t i = 0;
+    for (t_token *itr = args; i != len; itr = itr->next)
+    {
+        argv[i] = strdup(itr->word);
+        i++;
+    }
+    argv[len] = NULL;
+    return (argv);
+}
 
 pid_t exec_pipeline(t_node *node)
 {
@@ -209,25 +161,25 @@ pid_t exec_pipeline(t_node *node)
     return (pid);
 }
 
-int wait_pipeline(pid_t last_pid)
-{
-    pid_t   wait_result;
-    int     status;
-    int     wstatus;
+// int wait_pipeline(pid_t last_pid)
+// {
+//     pid_t   wait_result;
+//     int     status;
+//     int     wstatus;
 
-    while (1)
-    {
-        wait_result = wait(&wstatus);
-        if (wait_result == last_pid)
-            status = WEXITSTATUS(wstatus);
-        else if (wait_result < 0)
-        {
-            if (errno == ECHILD)
-                break;
-        }
-    }
-    return (status);
-}
+//     while (1)
+//     {
+//         wait_result = wait(&wstatus);
+//         if (wait_result == last_pid)
+//             status = WEXITSTATUS(wstatus);
+//         else if (wait_result < 0)
+//         {
+//             if (errno == ECHILD)
+//                 break;
+//         }
+//     }
+//     return (status);
+// }
 
 int exec(t_node *node)
 {
@@ -240,22 +192,3 @@ int exec(t_node *node)
     return (status);
 }
 
-
-char    **args_to_argv(t_token *args)
-{
-    size_t  len;
-    char    **argv;
-
-    len = 0;
-    for (t_token *itr = args; itr != NULL; itr = itr->next)
-        len++;
-    argv = malloc(sizeof(char *) * (len + 1));
-    size_t i = 0;
-    for (t_token *itr = args; i != len; itr = itr->next)
-    {
-        argv[i] = strdup(itr->word);
-        i++;
-    }
-    argv[len] = NULL;
-    return (argv);
-}
