@@ -94,10 +94,21 @@ int main()
 				tok = tokenizer(line);
 				node = parse(tok);
 				expand(node);
+<<<<<<< HEAD
 				//if (node->next == NULL && is_builtin(node->command->args->word))
 				//	do_builtin(node->command->args->word, node->command);
 				//else
 				exec(node);
+||||||| c42bd58
+				if (node->next == NULL && is_builtin(node->command->args->word))
+					do_builtin(node->command->args->word, node->command);
+				else
+					exec(node);
+=======
+				// if (node->next == NULL && is_builtin(node->command->args->word))
+				// 	do_builtin(node->command->args->word, node->command);
+				exec(node);
+>>>>>>> refs/remotes/origin/master
 				if (tok != NULL)
 					free_token(tok);
 			}
