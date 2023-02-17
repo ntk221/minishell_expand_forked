@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/17 23:56:33 by kazuki           ###   ########.fr       */
+/*   Updated: 2023/02/18 01:19:31 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include "./libft/libft.h"
-
-/**** token *****/
 
 #define IN 0
 #define OUT 1
@@ -108,6 +106,8 @@ typedef struct	s_map{
 
 extern	t_map	*g_env;
 
+/****************** MAP *******************/
+
 t_item	*item_new(char *name, char *value);
 t_map	*map_new(void);
 char	*map_get(t_map *map, const char *name);
@@ -128,8 +128,6 @@ void	ms_unset(char *line, t_command *command);
 
 char	**command_to_array(t_command *command);
 
-/******************************************/
-
 /*************** torkenizer **************/
 
 void    tokenize_error(const char *location, char **rest, char *line);
@@ -139,8 +137,6 @@ t_token	*redirect(char **rest, char *line);
 t_token *word(char **rest, char *line);
 t_token *operator(char **rest, char *line);
 
-/*****************************************/
-
 /***************** parser ****************/
 
 t_node	*parse(t_token *tok);
@@ -149,20 +145,25 @@ void	parse_word(t_token **args, t_token *tok);
 
 void	append_tok(t_token **tokens, t_token *tok);
 
-/*****************************************/
+/***************** expand ****************/
 
+void	expand(t_node *node);
+void	expand_doller(char **dst, char **rest, char *p);
+void	expand_doller_dq(char **dst, char **rest, char *p);
+
+void	append_char(char **s, char c);
 
 /************* signal handler ************/
 
 void 	sigint_handler();
 
-/*****************************************/
-
 /************* execfunction ************/
 
 int		do_builtin(char *line, t_command *command);
 
-/***************************************/
+void	prepare_pipe(t_node *node);
+void	prepare_pipe_child(t_node *node);
+void	prepare_pipe_parent(t_node *node);
 
 /************* role checker ************/
 
@@ -171,8 +172,6 @@ bool	is_metacharactert(char c);
 bool	is_operator(const char *s);
 bool	is_redirect(const char *s);
 bool	is_word(const char *s);
-
-/***************************************/
 
 /**************** utils ****************/
 

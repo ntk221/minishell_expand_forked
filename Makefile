@@ -1,8 +1,9 @@
 NAME	=	minishell
-SRCS	=	exec_func/exec_func.c exec_func/exec_builtin.c\
-			tokenizer/tokenizer.c tokenizer/expand.c tokenizer/error.c tokenizer/create_token.c\
+SRCS	=	tokenizer/tokenizer.c tokenizer/expand.c tokenizer/error.c tokenizer/create_token.c\
 			tokenizer/make_op_token.c tokenizer/make_redirect_token.c tokenizer/make_wd_token.c\
 			parser/parser.c parser/parse_word.c parser/parse_redirect.c\
+			expand/expand.c expand/expand_doller.c expand/expand_appendchar.c\
+			exec_func/exec_func.c exec_func/exec_builtin.c exec_func/pipe_func.c\
 			word_rolechecker/is_blank.c word_rolechecker/is_metacharacter.c\
 			word_rolechecker/is_operator.c word_rolechecker/is_redirect.c word_rolechecker/is_word.c\
 			utils/split.c utils/putstr_fd.c utils/strlcat.c utils/strlcpy.c utils/strlen.c\
