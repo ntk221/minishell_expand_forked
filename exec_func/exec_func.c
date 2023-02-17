@@ -111,12 +111,6 @@ int interpret(t_command *command)
     }
 }
 
-
-/**
- *  line が スペースを含む時は，splitする。
- *  そうではない時は，lineとNULLからなるchar **型のデータを返す
- *
- * */
 char    **line_to_argv(char *line)
 {
     char    **argv;
