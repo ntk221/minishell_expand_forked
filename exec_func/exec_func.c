@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 02:11:19 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:12:22 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,3 @@ int exec(t_node *node)
     status = wait_pipeline(last_pid);
     return (status);
 }
-

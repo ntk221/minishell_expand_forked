@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:20:06 by user              #+#    #+#             */
-/*   Updated: 2023/02/17 22:34:23 by kazuki           ###   ########.fr       */
+/*   Updated: 2023/02/18 02:22:22 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 void	ms_env(void)
 {
 	t_item	*itr;
+	size_t	size;
+	char	*name_and_value;
 
 	itr = g_env->item_head;
 	while (itr != NULL)
 	{
-		size_t	size;
-		char	*name_and_value;
-
 		size = ft_strlen(itr->name) + ft_strlen(itr->value) + 2;
 		name_and_value = malloc(size);
 		strlcat(name_and_value, itr->name, size);

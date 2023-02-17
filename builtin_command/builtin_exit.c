@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:21:24 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 20:22:08 by user             ###   ########.fr       */
+/*   Updated: 2023/02/18 02:23:22 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ms_exit(char *line, t_command *command)
 		printf("exit\n");
 		exit(0);
 	}
-	if (!atoi(commands[1]) || (atoi(commands[1]) == -1 && ft_strlen(commands[1]) > 2))
+	if (!atoi(commands[1]) || (atoi(commands[1]) == -1 \
+	&& ft_strlen(commands[1]) > 2))
 	{
 		printf("minishell: exit: numeric argument required\n");
 		exit(255);

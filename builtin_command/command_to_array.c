@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   command_to_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:26:48 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 20:27:21 by user             ###   ########.fr       */
+/*   Updated: 2023/02/18 02:23:34 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char **command_to_array(t_command *command)
+char	**command_to_array(t_command *command)
 {
 	char	**cmd_array;
 	size_t	array_num;
