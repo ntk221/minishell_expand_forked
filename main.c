@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "minishell.h"
 
 t_map	*g_env;
 
@@ -61,7 +61,7 @@ void	env_init(t_map **env, char **envp)
 	}
 }
 
-bool  is_builtin(char *line)
+bool	is_builtin(char *line)
 {
 	if (strncmp("export", line, ft_strlen("export")) == 0)
 		return (true);
@@ -83,9 +83,9 @@ bool  is_builtin(char *line)
 
 int main()
 {
-	char	  *line;
-	t_token	*tok;
-  	t_node  *node;
+	char		*line;
+	t_token		*tok;
+	t_node		*node;
 	extern char **environ;
 
 	rl_outstream = stderr;

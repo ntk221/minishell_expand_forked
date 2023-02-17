@@ -85,7 +85,7 @@ void	expand_doller(char **dst, char **rest, char *p)
     append_char(&name,*p++);
     while (isalpha(*p) != 0 || *p == '_' || isdigit(*p) != 0)
         append_char(&name,*p++);
-    value = getenv(name);
+    value = map_get(g_env, name);
     free(name);
     if (value)
         while (*value)

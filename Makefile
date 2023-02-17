@@ -12,8 +12,8 @@ SRCS	=	exec_func/exec_func.c exec_func/exec_builtin.c\
 			builtin_command/builtin_exit.c builtin_command/builtin_export.c builtin_command/builtin_pwd.c\
 			builtin_command/builtin_unset.c builtin_command/command_to_array.c\
 			signalhandler/sigint_handler.c\
-			readline/readline.c\
-			map/map.c
+			map/map.c\
+			main.c
 OBJS	=	$(SRCS:%.c=%.o)
 CC  	=	gcc
 CFLAGS	=	-Wall -Werror -Wextra

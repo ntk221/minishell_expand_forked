@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:18:23 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 20:19:00 by user             ###   ########.fr       */
+/*   Updated: 2023/02/17 22:34:13 by kazuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-t_map	*g_env;
 
 void	ms_cd(char *line, t_command *command)
 {

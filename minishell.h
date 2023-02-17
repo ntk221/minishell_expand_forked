@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/17 22:02:32 by user             ###   ########.fr       */
+/*   Updated: 2023/02/17 22:35:22 by kazuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct	s_map{
 	t_item	*item_head;
 }				t_map;
 
+extern	t_map	*g_env;
+
 t_item	*item_new(char *name, char *value);
 t_map	*map_new(void);
 char	*map_get(t_map *map, const char *name);
@@ -186,7 +188,7 @@ char	**ft_split(char const *s, char c);
 
 t_token *tokenizer(char *line);
 int     interpret(t_command *command);
-int exec(t_node *node);
+int		exec(t_node *node);
 int     abusolute_path(char *line);
 void	expand(t_node *node);
 void	free_token(t_token *head);

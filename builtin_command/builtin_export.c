@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 20:23:18 by user             ###   ########.fr       */
+/*   Updated: 2023/02/17 22:34:29 by kazuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-t_map	*g_env;
 
 void	ms_export(char *line, t_command *command)
 {

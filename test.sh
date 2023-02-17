@@ -43,3 +43,13 @@ assert 'echo hoge'
 # redirect
 assert 'cat < in'
 assert '< in cat'
+
+# pipe
+assert 'echo hoge | cat'
+assert 'echo hoge | cat | grep hoge'
+assert 'echo hoge | cat | grep "hoge"'
+
+# expand
+export hoge=HOGE
+assert 'echo $hoge'
+assert 'echo $$hoge'
