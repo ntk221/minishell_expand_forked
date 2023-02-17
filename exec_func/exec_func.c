@@ -241,8 +241,6 @@ void	prepare_pipe_child(t_node *node)
 
 void	prepare_pipe_parent(t_node *node)
 {
-    close(node->command->in_fd[1]);
-    close(node->command->out_fd[0]);
 	if (node->command->in_fd[0] != STDIN_FILENO)
 		close(node->command->in_fd[0]); //前の出力を持ってくる
 	if (node->next != NULL) //次がnullなら別にpipeでつなぐ必要はない
