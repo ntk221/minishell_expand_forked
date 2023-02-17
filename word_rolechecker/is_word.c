@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   is_word.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:04:33 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 22:07:36 by user             ###   ########.fr       */
+/*   Updated: 2023/02/18 05:51:45 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-bool is_word(const char *s)
+bool	is_word(const char *s)
 {
-	return (*s && !is_metacharactert(*s) && !is_blank(*s));
+	return (*s && !is_metacharactert(*s) \
+	&& !is_blank(*s));
 }
