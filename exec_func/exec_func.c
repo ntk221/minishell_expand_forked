@@ -262,6 +262,8 @@ pid_t exec_pipeline(t_node *node)
 		fatal_error("fork");
     else if (pid == 0)//childprocess
     {
+        signal(SIGINT, SIG_DFL);
+        signal(SIGQUIT, SIG_DFL);
         prepare_pipe_child(node);
         redirect_reconect(node->command);
         if (is_builtin(node->command->args->word))

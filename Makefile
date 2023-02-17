@@ -24,6 +24,9 @@ all:$(NAME)
 $(NAME):$(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -Llibft -L$(RLDIR)/lib -I$(RLDIR)/include -o $(NAME) -lreadline -lft
 
+$(OBJS): %.o : %.c
+	$(CC) $(CFLAGS) -L$(RLDIR)/lib -I$(RLDIR)/include -c  $< -o $@ 
+
 debug:$(OBJS)
 	$(CC) $(CFLAGS)  $(OBJS) -o $(NAME)
 

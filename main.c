@@ -2,22 +2,6 @@
 
 t_map	*g_env;
 
-
-/*void	shell_works(char *line)
-{
-	t_token	*tok;
-	t_node	*node;
-
-	tok = tokenizer(line);
-	expand(tok);
-	node = parse(tok);
-	exec(&node);
-	if (tok != NULL)
-		free_token(tok);
-	if (node != NULL)
-		free_command_node(node);
-}*/
-
 char  *get_name(char *name_and_value)
 {
 	size_t	len;
@@ -32,7 +16,8 @@ char  *get_name(char *name_and_value)
 		len++;
 	}
 	name = malloc(sizeof(char) * (len + 1));
-	// error
+	if (!name)
+		fatal_error("malloc");
 	j = 0;
 	while (len)
 	{
@@ -88,6 +73,9 @@ int main()
 	t_node		*node;
 	extern char **environ;
 
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
+
 	rl_outstream = stderr;
 	env_init(&g_env, environ);
 	while (1)
@@ -106,10 +94,10 @@ int main()
 				tok = tokenizer(line);
 				node = parse(tok);
 				expand(node);
-				if (node->next == NULL && is_builtin(node->command->args->word))
-					do_builtin(node->command->args->word, node->command);
-				else
-					exec(node);
+				//if (node->next == NULL && is_builtin(node->command->args->word))
+				//	do_builtin(node->command->args->word, node->command);
+				//else
+				exec(node);
 				if (tok != NULL)
 					free_token(tok);
 			}

@@ -6,7 +6,7 @@
 /*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/17 22:35:22 by kazuki           ###   ########.fr       */
+/*   Updated: 2023/02/17 23:56:33 by kazuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include <sys/wait.h>
 #include <assert.h>
 #include <readline/readline.h>
-//#include <readline/history.h>
+#include <readline/history.h>
 #include <errno.h>
 #include <ctype.h>
 #include <stdbool.h>
