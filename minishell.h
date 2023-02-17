@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 01:25:23 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 01:34:16 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include "./libft/libft.h"
+#include <fcntl.h>
 
 #define IN 0
 #define OUT 1
@@ -161,6 +162,9 @@ void 	sigint_handler();
 
 int		do_builtin(char *line, t_command *command);
 
+void	ready_redirectionfile(t_node *node);
+void    redirect_reconect(t_command *command);
+
 void	prepare_pipe(t_node *node);
 void	prepare_pipe_child(t_node *node);
 void	prepare_pipe_parent(t_node *node);
@@ -183,23 +187,17 @@ size_t	ft_strlen(const char *string_row);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 
-/***************************************/
+/************* errorhandle *************/
+
+void    fatal_error(const char *msg) __attribute__((noreturn));
 
 t_token *tokenizer(char *line);
 int     interpret(t_command *command);
 int		exec(t_node *node);
 int     abusolute_path(char *line);
-void	expand(t_node *node);
 void	free_token(t_token *head);
 
-void    fatal_error(const char *msg) __attribute__((noreturn));
-
-void	prepare_pipe(t_node *node);
-void	prepare_pipe_child(t_node *node);
-void	prepare_pipe_parent(t_node *node);
 pid_t	exec_pipeline(t_node *node);
-
-void append_char(char **s, char c);
 
 void	env_init(t_map **env, char **envp);
 bool	startswith(const char *s, const char *keyword);
