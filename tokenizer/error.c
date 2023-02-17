@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:56:53 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 21:57:36 by user             ###   ########.fr       */
+/*   Updated: 2023/02/17 22:34:07 by kazuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	fatal_error(const char *msg)
 
 void	tokenize_error(const char *location, char **rest, char *line)
 {
-	bool	syntax_error;
+	//bool	syntax_error;
 
-	syntax_error = true;
+	//syntax_error = true;
 	dprintf(STDERR_FILENO, "Fatal Error: %s", location);
 	while(*line)
 		line++;

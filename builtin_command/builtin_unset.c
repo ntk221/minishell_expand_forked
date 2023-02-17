@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:24:47 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 20:25:44 by user             ###   ########.fr       */
+/*   Updated: 2023/02/17 22:34:36 by kazuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-t_map	*g_env;
 
 void	ms_unset(char *line, t_command *command)
 {
