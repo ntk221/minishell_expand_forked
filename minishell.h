@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 17:44:06 by user             ###   ########.fr       */
+/*   Updated: 2023/02/18 18:05:25 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,8 @@ char	**command_to_array(t_command *command);
 
 /******************* env *****************/
 
-
+void	env_init(t_map **env, char **envp);
+char 	*get_name(char *name_and_value);
 
 /*************** torkenizer **************/
 
