@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:39:39 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 17:41:50 by user             ###   ########.fr       */
+/*   Updated: 2023/02/18 19:54:46 by knitta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char  *get_name(char *name_and_value)
 	char	*name;
 
 	len = 0;
-	while(name_and_value[len] != '\0')
+	while (name_and_value[len] != '\0')
 	{
 		if (name_and_value[len] == '=')
 			break;
@@ -39,17 +39,19 @@ char  *get_name(char *name_and_value)
 	return (name);
 }
 
-void	env_init(t_map **env, char **envp)
+void	env_init(t_map **env)
 {
-	size_t	i;
-	char	*name;
-	char	*value;
+	size_t			i;
+	char			*name;
+	char			*value;
+	extern char		**environ;
 
 	i = 0;
 	*env = malloc(sizeof(t_map));
-	while (envp[i] != NULL)
+	(*env)->item_head = NULL;
+	while (environ[i] != NULL)
 	{
-		name = get_name(envp[i]);
+		name = get_name(environ[i]);
 		value = getenv(name);
 		map_set(env, name, value);
 		i++;

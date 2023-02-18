@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 18:05:25 by user             ###   ########.fr       */
+/*   Updated: 2023/02/18 19:16:18 by knitta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ enum e_node_kind {
 	ND_SIMPLE_CMD,
 };
 
-typedef enum e_node_kind t_node_kind;
-typedef struct s_redirect t_redirect;
+typedef enum 	e_node_kind t_node_kind;
+typedef struct	s_redirect t_redirect;
 
 typedef struct s_node	t_node;
 
@@ -136,7 +136,7 @@ char	**command_to_array(t_command *command);
 
 /******************* env *****************/
 
-void	env_init(t_map **env, char **envp);
+void	env_init(t_map **env);
 char 	*get_name(char *name_and_value);
 
 /*************** torkenizer **************/
@@ -208,12 +208,13 @@ char	**ft_split(char const *s, char c);
 void    fatal_error(const char *msg) __attribute__((noreturn));
 
 t_token *tokenizer(char *line);
+
 // int     interpret(t_command *command);
 void	free_token(t_token *head);
 
 pid_t	exec_pipeline(t_node *node);
 
-void	env_init(t_map **env, char **envp);
+void	env_init(t_map **env);
 bool	startswith(const char *s, const char *keyword);
 
 #endif

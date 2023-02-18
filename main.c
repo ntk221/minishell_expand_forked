@@ -38,17 +38,14 @@ static void	readline_execpart(char *line)
 int main()
 {
 	char		*line;
-	extern char **environ;
 
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	rl_outstream = stderr;
-	env_init(&g_env, environ);
-	puts("hoge");
+	env_init(&g_env);
 	while (1)
 	{
 		line = readline("minishell$ ");
-		puts("hoge");
 		if (line == NULL)
 			break;
 		if (*line != 0)
