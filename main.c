@@ -44,9 +44,11 @@ int main()
 	signal(SIGQUIT, SIG_IGN);
 	rl_outstream = stderr;
 	env_init(&g_env, environ);
+	puts("hoge");
 	while (1)
 	{
 		line = readline("minishell$ ");
+		puts("hoge");
 		if (line == NULL)
 			break;
 		if (*line != 0)
