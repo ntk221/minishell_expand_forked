@@ -18,7 +18,7 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/expand.c tokenizer/error.c tokenizer/crea
 			env_ready.c main.c
 OBJS	=	$(SRCS:%.c=%.o)
 CC  	=	gcc
-CFLAGS	=	-Wall -Werror -Qunused-arguments -Wextra
+CFLAGS	=	-Wall -Werror -Wextra
 RLDIR	=	$(shell brew --prefix readline)
 
 all:$(NAME)

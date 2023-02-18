@@ -109,7 +109,6 @@ extern	t_map	*g_env;
 
 /******* global variable ******/
 
-t_map	*g_env;
 
 /******************************/
 
