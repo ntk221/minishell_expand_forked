@@ -15,7 +15,7 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/expand.c tokenizer/error.c tokenizer/crea
 			builtin_command/builtin_unset.c builtin_command/command_to_array.c\
 			signalhandler/sigint_handler.c\
 			map/map.c\
-			main.c
+			env_ready.c main.c
 OBJS	=	$(SRCS:%.c=%.o)
 CC  	=	gcc
 CFLAGS	=	-Wall -Werror -Qunused-arguments -Wextra

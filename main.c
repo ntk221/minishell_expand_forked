@@ -2,49 +2,49 @@
 
 t_map	*g_env;
 
-char  *get_name(char *name_and_value)
-{
-	size_t	len;
-	size_t	j;
-	char	*name;
+// char  *get_name(char *name_and_value)
+// {
+// 	size_t	len;
+// 	size_t	j;
+// 	char	*name;
 
-	len = 0;
-	while(name_and_value[len] != '\0')
-	{
-		if (name_and_value[len] == '=')
-			break;
-		len++;
-	}
-	name = malloc(sizeof(char) * (len + 1));
-	if (!name)
-		fatal_error("malloc");
-	j = 0;
-	while (len)
-	{
-		name[j] = name_and_value[j];
-		j++;
-		len--;
-	}
-	name[j] = '\0';
-	return (name);
-}
+// 	len = 0;
+// 	while(name_and_value[len] != '\0')
+// 	{
+// 		if (name_and_value[len] == '=')
+// 			break;
+// 		len++;
+// 	}
+// 	name = malloc(sizeof(char) * (len + 1));
+// 	if (!name)
+// 		fatal_error("malloc");
+// 	j = 0;
+// 	while (len)
+// 	{
+// 		name[j] = name_and_value[j];
+// 		j++;
+// 		len--;
+// 	}
+// 	name[j] = '\0';
+// 	return (name);
+// }
 
-void	env_init(t_map **env, char **envp)
-{
-	size_t	i;
-	char	*name;
-	char	*value;
+// void	env_init(t_map **env, char **envp)
+// {
+// 	size_t	i;
+// 	char	*name;
+// 	char	*value;
 
-	i = 0;
-	*env = malloc(sizeof(t_map));
-	while (envp[i] != NULL)
-	{
-		name = get_name(envp[i]);
-		value = getenv(name);
-		map_set(env, name, value);
-		i++;
-	}
-}
+// 	i = 0;
+// 	*env = malloc(sizeof(t_map));
+// 	while (envp[i] != NULL)
+// 	{
+// 		name = get_name(envp[i]);
+// 		value = getenv(name);
+// 		map_set(env, name, value);
+// 		i++;
+// 	}
+// }
 
 bool	is_builtin(char *line)
 {
@@ -66,16 +66,26 @@ bool	is_builtin(char *line)
     	return (false);
 }
 
+static void	readline_execpart(char *line)
+{
+	t_token		*tok;
+	t_node		*node;
+
+	tok = tokenizer(line);
+	node = parse(tok);
+	expand(node);
+	exec(node);
+	if (tok != NULL)
+		free_token(tok);
+}
+
 int main()
 {
 	char		*line;
-	t_token		*tok;
-	t_node		*node;
 	extern char **environ;
 
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
-
 	rl_outstream = stderr;
 	env_init(&g_env, environ);
 	while (1)
@@ -90,14 +100,7 @@ int main()
 			if (line[0] == '/' || line[0] == '.')
 				abusolute_path(line);
 			else
-			{
-				tok = tokenizer(line);
-				node = parse(tok);
-				expand(node);
-				exec(node);
-				if (tok != NULL)
-					free_token(tok);
-			}
+				readline_execpart(line);
 		}
 		free(line);
 	}

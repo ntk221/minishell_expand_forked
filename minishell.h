@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 02:03:10 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 17:44:06 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,12 @@ typedef struct	s_map{
 
 extern	t_map	*g_env;
 
+/******* global variable ******/
+
+t_map	*g_env;
+
+/******************************/
+
 /****************** MAP *******************/
 
 t_item	*item_new(char *name, char *value);
@@ -128,6 +134,10 @@ void	ms_pwd(void);
 void	ms_unset(char *line, t_command *command);
 
 char	**command_to_array(t_command *command);
+
+/******************* env *****************/
+
+
 
 /*************** torkenizer **************/
 
