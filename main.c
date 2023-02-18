@@ -53,10 +53,9 @@ int main()
 		{
 			if (*line)
 				add_history(line);
-			if (line[0] == '/' || line[0] == '.')
-				abusolute_path(line);
-			else
-				readline_execpart(line);
+			// if (line[0] == '/' || line[0] == '.')
+			//  	abusolute_path(line);
+			readline_execpart(line);
 		}
 		free(line);
 	}

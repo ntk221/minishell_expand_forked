@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 05:13:54 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/18 18:30:53 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ pid_t	exec_pipeline(t_node *node)
 		{
 			argv = args_to_argv(node->command->args);
 			path = argv[0];
-			execve(searchpath(path), argv, environ);
+			if (path[0] == '/' || path[0] == '.')
+				execve(path, argv, environ);
+			else
+				execve(searchpath(path), argv, environ);
 			fatal_error("excve");
 		}
 	}
