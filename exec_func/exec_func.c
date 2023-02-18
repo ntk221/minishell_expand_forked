@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 18:30:53 by user             ###   ########.fr       */
+/*   Updated: 2023/02/18 20:48:40 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ pid_t	exec_pipeline(t_node *node)
 
 	if (node == NULL)
 		return (-1);
+	if (searchpath(args_to_argv(node->command->args)[0]) == NULL)
+		printf("command not found :x\n");
 	prepare_pipe(node);
 	pid = fork();
 	if (pid < 0)
@@ -86,13 +88,18 @@ pid_t	exec_pipeline(t_node *node)
 			if (path[0] == '/' || path[0] == '.')
 				execve(path, argv, environ);
 			else
-				execve(searchpath(path), argv, environ);
+			{
+				if (searchpath(path) == NULL)
+					exit(127);
+				else
+					execve(searchpath(path), argv, environ);
+			}
 			fatal_error("excve");
 		}
 	}
 	else
 	{
-		prepare_pipe_parent(node);  
+		prepare_pipe_parent(node);
 		if (node->next)
 			return (exec_pipeline(node->next));
 	}
