@@ -44,6 +44,8 @@ assert 'echo hoge'
 assert 'cat < in'
 assert '< in cat'
 
+assert 'hogehoge'
+
 assert 'echo hello | cat'
 assert 'echo hello | cat | cat < in | cat < new.txt'
 assert 'echo hello | ls | pwd | cd ../ | ls '
