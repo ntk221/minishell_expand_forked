@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:37:59 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 20:32:19 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:33:19 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_token	*word(char **rest, char *line)
 {
 	char	*start;
 	char	*returnword;
-	char	*append_line;
 	bool	flag;
 
 	start = line;
