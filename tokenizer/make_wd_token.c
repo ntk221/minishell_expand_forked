@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:37:59 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 20:33:19 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:33:58 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*ready_quotestring(char *start, bool *flag, char type)
 		append_line = ft_strjoin(append_line, token_append(SINGLE));
 	start = ft_strjoin(start, append_line);
 	*flag = false;
+	return (start);
 }
 
 t_token	*word(char **rest, char *line)
