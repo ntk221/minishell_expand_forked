@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 17:22:02 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 17:30:36 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,13 @@ void	append_tok(t_token **tokens, t_token *tok)
 	append_tok(&(*tokens)->next, tok);
 }
 
-void	ready_redirectinout(t_node *node)
+void	ready_redirectinout(t_node *node, bool *flag)
 {
 	node->command->in_fd[0] = STDIN_FILENO;
 	node->command->in_fd[1] = -1;
 	node->command->out_fd[0] = -1;
 	node->command->out_fd[1] = STDOUT_FILENO;
+	*flag = true;
 }
 
 t_redirect	*tok_to_redirect_f(bool *flag, t_node *node, t_token *tok)
@@ -79,9 +80,8 @@ t_node *ready_nextnode(bool *flag, t_node *node, t_token **token)
 	if (*flag == true)
 		(*(node->command->redirect)) = NULL;
 	node->next = new_node(ND_SIMPLE_CMD);
-	ready_redirectinout(node->next);
+	ready_redirectinout(node->next, &flag);
 	node->next->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
-	*flag = true;
 	*token = (*token)->next;
 	return (node->next);
 }
@@ -96,8 +96,8 @@ t_node	*parse(t_token *tok)
 	node = new_node(ND_SIMPLE_CMD);
 	fnode = node;
 	node->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
-	ready_redirectinout(node);
-	first_action = true;
+	ready_redirectinout(node, &first_action);
+	//first_action = true;
 	while (tok && !at_eof(tok))
 	{
 		if (tok->kind == TK_WORD)
