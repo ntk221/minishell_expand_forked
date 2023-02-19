@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 16:26:10 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 16:29:32 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,7 @@ char	*expand_args(char *args, char *args_free)
 			if (*(args - 1) == '\'')
 				append_single(&args, &new_word);
 			else if (*(args - 1) == '\"')
-			{
-				// while (*args != '\"')
-				// {
-				// 	if (*args == '$')
-				// 		expand_doller_dq(&new_word, &args, args);
-				// 	else
-				// 		append_char(&new_word, *args++);
-				// }
 				append_double(&args, &new_word, args);
-			}
 			args++;
 		}
 		else if (*args == '$')
