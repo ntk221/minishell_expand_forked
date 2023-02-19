@@ -212,6 +212,7 @@ t_token *tokenizer(char *line);
 
 // int     interpret(t_command *command);
 void	free_token(t_token *head);
+void	free_node(t_node *node);
 
 pid_t	exec_pipeline(t_node *node);
 

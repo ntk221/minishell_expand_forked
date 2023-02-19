@@ -18,8 +18,17 @@ int	ms_echo(char *line, t_command *command)
 
 	(void)line;
 	commands = command_to_array(command);
-	if (commands == NULL || commands[1] == NULL)
+	if (!commands)
+	{
+		perror("malloc");
+		exit(1);
+	}
+	if (commands[1] == NULL)
+	{
+		free_commands(commands);
+		perror("builtin_echo");
 		return (0);
+	}
 	if (strcmp(commands[1], "-n") == 0)
 		write(1, commands[2], ft_strlen(commands[2]));
 	else
@@ -35,6 +44,6 @@ int	ms_echo(char *line, t_command *command)
 		free(commands[i]);
 		i++;
 	}
-	free(commands);
+	free_commands(commands);
 	return (0);
 }

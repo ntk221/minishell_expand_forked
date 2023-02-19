@@ -33,6 +33,8 @@ static void	readline_execpart(char *line)
 	exec(node);
 	if (tok != NULL)
 		free_token(tok);
+	if (node != NULL)
+		free_node(node);
 }
 
 int main()
