@@ -1,30 +1,116 @@
-Makefile
-a.out
-builtin_command
-cmp
-echo.out
-enter
-env_ready.c
-env_ready.o
-exec_func
-expand
-hoge.txt
-in
-libft
-main.c
-main.o
-map
-minishell
-minishell.h
-new.txt
-new1.txt
-none
-out
-output
-parser
-signalhandler
-test.c
-test.sh
-tokenizer
-utils
-word_rolechecker
+env_ready.c: Error!
+Error: CONSECUTIVE_SPC      (line:  15, col:   5):	Two or more consecutives spaces
+Error: SPACE_BEFORE_FUNC    (line:  15, col:   6):	space before function name
+Error: SPACE_AFTER_KW       (line:  25, col:  13):	Missing space after keyword
+main.c: Error!
+Error: INVALID_HEADER       (line:   1, col:   1):	Missing or invalid 42 header
+Notice: GLOBAL_VAR_DETECTED  (line:   3, col:   1):	Global variable present in file. Make sure it is a reasonable choice.
+Error: SPACE_BEFORE_FUNC    (line:  18, col:   4):	space before function name
+Error: NO_ARGS_VOID         (line:  18, col:  10):	Empty function argument requires void
+Error: SPACE_AFTER_KW       (line:  30, col:  13):	Missing space after keyword
+minishell.h: Error!
+Notice: GLOBAL_VAR_DETECTED  (line:  98, col:   1):	Global variable present in file. Make sure it is a reasonable choice.
+Error: MISALIGNED_VAR_DECL  (line:  98, col:  17):	Misaligned variable declaration
+builtin_command/builtin_cd.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  23, col:   5):	Comment is invalid in this scope
+builtin_command/builtin_ch.c: Error!
+Error: TOO_FEW_TAB          (line:  32, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  32, col:   5):	Found space when expecting tab
+Error: BRACE_SHOULD_EOL     (line:  33, col:   1):	Expected newline after brace
+builtin_command/builtin_echo.c: OK!
+builtin_command/builtin_env.c: OK!
+builtin_command/builtin_exit.c: OK!
+builtin_command/builtin_export.c: OK!
+builtin_command/builtin_pwd.c: OK!
+builtin_command/builtin_unset.c: OK!
+builtin_command/command_to_array.c: OK!
+exec_func/exec_absolutepath.c: Error!
+Error: FORBIDDEN_CS         (line:  19, col:   5):	Forbidden control structure
+exec_func/exec_argsready.c: Error!
+Error: FORBIDDEN_CS         (line:  23, col:   5):	Forbidden control structure
+Error: SPC_AFTER_OPERATOR   (line:  23, col:  18):	missing space after operator
+Error: FORBIDDEN_CS         (line:  26, col:   5):	Forbidden control structure
+Error: SPC_AFTER_OPERATOR   (line:  26, col:  18):	missing space after operator
+exec_func/exec_builtin.c: OK!
+exec_func/exec_func.c: Error!
+Error: CONSECUTIVE_NEWLINES (line:  13, col:   1):	Consecutive newlines
+Error: TOO_MANY_LINES       (line:  48, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 108, col:   1):	Function has more than 25 lines
+exec_func/pipe_func.c: OK!
+exec_func/redirect_file.c: OK!
+expand/expand.c: OK!
+expand/expand_appendchar.c: OK!
+expand/expand_doller.c: OK!
+libft/ft_atoi.c: OK!
+libft/ft_bzero.c: OK!
+libft/ft_calloc.c: OK!
+libft/ft_isalnum.c: OK!
+libft/ft_isalpha.c: OK!
+libft/ft_isascii.c: OK!
+libft/ft_isdigit.c: OK!
+libft/ft_isprint.c: OK!
+libft/ft_itoa.c: OK!
+libft/ft_lstadd_back.c: OK!
+libft/ft_lstadd_front.c: OK!
+libft/ft_lstclear.c: OK!
+libft/ft_lstdelone.c: OK!
+libft/ft_lstiter.c: OK!
+libft/ft_lstlast.c: OK!
+libft/ft_lstmap.c: OK!
+libft/ft_lstnew.c: OK!
+libft/ft_lstsize.c: OK!
+libft/ft_memchr.c: OK!
+libft/ft_memcmp.c: OK!
+libft/ft_memcpy.c: OK!
+libft/ft_memmove.c: OK!
+libft/ft_memset.c: OK!
+libft/ft_putchar_fd.c: OK!
+libft/ft_putendl_fd.c: OK!
+libft/ft_putnbr_fd.c: OK!
+libft/ft_putstr_fd.c: OK!
+libft/ft_split.c: OK!
+libft/ft_strchr.c: OK!
+libft/ft_strcmp.c: OK!
+libft/ft_strdup.c: OK!
+libft/ft_striteri.c: OK!
+libft/ft_strjoin.c: OK!
+libft/ft_strlcat.c: OK!
+libft/ft_strlcpy.c: OK!
+libft/ft_strlen.c: OK!
+libft/ft_strmapi.c: OK!
+libft/ft_strncmp.c: OK!
+libft/ft_strnstr.c: OK!
+libft/ft_strrchr.c: OK!
+libft/ft_strtrim.c: OK!
+libft/ft_substr.c: OK!
+libft/ft_tolower.c: OK!
+libft/ft_toupper.c: OK!
+libft/libft.h: OK!
+map/map.c: Error!
+Error: TOO_MANY_FUNCS       (line: 124, col:   1):	Too many functions in file
+parser/parse_redirect.c: OK!
+parser/parse_word.c: OK!
+parser/parser.c: OK!
+parser/parser_utils.c: OK!
+signalhandler/sigint_handler.c: OK!
+tokenizer/create_token.c: OK!
+tokenizer/error.c: OK!
+tokenizer/make_op_token.c: OK!
+tokenizer/make_redirect_token.c: OK!
+tokenizer/make_wd_token.c: OK!
+tokenizer/tokenizer.c: OK!
+utils/putchar_fd.c: OK!
+utils/putstr_fd.c: OK!
+utils/split.c: OK!
+utils/strchr.c: OK!
+utils/strdup.c: OK!
+utils/strjoin.c: OK!
+utils/strlcat.c: OK!
+utils/strlcpy.c: OK!
+utils/strlen.c: OK!
+utils/strtrim.c: OK!
+word_rolechecker/is_blank.c: OK!
+word_rolechecker/is_metacharacter.c: OK!
+word_rolechecker/is_operator.c: OK!
+word_rolechecker/is_redirect.c: OK!
+word_rolechecker/is_word.c: OK!

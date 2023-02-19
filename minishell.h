@@ -6,68 +6,55 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 19:32:32 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 21:31:27 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-#ifndef minishell_h
-# define minishell_h
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <string.h>
+# include <stdbool.h>
+# include <sys/wait.h>
+# include <assert.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <errno.h>
+# include <ctype.h>
+# include <stdbool.h>
+# include "./libft/libft.h"
+# include <fcntl.h>
+# define IN 0
+# define OUT 1
+# define APPEND 2
+# define HEREDOC 3
+# define SINGLE 1
+# define DOUBLE 2
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <string.h>
-#include <stdbool.h>
-#include <sys/wait.h>
-#include <assert.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <errno.h>
-#include <ctype.h>
-#include <stdbool.h>
-#include "./libft/libft.h"
-#include <fcntl.h>
+typedef struct s_token	t_token;
+typedef enum e_token_kind{
+	TK_WORD,
+	TK_RESERVED,
+	TK_REDIRECT,
+	TK_OP,
+	TK_EOF,
+}	t_token_kind;
 
-#define IN 0
-#define OUT 1
-#define APPEND 2
-#define HEREDOC 3
-
-#define SINGLE 1
-#define DOUBLE 2
-
-typedef struct s_token t_token;
-
-//extern bool    syntax_error;
-
-typedef enum e_token_kind {
-    TK_WORD,
-    TK_RESERVED, // いる？
-    TK_REDIRECT,
-    TK_OP,
-    TK_EOF,
-}            t_token_kind;
-
-struct s_token {
-    char         *word;
-    t_token_kind kind;
-    t_token      *next;
+struct	s_token {
+	char			*word;
+	t_token_kind	kind;
+	t_token			*next;
 };
 
-/**** simple command node ****/
-
-enum e_node_kind {
+typedef enum e_node_kind {
 	ND_SIMPLE_CMD,
-};
+}	t_node_kind;
 
-typedef enum 	e_node_kind t_node_kind;
-typedef struct	s_redirect t_redirect;
-
-typedef struct s_node	t_node;
-
-typedef struct	s_redirect
+typedef struct s_redirect
 {
 	int					type;
 	char				*file_path;
@@ -75,17 +62,19 @@ typedef struct	s_redirect
 	int					redirectfile;
 	t_redirect			*next;
 	t_redirect			*before;
-}				t_redirect;
+}	t_redirect;
 
 typedef struct s_command
 {
-	t_token		 	*args;
-	t_redirect		**redirect;
-	int				in_fd[2];
-	int				out_fd[2];
-	int				now_in;
-	int				now_out;
+	t_token		*args;
+	t_redirect	**redirect;
+	int			in_fd[2];
+	int			out_fd[2];
+	int			now_in;
+	int			now_out;
 }	t_command;
+
+typedef struct s_node	t_node;
 
 struct s_node {
 	t_command	*command;
@@ -95,49 +84,47 @@ struct s_node {
 
 /********* MAP ***********/
 
-typedef struct	s_item {
+typedef struct s_item {
 	char			*name;
 	char			*value;
-	struct	s_item	*next;;
+	struct s_item	*next;
 }				t_item;
 
-typedef struct	s_map{
+typedef struct s_map{
 	t_item	*item_head;
 	int		err_status;
 }				t_map;
 
-extern	t_map	*g_env;
+extern t_map	*g_env;
 
 /****************** MAP *******************/
 
-t_item	*item_new(char *name, char *value);
-t_map	*map_new(void);
-char	*map_get(t_map *map, const char *name);
-void	map_set(t_map **map, char *name, char *value);
-void	map_unset(t_map **map, char *name);
+t_item		*item_new(char *name, char *value);
+t_map		*map_new(void);
+char		*map_get(t_map *map, const char *name);
+void		map_set(t_map **map, char *name, char *value);
+void		map_unset(t_map **map, char *name);
 
 /************* builtin command ************/
 
-bool 	is_builtin(char *line);
-
-void	ms_cd(char *line, t_command *command);
-void	ms_env(void);
-int		ms_echo(char *line, t_command *command);
-void	ms_exit(char *line, t_command *command);
-void	ms_export(char *line, t_command *command);
-void	ms_pwd(void);
-void	ms_unset(char *line, t_command *command);
-
-char	**command_to_array(t_command *command);
+bool		is_builtin(char *line);
+void		ms_cd(char *line, t_command *command);
+void		ms_env(void);
+int			ms_echo(char *line, t_command *command);
+void		ms_exit(char *line, t_command *command);
+void		ms_export(char *line, t_command *command);
+void		ms_pwd(void);
+void		ms_unset(char *line, t_command *command);
+char		**command_to_array(t_command *command);
 
 /******************* env *****************/
 
-void	env_init(t_map **env);
-char 	*get_name(char *name_and_value);
+void		env_init(t_map **env);
+char		*get_name(char *name_and_value);
 
 /*************** torkenizer **************/
 
-t_token 	*tokenizer(char *line);
+t_token		*tokenizer(char *line);
 void		tokenize_error(const char *location, char **rest, char *line);
 t_token		*new_token(char *word, t_token_kind kind);
 char		*token_append(int flag);
@@ -171,24 +158,20 @@ void		append_char(char **s, char c);
 
 /************* signal handler ************/
 
-void 		sigint_handler();
+void		sigint_handler(void);
 
 /************* execfunction ************/
 
 int			exec(t_node *node);
-
 int			do_builtin(char *line, t_command *command);
 int			abusolute_path(char *line);
-
 void		ready_redirectionfile(t_node *node);
-void    	redirect_reconect(t_command *command);
-
+void		redirect_reconect(t_command *command);
 void		prepare_pipe(t_node *node);
 void		prepare_pipe_child(t_node *node);
 void		prepare_pipe_parent(t_node *node);
 int			wait_pipeline(pid_t last_pid);
-
-char    	**args_to_argv(t_token *args);
+char		**args_to_argv(t_token *args);
 
 /************* role checker ************/
 
@@ -210,13 +193,9 @@ char		**ft_split(char const *s, char c);
 
 /************* errorhandle *************/
 
-void    	fatal_error(const char *msg) __attribute__((noreturn));
-
-// int     interpret(t_command *command);
+void		fatal_error(const char *msg) __attribute__((noreturn));
 void		free_token(t_token *head);
-
 pid_t		exec_pipeline(t_node *node);
-
 void		env_init(t_map **env);
 bool		startswith(const char *s, const char *keyword);
 
