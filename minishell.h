@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 18:20:02 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 19:21:20 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,11 @@ t_redirect	*tok_to_redirect_f(bool *flag, t_node *node, t_token *tok);
 t_redirect	*tok_to_redirect(t_redirect *redirect, t_token *tok);
 t_token		*word(char **rest, char *line);
 t_token		*operator(char **rest, char *line);
+
+bool		at_eof(t_token *tok);
+t_node		*new_node(t_node_kind kind);
+t_token		*tokdup(t_token *tok);
+void		append_tok(t_token **tokens, t_token *tok);
 
 /***************** parser ****************/
 
