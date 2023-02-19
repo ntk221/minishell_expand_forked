@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 05:34:39 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 07:14:10 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,27 @@ t_node	*new_node(t_node_kind kind)
 		fatal_error("calloc");
 	node->kind = kind;
 	node->command = calloc(1, sizeof(t_command));
-	node->next = calloc(1, sizeof(node->next));
+	node->next = NULL;
 	node->command->redirect = NULL;
 	return (node);
+}
+
+void    free_node(t_node *node)
+{
+	t_node	*itr;
+	t_node	*next;
+
+	itr = node;
+	while (itr != NULL)
+	{
+		if(itr->command->redirect  != NULL)
+			free(itr->command->redirect);
+		free_token(itr->command->args);
+		free(itr->command);
+		next = itr->next;
+		free(itr);
+		itr = next;
+	}
 }
 
 t_token	*tokdup(t_token *tok)
