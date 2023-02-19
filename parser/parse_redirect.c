@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 23:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 19:31:41 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:20:40 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ t_redirect	*tok_to_redirect(t_redirect *redirect, t_token *tok)
 bool	parse_redirect(t_redirect **redirect, t_token **tok)
 {
 	*redirect = malloc(sizeof(t_redirect));
-	if (ft_strcmp((*tok)->word, ">") == 0 && ft_strcmp((*tok)->next->word, ">") == 0)
+	if (ft_strcmp((*tok)->word, ">") == 0 && \
+	ft_strcmp((*tok)->next->word, ">") == 0)
 	{
 		(*redirect)->type = APPEND;
 		*tok = (*tok)->next;
@@ -55,7 +56,8 @@ bool	parse_redirect(t_redirect **redirect, t_token **tok)
 void	ready_redirectinout(t_node *node, bool *flag, bool f_content)
 {
 	if (f_content == true)
-		node->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
+		node->command->redirect = \
+		(t_redirect **)malloc(sizeof(t_redirect *) * 1);
 	node->command->in_fd[0] = STDIN_FILENO;
 	node->command->in_fd[1] = -1;
 	node->command->out_fd[0] = -1;

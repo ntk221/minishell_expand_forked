@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:30:12 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 19:50:09 by knitta           ###   ########.fr       */
+/*   Updated: 2023/02/19 20:18:23 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	map_set(t_map **map, char *name, char *value)
 	t_item	*itr;
 	t_item	*item;
 
-	// puts("hoge");
 	itr = (*map)->item_head;
 	while (itr != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:32:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 13:44:27 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:17:30 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	ready_redirectionfile(t_node *node)
 				fd = open(redirect->file_path, \
 				O_CREAT | O_WRONLY | O_APPEND, 0644);
 			redirect->redirectfile = fd;
-			//redirect->redirectfile = stashfd(fd);
 			redirect = redirect->next;
 		}
 		node = node->next;

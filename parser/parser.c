@@ -6,26 +6,27 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 19:35:01 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:19:44 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_node *ready_nextnode(bool *flag, t_node *node, t_token **token)
+t_node	*ready_nextnode(bool *flag, t_node *node, t_token **token)
 {
 	if (*flag == true)
 		(*(node->command->redirect)) = NULL;
 	node->next = new_node(ND_SIMPLE_CMD);
 	ready_redirectinout(node->next, &(*flag), false);
-	node->next->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
+	node->next->command->redirect = \
+	(t_redirect **)malloc(sizeof(t_redirect *) * 1);
 	*token = (*token)->next;
 	return (node->next);
 }
 
 void	tok_parsing(t_token *tok, t_node *node, bool first_action)
 {
-	t_redirect *redirection_node;
+	t_redirect	*redirection_node;
 
 	while (tok && !at_eof(tok))
 	{

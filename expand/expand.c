@@ -6,13 +6,13 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 16:29:32 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:17:46 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void append_single(char **args, char **new)
+static	void	append_single(char **args, char **new)
 {
 	while (**args != '\'')
 	{
@@ -21,7 +21,7 @@ static void append_single(char **args, char **new)
 	}
 }
 
-static void append_double(char **args, char **new, char *args_dummy)
+static	void	append_double(char **args, char **new, char *args_dummy)
 {
 	while (**args != '\"')
 	{
