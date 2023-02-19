@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:39:47 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 05:39:11 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 19:38:44 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ t_token	*redirect(char **rest, char *line)
 	{
 		if (startswith(line, redirect[i]))
 		{
-			re = strdup(redirect[i]);
+			re = ft_strdup(redirect[i]);
 			if (re == NULL)
 				fatal_error("strdup");
-			*rest = line + strlen(re);
+			*rest = line + ft_strlen(re);
 			return (new_token(re, TK_REDIRECT));
 		}
 		i++;

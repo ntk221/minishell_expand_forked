@@ -6,22 +6,11 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 19:33:55 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 19:35:01 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// void	ready_redirectinout(t_node *node, bool *flag, bool f_content)
-// {
-// 	if (f_content == true)
-// 		node->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
-// 	node->command->in_fd[0] = STDIN_FILENO;
-// 	node->command->in_fd[1] = -1;
-// 	node->command->out_fd[0] = -1;
-// 	node->command->out_fd[1] = STDOUT_FILENO;
-// 	*flag = true;
-// }
 
 t_node *ready_nextnode(bool *flag, t_node *node, t_token **token)
 {
