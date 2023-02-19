@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 21:31:27 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 21:34:22 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define DOUBLE 2
 
 typedef struct s_token	t_token;
+typedef struct s_redirect	t_redirect;
+
 typedef enum e_token_kind{
 	TK_WORD,
 	TK_RESERVED,
@@ -158,7 +160,7 @@ void		append_char(char **s, char c);
 
 /************* signal handler ************/
 
-void		sigint_handler(void);
+void		sigint_handler();
 
 /************* execfunction ************/
 
