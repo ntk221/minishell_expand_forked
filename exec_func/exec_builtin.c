@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:46:37 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 13:18:03 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 13:42:30 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	do_builtin(char *line, t_command *command)
 {
-	if (strcmp(line, "env") == 0)
+	if (ft_strcmp(line, "env") == 0)
 		ms_env();
 	else if (ft_strncmp(line, "export", 6) == 0)
 		ms_export(line, command);

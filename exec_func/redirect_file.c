@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:32:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 05:19:58 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 13:44:27 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	int	heredoc(const char *deli)
 		line = readline("input > ");
 		if (line == NULL)
 			break ;
-		else if (strcmp(line, deli) == 0)
+		else if (ft_strcmp(line, deli) == 0)
 		{
 			free(line);
 			break ;

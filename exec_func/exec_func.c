@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 20:48:40 by user             ###   ########.fr       */
+/*   Updated: 2023/02/19 13:43:36 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ char	*searchpath(const char *filename)
 	char	*dup;
 
 	value = getenv("PATH");
-	if (strlen(filename) > PATH_MAX)
+	if (ft_strlen(filename) > PATH_MAX)
 		fatal_error("strlen");
 	while (*value != '\0')
 	{
 		bzero(path, PATH_MAX);
-		end = strchr(value, ':');
+		end = ft_strchr(value, ':');
 		if (end)
 			strncpy(path, value, end - value);
 		else
@@ -34,7 +34,7 @@ char	*searchpath(const char *filename)
 		ft_strlcat(path, filename, PATH_MAX);
 		if (access(path, X_OK) == 0)
 		{
-			dup = strdup(path);
+			dup = ft_strdup(path);
 			if (dup == NULL)
 				fatal_error("strdup");
 			return (dup);

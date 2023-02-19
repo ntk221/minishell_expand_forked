@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_argsready.c                                   :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 02:00:35 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 13:35:17 by satushi          ###   ########.fr       */
+/*   Created: 2023/02/19 13:36:34 by satushi           #+#    #+#             */
+/*   Updated: 2023/02/19 13:40:29 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	**args_to_argv(t_token *args)
+int	strcmp(const char *s1, const char *s2)
 {
-	size_t	len;
-	char	**argv;
-	size_t	i;
+	size_t	s1_len;
+	size_t	position;
 
-	len = 0;
-	i = 0;
-	for (t_token *itr = args; itr != NULL; itr = itr->next)
-		len++;
-	argv = malloc(sizeof(char *) * (len + 1));
-	for (t_token *itr = args; i != len; itr = itr->next)
+	position = 0;
+	s1_len = ft_strlen(s1);
+	if (s1_len != ft_strlen(s2))
+		return (1);
+	while (position != s1_len)
 	{
-		argv[i] = ft_strdup(itr->word);
-		i++;
+		if (s1[position] != s2[position])
+			return (s1[position] - s2[position]);
+		position++;
 	}
-	argv[len] = NULL;
-	return (argv);
+	return (0);
 }
