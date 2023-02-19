@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 17:30:36 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 17:31:37 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_node *ready_nextnode(bool *flag, t_node *node, t_token **token)
 	if (*flag == true)
 		(*(node->command->redirect)) = NULL;
 	node->next = new_node(ND_SIMPLE_CMD);
-	ready_redirectinout(node->next, &flag);
+	ready_redirectinout(node->next, &(*flag));
 	node->next->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
 	*token = (*token)->next;
 	return (node->next);
