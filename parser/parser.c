@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 16:54:57 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 17:01:16 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,17 @@ t_redirect	*tok_to_redirect(t_redirect *redirect, t_token *tok)
 	return (redirect->next);
 }
 
+t_node *ready_nextnode(bool *flag, t_node *node)
+{
+	if (*flag == true)
+		(*(node->command->redirect)) = NULL;
+	node->next = new_node(ND_SIMPLE_CMD);
+	ready_redirectinout(node->next);
+	node->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
+	*flag = true;
+	return (node->next);
+}
+
 t_node	*parse(t_token *tok)
 {
 	t_node		*node;
@@ -103,14 +114,7 @@ t_node	*parse(t_token *tok)
 		}
 		else if (tok->kind == TK_OP)
 		{
-			if (first_action == true)
-				(*(node->command->redirect)) = NULL;
-			node->next = new_node(ND_SIMPLE_CMD);
-			node = node->next;
-			ready_redirectinout(node);
-			node->command->redirect = \
-			(t_redirect **)malloc(sizeof(t_redirect *) * 1);
-			first_action = true;
+			node = ready_nextnode(&first_action, node);
 			tok = tok->next;
 		}
 		else
