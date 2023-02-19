@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 17:18:01 by user             ###   ########.fr       */
+/*   Updated: 2023/02/19 18:20:02 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,80 +137,81 @@ char 	*get_name(char *name_and_value);
 
 /*************** torkenizer **************/
 
-void    tokenize_error(const char *location, char **rest, char *line);
-t_token *new_token(char *word, t_token_kind kind);
-char	*token_append(int flag);
-t_token	*redirect(char **rest, char *line);
-t_token *word(char **rest, char *line);
-t_token *operator(char **rest, char *line);
+t_token 	*tokenizer(char *line);
+void		tokenize_error(const char *location, char **rest, char *line);
+t_token		*new_token(char *word, t_token_kind kind);
+char		*token_append(int flag);
+t_token		*redirect(char **rest, char *line);
+t_redirect	*tok_to_redirect_f(bool *flag, t_node *node, t_token *tok);
+t_redirect	*tok_to_redirect(t_redirect *redirect, t_token *tok);
+t_token		*word(char **rest, char *line);
+t_token		*operator(char **rest, char *line);
 
 /***************** parser ****************/
 
-t_node	*parse(t_token *tok);
-bool	parse_redirect(t_redirect **redirect, t_token **tok);
-t_token	*parse_word(t_token **args, t_token *tok, t_token *tok_o);
+t_node		*parse(t_token *tok);
+bool		parse_redirect(t_redirect **redirect, t_token **tok);
+t_token		*parse_word(t_token **args, t_token *tok, t_token *tok_o);
 
-void	append_tok(t_token **tokens, t_token *tok);
+void		append_tok(t_token **tokens, t_token *tok);
 
 /***************** expand ****************/
 
-void	expand(t_node *node);
-void	expand_doller(char **dst, char **rest, char *p);
-void	expand_doller_dq(char **dst, char **rest, char *p);
+void		expand(t_node *node);
+void		expand_doller(char **dst, char **rest, char *p);
+void		expand_doller_dq(char **dst, char **rest, char *p);
 
-void	append_char(char **s, char c);
+void		append_char(char **s, char c);
 
 /************* signal handler ************/
 
-void 	sigint_handler();
+void 		sigint_handler();
 
 /************* execfunction ************/
 
-int		exec(t_node *node);
+int			exec(t_node *node);
 
-int		do_builtin(char *line, t_command *command);
-int		abusolute_path(char *line);
+int			do_builtin(char *line, t_command *command);
+int			abusolute_path(char *line);
 
-void	ready_redirectionfile(t_node *node);
-void    redirect_reconect(t_command *command);
+void		ready_redirectionfile(t_node *node);
+void    	redirect_reconect(t_command *command);
 
-void	prepare_pipe(t_node *node);
-void	prepare_pipe_child(t_node *node);
-void	prepare_pipe_parent(t_node *node);
-int		wait_pipeline(pid_t last_pid);
+void		prepare_pipe(t_node *node);
+void		prepare_pipe_child(t_node *node);
+void		prepare_pipe_parent(t_node *node);
+int			wait_pipeline(pid_t last_pid);
 
-char    **args_to_argv(t_token *args);
+char    	**args_to_argv(t_token *args);
 
 /************* role checker ************/
 
-bool	is_blank(char c);
-bool	is_metacharactert(char c);
-bool	is_operator(const char *s);
-bool	is_redirect(const char *s);
-bool	is_word(const char *s);
+bool		is_blank(char c);
+bool		is_metacharactert(char c);
+bool		is_operator(const char *s);
+bool		is_redirect(const char *s);
+bool		is_word(const char *s);
 
 /**************** utils ****************/
 
-void	ft_putstr_fd(char *s, int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-size_t	ft_strlen(const char *string_row);
-char	*ft_strtrim(char const *s1, char const *set);
-char	**ft_split(char const *s, char c);
+void		ft_putstr_fd(char *s, int fd);
+char		*ft_strjoin(char const *s1, char const *s2);
+size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
+size_t		ft_strlcpy(char *dst, const char *src, size_t size);
+size_t		ft_strlen(const char *string_row);
+char		*ft_strtrim(char const *s1, char const *set);
+char		**ft_split(char const *s, char c);
 
 /************* errorhandle *************/
 
-void    fatal_error(const char *msg) __attribute__((noreturn));
-
-t_token *tokenizer(char *line);
+void    	fatal_error(const char *msg) __attribute__((noreturn));
 
 // int     interpret(t_command *command);
-void	free_token(t_token *head);
+void		free_token(t_token *head);
 
-pid_t	exec_pipeline(t_node *node);
+pid_t		exec_pipeline(t_node *node);
 
-void	env_init(t_map **env);
-bool	startswith(const char *s, const char *keyword);
+void		env_init(t_map **env);
+bool		startswith(const char *s, const char *keyword);
 
 #endif

@@ -6,11 +6,26 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 23:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 16:33:17 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 18:02:57 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+t_redirect	*tok_to_redirect_f(bool *flag, t_node *node, t_token *tok)
+{
+	parse_redirect(&(*node->command->redirect), &tok);
+	*flag = false;
+	(*node->command->redirect)->before = NULL;
+	return (*node->command->redirect);
+}
+
+t_redirect	*tok_to_redirect(t_redirect *redirect, t_token *tok)
+{
+	parse_redirect(&redirect->next, &tok);
+	redirect->next->before = redirect;
+	return (redirect->next);
+}
 
 bool	parse_redirect(t_redirect **redirect, t_token **tok)
 {
