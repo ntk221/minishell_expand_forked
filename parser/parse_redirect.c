@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 23:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 18:02:57 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 19:31:41 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,15 @@ bool	parse_redirect(t_redirect **redirect, t_token **tok)
 	else
 		fatal_error("redirection end or not?\n");
 	return (true);
+}
+
+void	ready_redirectinout(t_node *node, bool *flag, bool f_content)
+{
+	if (f_content == true)
+		node->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
+	node->command->in_fd[0] = STDIN_FILENO;
+	node->command->in_fd[1] = -1;
+	node->command->out_fd[0] = -1;
+	node->command->out_fd[1] = STDOUT_FILENO;
+	*flag = true;
 }
