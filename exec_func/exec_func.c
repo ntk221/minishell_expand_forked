@@ -6,7 +6,11 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/19 13:43:36 by satushi          ###   ########.fr       */
+=======
+/*   Updated: 2023/02/19 13:32:43 by user             ###   ########.fr       */
+>>>>>>> 3040e691006eb20cb6a1c0e77da6853f0618b3ea
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +71,10 @@ pid_t	exec_pipeline(t_node *node)
 
 	if (node == NULL)
 		return (-1);
-	if (searchpath(args_to_argv(node->command->args)[0]) == NULL)
-		printf("command not found :x\n");
+	argv = args_to_argv(node->command->args);
+	path = argv[0];
+	if (path[0] != '/' && path[0] != '.' && searchpath(path) == NULL)
+		printf("bash: %s: command not found :x\n", path);
 	prepare_pipe(node);
 	pid = fork();
 	if (pid < 0)
@@ -83,8 +89,6 @@ pid_t	exec_pipeline(t_node *node)
 			exit(do_builtin(node->command->args->word, node->command));
 		else
 		{
-			argv = args_to_argv(node->command->args);
-			path = argv[0];
 			if (path[0] == '/' || path[0] == '.')
 				execve(path, argv, environ);
 			else
