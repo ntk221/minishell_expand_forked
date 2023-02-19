@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 17:31:37 by user             ###   ########.fr       */
+/*   Updated: 2023/02/19 17:43:29 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ void	append_tok(t_token **tokens, t_token *tok)
 	append_tok(&(*tokens)->next, tok);
 }
 
-void	ready_redirectinout(t_node *node, bool *flag)
+void	ready_redirectinout(t_node *node, bool *flag, bool f_content)
 {
+	if (f_content == true)
+		node->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
 	node->command->in_fd[0] = STDIN_FILENO;
 	node->command->in_fd[1] = -1;
 	node->command->out_fd[0] = -1;
@@ -80,24 +82,14 @@ t_node *ready_nextnode(bool *flag, t_node *node, t_token **token)
 	if (*flag == true)
 		(*(node->command->redirect)) = NULL;
 	node->next = new_node(ND_SIMPLE_CMD);
-	ready_redirectinout(node->next, &(*flag));
+	ready_redirectinout(node->next, &(*flag), false);
 	node->next->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
 	*token = (*token)->next;
 	return (node->next);
 }
 
-t_node	*parse(t_token *tok)
+void	tok_parsing(t_token *tok, t_redirect *redirection_node, t_node *node, bool first_action)
 {
-	t_node		*node;
-	t_node		*fnode;
-	t_redirect	*redirection_node;
-	bool		first_action;
-
-	node = new_node(ND_SIMPLE_CMD);
-	fnode = node;
-	node->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
-	ready_redirectinout(node, &first_action);
-	//first_action = true;
 	while (tok && !at_eof(tok))
 	{
 		if (tok->kind == TK_WORD)
@@ -115,6 +107,36 @@ t_node	*parse(t_token *tok)
 		else
 			fatal_error("Implement parser");
 	}
+}
+
+t_node	*parse(t_token *tok)
+{
+	t_node		*node;
+	t_node		*fnode;
+	t_redirect	*redirection_node;
+	bool		first_action;
+
+	node = new_node(ND_SIMPLE_CMD);
+	fnode = node;
+	ready_redirectinout(node, &first_action, true);
+	tok_parsing(tok, redirection_node, node, first_action);
+	// while (tok && !at_eof(tok))
+	// {
+	// 	if (tok->kind == TK_WORD)
+	// 		tok = parse_word(&node->command->args, tokdup(tok), tok);
+	// 	else if (tok->kind == TK_REDIRECT)
+	// 	{
+	// 		if (first_action == true)
+	// 			redirection_node = tok_to_redirect_f(&first_action, node, tok);
+	// 		else
+	// 			redirection_node = tok_to_redirect(redirection_node, tok);
+	// 		tok = tok->next->next;
+	// 	}
+	// 	else if (tok->kind == TK_OP)
+	// 		node = ready_nextnode(&first_action, node, &tok);
+	// 	else
+	// 		fatal_error("Implement parser");
+	// }
 	if (first_action == true)
 		(*(node->command->redirect)) = NULL;
 	else
