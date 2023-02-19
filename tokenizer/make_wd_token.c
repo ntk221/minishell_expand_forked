@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:37:59 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 20:43:04 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:45:11 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,19 @@ t_token	*word(char **rest, char *line)
 	{
 		if (*line == '\'')
 		{
-			lack_singlequote(&line, &start, &flag);
-			// line++;
-			// while (*line != '\'')
-			// {
-			// 	if (*line == '\0')
-			// 	{
-			// 		start = ready_quotestring(start, &flag, '\'');
-			// 		break ;
-			// 	}
-			// 	else
-			// 		line++;
-			// }
-			// line++;
+			//lack_singlequote(&line, &start, &flag);
+			line++;
+			while (*line != '\'')
+			{
+				if (*line == '\0')
+				{
+					start = ready_quotestring(start, &flag, '\'');
+					break ;
+				}
+				else
+					line++;
+			}
+			line++;
 			if (flag == false)
 				re_check(&flag, &line, start);
 		}
