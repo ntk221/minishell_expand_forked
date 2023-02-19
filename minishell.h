@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 17:12:14 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 17:18:01 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ t_token *operator(char **rest, char *line);
 
 t_node	*parse(t_token *tok);
 bool	parse_redirect(t_redirect **redirect, t_token **tok);
-t_token	*parse_word(t_token **args, t_token *tok);
+t_token	*parse_word(t_token **args, t_token *tok, t_token *tok_o);
 
 void	append_tok(t_token **tokens, t_token *tok);
 
