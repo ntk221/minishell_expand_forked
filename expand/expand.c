@@ -6,30 +6,30 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 14:35:27 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 14:36:01 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	void	expand_args_in_quote(char **args, char *new_word, char type)
-{
-	*args++;
-	if (type == "\'")
-		while (**args != '\'')
-			append_char(&new_word, **args++);
-	else if (type == '\"')
-	{
-		while (**args != '\"')
-		{
-			if (*args == '$')
-				expand_doller_dq(&new_word, args, *args);
-			else
-				append_char(&new_word, **args++);
-		}
-	}
-	*args++;
-}
+// static	void	expand_args_in_quote(char **args, char *new_word, char type)
+// {
+// 	*args++;
+// 	if (type == "\'")
+// 		while (**args != '\'')
+// 			append_char(&new_word, **args++);
+// 	else if (type == '\"')
+// 	{
+// 		while (**args != '\"')
+// 		{
+// 			if (*args == '$')
+// 				expand_doller_dq(&new_word, args, *args);
+// 			else
+// 				append_char(&new_word, **args++);
+// 		}
+// 	}
+// 	*args++;
+// }
 
 char	*expand_args(char *args, char *args_free)
 {
