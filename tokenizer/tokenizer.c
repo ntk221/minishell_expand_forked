@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:42:10 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 20:12:39 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:15:13 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,6 @@ t_token	*tokenizer(char *line)
 				tok->next = redirect(&line, line);
 			tok = tok->next;
 		}
-		// else if (is_operator(line))
-		// {
-		// 	tok->next = operator(&line, line);
-		// 	//tok = tok->next;
-		// }
-		// else if (is_word(line))
-		// {
-		// 	tok->next = word(&line, line);
-		// 	//tok = tok->next;
-		// }
-		// else if (is_redirect(line))
-		// {
-		// 	tok->next = redirect(&line, line);
-		// 	//tok = tok->next;
-		// }
 		else
 			tokenize_error("Unexpected Token", &line, line);
 	}
