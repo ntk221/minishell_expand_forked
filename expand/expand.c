@@ -3,32 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 14:46:14 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 16:20:26 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	void	expand_args_in_quote(char **args, char *new_word, char type)
+static void append_single(char **args, char **new)
 {
-	(*args)++;
-	if (type == '\'')
-		while (**args != '\'')
-			append_char(&new_word, *((*args)++));
-	else if (type == '\"')
+	while (**args != '\'')
 	{
-		while (**args != '\"')
-		{
-			if (**args == '$')
-				expand_doller_dq(&new_word, &(*args), *args);
-			else
-				append_char(&new_word, *((*args)++));
-		}
+		append_char(&(*new), **args);
+		(*args)++;
 	}
-	(*args)++;
 }
 
 char	*expand_args(char *args, char *args_free)
@@ -38,42 +28,23 @@ char	*expand_args(char *args, char *args_free)
 	new_word = NULL;
 	while (*args != '\0')
 	{
-		// if (*args == '\'')
-		// {
-		// 	args++;
-		// 	while (*args != '\'')
-		// 		append_char(&new_word, *args++);
-		// 	args++;
-		// }
-		// else if (*args == '\"')
-		// {
-		// 	args++;
-		// 	while (*args != '\"')
-		// 	{
-		// 		if (*args == '$')
-		// 			expand_doller_dq(&new_word, &args, args);
-		// 		else
-		// 			append_char(&new_word, *args++);
-		// 	}
-		// 	args++;
-		// }
-		// if (*args == '\'' || *args == '\"')
-		// {
-		// 	args++;
-		// 	if (*args == '\'')
-		// 		while (*args != '\'')
-		// 			append_char(&new_word, *args++);
-		// 	else if (*args == '\"')
-		// 	{
-		// 		if (*args == '$')
-		// 			expand_doller_dq(&new_word, &args, args);
-		// 		else
-		// 			append_char(&new_word, *args++);
-		// 	}
-		// 	args++;
-		// }
 		if (*args == '\'' || *args == '\"')
-			expand_args_in_quote(&args, new_word, *args);
+		{
+			args++;
+			if (*(args - 1) == '\'')
+				append_single(&args, &new_word);
+			else if (*(args - 1) == '\"')
+			{
+				while (*args != '\"')
+				{
+					if (*args == '$')
+						expand_doller_dq(&new_word, &args, args);
+					else
+						append_char(&new_word, *args++);
+				}
+			}
+			args++;
+		}
 		else if (*args == '$')
 			expand_doller(&new_word, &args, args);
 		else
