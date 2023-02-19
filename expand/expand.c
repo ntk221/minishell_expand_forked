@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 16:20:26 by user             ###   ########.fr       */
+/*   Updated: 2023/02/19 16:26:10 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@ static void append_single(char **args, char **new)
 	{
 		append_char(&(*new), **args);
 		(*args)++;
+	}
+}
+
+static void append_double(char **args, char **new, char *args_dummy)
+{
+	while (**args != '\"')
+	{
+		if (**args == '$')
+			expand_doller_dq(&(*new), &(*args), args_dummy);
+		else
+		{
+			append_char(&(*new), **args);
+			(*args)++;
+		}
 	}
 }
 
@@ -35,13 +49,14 @@ char	*expand_args(char *args, char *args_free)
 				append_single(&args, &new_word);
 			else if (*(args - 1) == '\"')
 			{
-				while (*args != '\"')
-				{
-					if (*args == '$')
-						expand_doller_dq(&new_word, &args, args);
-					else
-						append_char(&new_word, *args++);
-				}
+				// while (*args != '\"')
+				// {
+				// 	if (*args == '$')
+				// 		expand_doller_dq(&new_word, &args, args);
+				// 	else
+				// 		append_char(&new_word, *args++);
+				// }
+				append_double(&args, &new_word, args);
 			}
 			args++;
 		}
