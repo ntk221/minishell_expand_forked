@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 19:16:18 by knitta           ###   ########.fr       */
+/*   Updated: 2023/02/18 21:10:16 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct	s_item {
 
 typedef struct	s_map{
 	t_item	*item_head;
+	int		err_status;
 }				t_map;
 
 extern	t_map	*g_env;
