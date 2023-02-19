@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_ready.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:39:39 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 19:54:46 by knitta           ###   ########.fr       */
+/*   Updated: 2023/02/19 08:57:22 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	env_init(t_map **env)
 		name = get_name(environ[i]);
 		value = getenv(name);
 		map_set(env, name, value);
+		free(name);
 		i++;
 	}
 }
