@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 16:36:14 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 16:50:12 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ void	ready_redirectinout(t_node *node)
 	node->command->out_fd[1] = STDOUT_FILENO;
 }
 
+t_redirect	*tok_to_redirect(bool *flag, t_node *node, t_token *tok)
+{
+	parse_redirect(&(*node->command->redirect), &tok);
+	*flag = false;
+	(*node->command->redirect)->before = NULL;
+	return (*node->command->redirect);
+}
+
 t_node	*parse(t_token *tok)
 {
 	t_node		*node;
@@ -70,10 +78,6 @@ t_node	*parse(t_token *tok)
 	fnode = node;
 	node->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
 	ready_redirectinout(node);
-	// node->command->in_fd[0] = STDIN_FILENO;
-	// node->command->in_fd[1] = -1;
-	// node->command->out_fd[0] = -1;
-	// node->command->out_fd[1] = STDOUT_FILENO;
 	first_action = true;
 	while (tok && !at_eof(tok))
 	{
@@ -85,12 +89,7 @@ t_node	*parse(t_token *tok)
 		else if (tok->kind == TK_REDIRECT)
 		{
 			if (first_action == true)
-			{
-				parse_redirect(&(*node->command->redirect), &tok);
-				first_action = false;
-				redirection_node = (*node->command->redirect);
-				redirection_node->before = NULL;
-			}
+				redirection_node = tok_to_redirect(&first_action, node, tok);
 			else
 			{
 				parse_redirect(&redirection_node->next, &tok);
@@ -106,10 +105,6 @@ t_node	*parse(t_token *tok)
 			node->next = new_node(ND_SIMPLE_CMD);
 			node = node->next;
 			ready_redirectinout(node);
-			// node->command->in_fd[0] = STDIN_FILENO;
-			// node->command->in_fd[1] = -1;
-			// node->command->out_fd[0] = -1;
-			// node->command->out_fd[1] = STDOUT_FILENO;
 			node->command->redirect = \
 			(t_redirect **)malloc(sizeof(t_redirect *) * 1);
 			first_action = true;
