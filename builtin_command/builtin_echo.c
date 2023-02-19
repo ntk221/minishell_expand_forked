@@ -26,7 +26,7 @@ int	ms_echo(char *line, t_command *command)
 	if (commands[1] == NULL)
 	{
 		free_commands(commands);
-		perror("builtin_echo");
+    write(1, "\n", ft_strlen("\n"));
 		return (0);
 	}
 	if (strcmp(commands[1], "-n") == 0)
@@ -35,14 +35,6 @@ int	ms_echo(char *line, t_command *command)
 	{
 		write(1, commands[1], ft_strlen(commands[1]));
 		write(1, "\n", ft_strlen("\n"));
-	}
-	size_t	i;
-
-	i = 0;
-	while (commands[i] != NULL)
-	{
-		free(commands[i]);
-		i++;
 	}
 	free_commands(commands);
 	return (0);
