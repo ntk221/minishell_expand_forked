@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 17:17:05 by user             ###   ########.fr       */
+/*   Updated: 2023/02/19 17:22:02 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_redirect	*tok_to_redirect(t_redirect *redirect, t_token *tok)
 	return (redirect->next);
 }
 
-t_node *ready_nextnode(bool *flag, t_node *node)
+t_node *ready_nextnode(bool *flag, t_node *node, t_token **token)
 {
 	if (*flag == true)
 		(*(node->command->redirect)) = NULL;
@@ -82,6 +82,7 @@ t_node *ready_nextnode(bool *flag, t_node *node)
 	ready_redirectinout(node->next);
 	node->next->command->redirect = (t_redirect **)malloc(sizeof(t_redirect *) * 1);
 	*flag = true;
+	*token = (*token)->next;
 	return (node->next);
 }
 
@@ -110,10 +111,7 @@ t_node	*parse(t_token *tok)
 			tok = tok->next->next;
 		}
 		else if (tok->kind == TK_OP)
-		{
-			node = ready_nextnode(&first_action, node);
-			tok = tok->next;
-		}
+			node = ready_nextnode(&first_action, node, &tok);
 		else
 			fatal_error("Implement parser");
 	}
