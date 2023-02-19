@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 16:50:12 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 16:54:57 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,19 @@ void	ready_redirectinout(t_node *node)
 	node->command->out_fd[1] = STDOUT_FILENO;
 }
 
-t_redirect	*tok_to_redirect(bool *flag, t_node *node, t_token *tok)
+t_redirect	*tok_to_redirect_f(bool *flag, t_node *node, t_token *tok)
 {
 	parse_redirect(&(*node->command->redirect), &tok);
 	*flag = false;
 	(*node->command->redirect)->before = NULL;
 	return (*node->command->redirect);
+}
+
+t_redirect	*tok_to_redirect(t_redirect *redirect, t_token *tok)
+{
+	parse_redirect(&redirect->next, &tok);
+	redirect->next->before = redirect;
+	return (redirect->next);
 }
 
 t_node	*parse(t_token *tok)
@@ -89,13 +96,9 @@ t_node	*parse(t_token *tok)
 		else if (tok->kind == TK_REDIRECT)
 		{
 			if (first_action == true)
-				redirection_node = tok_to_redirect(&first_action, node, tok);
+				redirection_node = tok_to_redirect_f(&first_action, node, tok);
 			else
-			{
-				parse_redirect(&redirection_node->next, &tok);
-				redirection_node->next->before = redirection_node;
-				redirection_node = redirection_node->next;
-			}
+				redirection_node = tok_to_redirect(redirection_node, tok);
 			tok = tok->next->next;
 		}
 		else if (tok->kind == TK_OP)
