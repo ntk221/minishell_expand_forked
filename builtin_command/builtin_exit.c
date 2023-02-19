@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:21:24 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 02:23:22 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 08:06:37 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ms_exit(char *line, t_command *command)
 
 	(void)line;
 	commands = command_to_array(command);
+	if (!commands)
+		perror("malloc");
 	if (commands[1] == NULL)
 	{
 		printf("exit\n");

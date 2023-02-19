@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:24:47 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 02:22:56 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 08:04:43 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ void	ms_unset(char *line, t_command *command)
 
 	(void)line;
 	commands = command_to_array(command);
-	if (commands == NULL || commands[1] == NULL)
+	if (!commands)
+		perror("malloc");
+	if (commands[1] == NULL)
+	{
+		free_commands(commands);
 		return ;
+	}
 	map_unset(&g_env, commands[1]);
+	free_commands(commands);
 }

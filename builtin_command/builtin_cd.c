@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:18:23 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 02:22:31 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 08:00:48 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	ms_cd(char *line, t_command *command)
 
 	(void)line;
 	commands = command_to_array(command);
+	if (!commands)
+		perror("malloc");
 	// TODO: ~ を解釈する
-	if (commands == 0 || commands[1] == NULL)
+	if (commands[1] == NULL)
 	{
 		puts("TODO: print usage");
 		return ;
@@ -33,4 +35,5 @@ void	ms_cd(char *line, t_command *command)
 		return ;
 	}
 	map_set(&g_env, "PWD", getcwd(buf, sizeof(buf)));
+	free_commands(commands);
 }

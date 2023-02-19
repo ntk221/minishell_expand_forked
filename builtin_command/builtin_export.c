@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 02:22:47 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 08:03:16 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,18 @@ void	ms_export(char *line, t_command *command)
 		if (name_and_value[0] && name_and_value[1])
 		{
 			map_set(&g_env, name_and_value[0], name_and_value[1]);
+			size_t i = 0;
+			while(name_and_value[i])
+			{
+				free(name_and_value[i]);
+				i++;
+			}
+			free(name_and_value);
 			return ;
 		}
 		else
 			return ;
 	}
+	free_commands(commands);
 	puts("TODO: print usage");
 }

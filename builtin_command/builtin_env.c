@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:20:06 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 02:22:22 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 08:05:56 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	ms_env(void)
 	{
 		size = ft_strlen(itr->name) + ft_strlen(itr->value) + 2;
 		name_and_value = malloc(size);
-		strlcat(name_and_value, itr->name, size);
-		strlcat(name_and_value, "=", size);
-		strlcat(name_and_value, itr->value, size);
+		ft_strlcat(name_and_value, itr->name, size);
+		ft_strlcat(name_and_value, "=", size);
+		ft_strlcat(name_and_value, itr->value, size);
 		printf("%s\n", name_and_value);
 		free(name_and_value);
 		itr = itr->next;

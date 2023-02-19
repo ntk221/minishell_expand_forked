@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_to_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:26:48 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 02:23:34 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 08:04:56 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,18 @@ char	**command_to_array(t_command *command)
 	}
 	cmd_array[position] = NULL;
 	return (cmd_array);
+}
+
+void	free_commands(char **commands)
+{
+	size_t	i;
+
+	i = 0;
+	while (commands[i] != NULL)
+	{
+		free(commands[i]);
+		i++;
+	}
+	free(commands);
+
 }
