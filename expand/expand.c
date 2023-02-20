@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 20:17:46 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/20 21:15:56 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*expand_args(char *args, char *args_free)
 				append_double(&args, &new_word, args);
 			args++;
 		}
+		else if (*args == '$' && *(args + 1) == '?')
+			expand_dolleeques(&new_word, &args, args);
 		else if (*args == '$')
 			expand_doller(&new_word, &args, args);
 		else

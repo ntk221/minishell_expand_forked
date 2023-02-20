@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/20 14:45:44 by user             ###   ########.fr       */
+/*   Updated: 2023/02/20 21:11:23 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,8 @@ void		expand(t_node *node);
 void		expand_doller(char **dst, char **rest, char *p);
 void		expand_doller_dq(char **dst, char **rest, char *p);
 void		append_char(char **s, char c);
+void		expand_dolleeques(char **dst, char **rest, char *p);
+void		append_num(char **dst, unsigned int num);
 
 /************* signal handler ************/
 
