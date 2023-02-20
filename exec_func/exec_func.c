@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/20 00:36:29 by user             ###   ########.fr       */
+/*   Updated: 2023/02/20 22:04:49 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,11 @@ int	stashfd(int fd)
 
 void	child_process(t_node *node, char *path, char **argv, char **environ)
 {
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	prepare_pipe_child(node);
-	redirect_reconect(node->command);
+	if (redirect_reconect(node->command) == 1)
+		exit(1);
 	if (is_builtin(node->command->args->word))
 		exit(do_builtin(node->command->args->word, node->command));
 	else
@@ -85,6 +88,28 @@ void	child_process(t_node *node, char *path, char **argv, char **environ)
 	}
 }
 
+void	exec_check(t_node *node, char *path)
+{
+	t_redirect	*redirect;
+
+	redirect = *(node->command->redirect);
+	while (redirect != NULL)
+	{
+		if (redirect->redirectfile == -1)
+		{
+			printf("minishell: %s: No such file or directory\n", redirect->file_path);
+			g_env->err_status = 1;
+			return ;
+		}
+		redirect = redirect->next;
+	}
+	if (path[0] != '/' && path[0] != '.' && searchpath(path) == NULL)
+	{
+		printf("bash: %s: command not found :x\n", path);
+		g_env->err_status = 127;
+	}
+}
+
 pid_t	exec_pipeline(t_node *node)
 {
 	extern char	**environ;
@@ -94,18 +119,13 @@ pid_t	exec_pipeline(t_node *node)
 	if (node == NULL)
 		return (-1);
 	argv = args_to_argv(node->command->args);
-	if (argv[0][0] != '/' && argv[0][0] != '.' && searchpath(argv[0]) == NULL)
-		printf("bash: %s: command not found :x\n", argv[0]);
+	exec_check(node, argv[0]);
 	prepare_pipe(node);
 	pid = fork();
 	if (pid < 0)
 		fatal_error("fork");
 	else if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
 		child_process(node, argv[0], argv, environ);
-	}
 	prepare_pipe_parent(node);
 	if (node->next)
 		return (exec_pipeline(node->next));

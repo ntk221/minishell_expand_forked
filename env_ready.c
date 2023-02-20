@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:39:39 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 19:54:46 by knitta           ###   ########.fr       */
+/*   Updated: 2023/02/20 21:52:36 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	env_init(t_map **env)
 
 	i = 0;
 	*env = malloc(sizeof(t_map));
+	(*env)->err_status = 0;
 	(*env)->item_head = NULL;
 	while (environ[i] != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:08:20 by user              #+#    #+#             */
-/*   Updated: 2023/02/20 21:10:57 by user             ###   ########.fr       */
+/*   Updated: 2023/02/20 21:53:56 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ void	append_num(char **dst, unsigned int num)
 
 void	expand_dolleeques(char **dst, char **rest, char *p)
 {
-	int	last_status;
-
 	p = p + 2;
-	last_status = 0;//本来はここに常に最終のステータスを保存する
-	append_num(dst, last_status);
+	append_num(dst, g_env->err_status);
 	*rest = p;
 }

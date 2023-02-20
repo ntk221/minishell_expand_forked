@@ -7,29 +7,10 @@ static void	readline_execpart(char *line)
 	t_token		*tok;
 	t_node		*node;
 
-	// t_token		*args;
-	// t_redirect	*redirect;
-
 	tok = tokenizer(line);
 	node = parse(tok);
-	// while (node != NULL)
-	// {
-	// 	args = node->command->args;
-	// 	redirect = *(node->command->redirect);
-	// 	while (args != NULL)
-	// 	{
-	// 		printf("args iis > %s\n", node->command->args->word);
-	// 		args = args->next;
-	// 	}
-	// 	while (redirect != NULL)
-	// 	{
-	// 		printf("redirect file is > %s\n", redirect->file_path);
-	// 		redirect = redirect->next;
-	// 	}
-	// 	node = node->next;
-	// }
 	expand(node);
-	exec(node);
+	g_env->err_status = exec(node);
 	if (tok != NULL)
 		free_token(tok);
 }

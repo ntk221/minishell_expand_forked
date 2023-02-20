@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/20 21:11:23 by user             ###   ########.fr       */
+/*   Updated: 2023/02/20 21:28:32 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int			exec(t_node *node);
 int			do_builtin(char *line, t_command *command);
 int			abusolute_path(char *line);
 void		ready_redirectionfile(t_node *node);
-void		redirect_reconect(t_command *command);
+int			redirect_reconect(t_command *command);
 void		prepare_pipe(t_node *node);
 void		prepare_pipe_child(t_node *node);
 void		prepare_pipe_parent(t_node *node);
