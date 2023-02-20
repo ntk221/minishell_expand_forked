@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 20:19:44 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/20 15:09:03 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	tok_parsing(t_token *tok, t_node *node, bool first_action)
 	while (tok && !at_eof(tok))
 	{
 		if (tok->kind == TK_WORD)
-			tok = parse_word(&node->command->args, tokdup(tok), tok);
+			parse_word(&node->command->args, tokdup(tok), &tok);
 		else if (tok->kind == TK_REDIRECT)
 		{
 			if (first_action == true)
-				redirection_node = tok_to_redirect_f(&first_action, node, tok);
+				redirection_node = tok_to_redirect_f(&first_action, node, &tok);
 			else
-				redirection_node = tok_to_redirect(redirection_node, tok);
+				redirection_node = tok_to_redirect(redirection_node, &tok);
 			tok = tok->next->next;
 		}
 		else if (tok->kind == TK_OP)

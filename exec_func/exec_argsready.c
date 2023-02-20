@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_argsready.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:00:35 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 13:35:17 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 22:54:39 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,22 @@ char	**args_to_argv(t_token *args)
 	size_t	len;
 	char	**argv;
 	size_t	i;
+	t_token	*itr;
 
 	len = 0;
 	i = 0;
-	for (t_token *itr = args; itr != NULL; itr = itr->next)
+	itr = args;
+	while (itr != NULL)
+	{
 		len++;
+		itr = itr->next;
+	}
 	argv = malloc(sizeof(char *) * (len + 1));
-	for (t_token *itr = args; i != len; itr = itr->next)
+	itr = args;
+	while (i != len)
 	{
 		argv[i] = ft_strdup(itr->word);
+		itr = itr->next;
 		i++;
 	}
 	argv[len] = NULL;

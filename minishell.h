@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 21:34:22 by user             ###   ########.fr       */
+/*   Updated: 2023/02/20 14:45:44 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ void		tokenize_error(const char *location, char **rest, char *line);
 t_token		*new_token(char *word, t_token_kind kind);
 char		*token_append(int flag);
 t_token		*redirect(char **rest, char *line);
-t_redirect	*tok_to_redirect_f(bool *flag, t_node *node, t_token *tok);
-t_redirect	*tok_to_redirect(t_redirect *redirect, t_token *tok);
+t_redirect	*tok_to_redirect_f(bool *flag, t_node *node, t_token **tok);
+t_redirect	*tok_to_redirect(t_redirect *redirect, t_token **tok);
 t_token		*word(char **rest, char *line);
 t_token		*operator(char **rest, char *line);
 
@@ -140,11 +140,9 @@ t_token		*operator(char **rest, char *line);
 
 t_node		*parse(t_token *tok);
 bool		parse_redirect(t_redirect **redirect, t_token **tok);
-t_token		*parse_word(t_token **args, t_token *tok, t_token *tok_o);
-
+void		parse_word(t_token **args, t_token *tok, t_token **tok_o);
 void		append_tok(t_token **tokens, t_token *tok);
 void		ready_redirectinout(t_node *node, bool *flag, bool f_content);
-
 bool		at_eof(t_token *tok);
 t_node		*new_node(t_node_kind kind);
 t_token		*tokdup(t_token *tok);
@@ -155,7 +153,6 @@ void		append_tok(t_token **tokens, t_token *tok);
 void		expand(t_node *node);
 void		expand_doller(char **dst, char **rest, char *p);
 void		expand_doller_dq(char **dst, char **rest, char *p);
-
 void		append_char(char **s, char c);
 
 /************* signal handler ************/

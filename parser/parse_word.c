@@ -6,14 +6,14 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 23:25:16 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 17:17:30 by user             ###   ########.fr       */
+/*   Updated: 2023/02/20 14:46:57 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_token	*parse_word(t_token **args, t_token *tok, t_token *tok_o)
+void	parse_word(t_token **args, t_token *tok, t_token **tok_o)
 {
 	append_tok(args, tok);
-	return (tok_o->next);
+	*tok_o = (*tok_o)->next;
 }

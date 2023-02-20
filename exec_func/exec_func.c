@@ -6,21 +6,31 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 14:15:51 by user             ###   ########.fr       */
+/*   Updated: 2023/02/20 00:36:29 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../minishell.h"
 
-char	*searchpath(const char *filename)
+char	*accessok_file(char *path)
 {
-	char	path[PATH_MAX];
-	char	*value;
-	char	*end;
 	char	*dup;
 
+	dup = ft_strdup(path);
+	if (dup == NULL)
+		fatal_error("strdup");
+	return (dup);
+}
+
+char	*searchpath(const char *filename)
+{
+	char	*path;
+	char	*value;
+	char	*end;
+
 	value = getenv("PATH");
+	path = (char *)malloc(sizeof(char) * PATH_MAX);
 	if (ft_strlen(filename) > PATH_MAX)
 		fatal_error("strlen");
 	while (*value != '\0')
@@ -34,12 +44,7 @@ char	*searchpath(const char *filename)
 		ft_strlcat(path, "/", PATH_MAX);
 		ft_strlcat(path, filename, PATH_MAX);
 		if (access(path, X_OK) == 0)
-		{
-			dup = ft_strdup(path);
-			if (dup == NULL)
-				fatal_error("strdup");
-			return (dup);
-		}
+			return (accessok_file(path));
 		if (end == NULL)
 			return (NULL);
 		value = end + 1;
@@ -59,19 +64,38 @@ int	stashfd(int fd)
 	return (stashfd);
 }
 
+void	child_process(t_node *node, char *path, char **argv, char **environ)
+{
+	prepare_pipe_child(node);
+	redirect_reconect(node->command);
+	if (is_builtin(node->command->args->word))
+		exit(do_builtin(node->command->args->word, node->command));
+	else
+	{
+		if (path[0] == '/' || path[0] == '.')
+			execve(path, argv, environ);
+		else
+		{
+			if (searchpath(path) == NULL)
+				exit(127);
+			else
+				execve(searchpath(path), argv, environ);
+		}
+		fatal_error("excve");
+	}
+}
+
 pid_t	exec_pipeline(t_node *node)
 {
 	extern char	**environ;
-	char		*path;
 	pid_t		pid;
 	char		**argv;
 
 	if (node == NULL)
 		return (-1);
 	argv = args_to_argv(node->command->args);
-	path = argv[0];
-	if (path[0] != '/' && path[0] != '.' && searchpath(path) == NULL)
-		printf("bash: %s: command not found :x\n", path);
+	if (argv[0][0] != '/' && argv[0][0] != '.' && searchpath(argv[0]) == NULL)
+		printf("bash: %s: command not found :x\n", argv[0]);
 	prepare_pipe(node);
 	pid = fork();
 	if (pid < 0)
@@ -80,30 +104,11 @@ pid_t	exec_pipeline(t_node *node)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		prepare_pipe_child(node);
-		redirect_reconect(node->command);
-		if (is_builtin(node->command->args->word))
-			exit(do_builtin(node->command->args->word, node->command));
-		else
-		{
-			if (path[0] == '/' || path[0] == '.')
-				execve(path, argv, environ);
-			else
-			{
-				if (searchpath(path) == NULL)
-					exit(127);
-				else
-					execve(searchpath(path), argv, environ);
-			}
-			fatal_error("excve");
-		}
+		child_process(node, argv[0], argv, environ);
 	}
-	else
-	{
-		prepare_pipe_parent(node);
-		if (node->next)
-			return (exec_pipeline(node->next));
-	}
+	prepare_pipe_parent(node);
+	if (node->next)
+		return (exec_pipeline(node->next));
 	return (pid);
 }
 

@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redirect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 23:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 20:20:40 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/20 14:42:15 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_redirect	*tok_to_redirect_f(bool *flag, t_node *node, t_token *tok)
+t_redirect	*tok_to_redirect_f(bool *flag, t_node *node, t_token **tok)
 {
-	parse_redirect(&(*node->command->redirect), &tok);
+	parse_redirect(&(*node->command->redirect), &(*tok));
 	*flag = false;
 	(*node->command->redirect)->before = NULL;
 	return (*node->command->redirect);
 }
 
-t_redirect	*tok_to_redirect(t_redirect *redirect, t_token *tok)
+t_redirect	*tok_to_redirect(t_redirect *redirect, t_token **tok)
 {
-	parse_redirect(&redirect->next, &tok);
+	parse_redirect(&(redirect->next), &(*tok));
 	redirect->next->before = redirect;
 	return (redirect->next);
 }
