@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/20 22:04:49 by user             ###   ########.fr       */
+/*   Updated: 2023/02/20 22:11:10 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	exec_check(t_node *node, char *path)
 		}
 		redirect = redirect->next;
 	}
-	if (path[0] != '/' && path[0] != '.' && searchpath(path) == NULL)
+	if (path[0] != '/' && path[0] != '.' && searchpath(path) == NULL && ft_strcmp("exit", path) != 0)
 	{
 		printf("bash: %s: command not found :x\n", path);
 		g_env->err_status = 127;
