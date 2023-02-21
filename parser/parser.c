@@ -88,12 +88,12 @@ bool	parse_redirect(t_redirect **redirect, t_token **tok);
 t_node	*parse(t_token *tok)
 {
 	t_node		*node;
-	t_node		*first_node;
+	t_node		*head;
 	t_redirect	*itr;
 	bool		first_action;
 
 	node = new_node(ND_SIMPLE_CMD);
-	first_node = node;
+	head = node;
 	// node->command->redirect = (t_redirect *)malloc(sizeof(t_redirect *) * 1);
 	node->command->in_fd[0] = STDIN_FILENO;
 	node->command->in_fd[1] = -1;
@@ -134,8 +134,8 @@ t_node	*parse(t_token *tok)
 			node->command->in_fd[1] = -1;
 			node->command->out_fd[0] = -1;
 			node->command->out_fd[1] = STDOUT_FILENO;
-			node->command->redirect = \
-			(t_redirect *)malloc(sizeof(t_redirect *) * 1);
+			//node->command->redirect = 
+			//(t_redirect *)malloc(sizeof(t_redirect) * 1);
 			first_action = true;
 			tok = tok->next;
 		}
@@ -150,5 +150,5 @@ t_node	*parse(t_token *tok)
 	else
 		itr->next = NULL;
 	node->next = NULL;
-	return (first_node);
+	return (head);
 }
