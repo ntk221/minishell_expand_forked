@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strdup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:48:44 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 05:48:48 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/21 11:49:17 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	*ft_strdup(const char *s)
 	size_t		len;
 	char		*src_sub;
 
+	if (s == NULL)
+		return (NULL);
 	len = ft_strlen(s);
 	src_sub = (char *)malloc(sizeof(char) * (len + 1));
 	if (src_sub == NULL)

@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/20 21:28:32 by user             ###   ########.fr       */
+/*   Updated: 2023/02/21 20:50:49 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_redirect
 	char				*file_path;
 	int					stashed_fd;
 	int					redirectfile;
+	int					ambiguous;
 	t_redirect			*next;
 	t_redirect			*before;
 }	t_redirect;
@@ -164,6 +165,7 @@ void		sigint_handler();
 /************* execfunction ************/
 
 int			exec(t_node *node);
+void		exec_check(t_node *node, char *path);
 int			do_builtin(char *line, t_command *command);
 int			abusolute_path(char *line);
 void		ready_redirectionfile(t_node *node);

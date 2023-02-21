@@ -10,7 +10,13 @@ static void	readline_execpart(char *line)
 	tok = tokenizer(line);
 	node = parse(tok);
 	expand(node);
-	g_env->err_status = exec(node);
+	if (node->next == NULL && is_builtin(node->command->args->word))
+	{
+		redirect_reconect(node->command);
+		g_env->err_status = do_builtin("test", node->command);
+	}
+	else
+		g_env->err_status = exec(node);
 	if (tok != NULL)
 		free_token(tok);
 }

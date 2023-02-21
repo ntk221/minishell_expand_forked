@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/20 22:11:10 by user             ###   ########.fr       */
+/*   Updated: 2023/02/21 08:39:27 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ void	exec_check(t_node *node, char *path)
 	{
 		if (redirect->redirectfile == -1)
 		{
-			printf("minishell: %s: No such file or directory\n", redirect->file_path);
+			if (redirect->file_path == NULL)
+				printf("minishell: ambiguous redirect\n");
+			else
+				printf("minishell: %s: No such file or directory\n", redirect->file_path);
 			g_env->err_status = 1;
 			return ;
 		}

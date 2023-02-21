@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:32:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/20 22:01:32 by user             ###   ########.fr       */
+/*   Updated: 2023/02/21 08:36:46 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	redirect_reconect(t_command *command)
 	while (redirect != NULL)
 	{
 		if (redirect->redirectfile == -1)
-			flag = 1;
+			return 1;
 		if (redirect->type == IN || redirect->type == HEREDOC)
 		{
 			dup2(redirect->redirectfile, 0);
