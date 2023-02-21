@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   expand_doller.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:04:15 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/21 11:33:14 by user             ###   ########.fr       */
+/*   Updated: 2023/02/21 22:33:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char	*expand_args_doller(char *args, char *args_free)
+{
+	char	*new_word;
+	char	type;
+
+	new_word = NULL;
+	while (*args != '\0')
+	{
+		if (*args == '\'' || *args == '\"')
+		{
+			type = *args;
+			append_char(&new_word, *args++);
+			while (*args != type)
+				append_char(&new_word, *args++);
+			append_char(&new_word, *args++);
+		}
+		else if (*args == '$' && *(args + 1) == '?')
+			expand_dolleeques(&new_word, &args, args);
+		else if (*args == '$')
+			expand_doller(&new_word, &args, args);
+		else
+			append_char(&new_word, *args++);
+	}
+	free(args_free);
+	return (new_word);
+}
 
 void	expand_doller(char **dst, char **rest, char *p)
 {

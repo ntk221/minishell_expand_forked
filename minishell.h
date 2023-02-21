@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/21 20:50:49 by user             ###   ########.fr       */
+/*   Updated: 2023/02/21 22:45:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <stdbool.h>
 # include "./libft/libft.h"
 # include <fcntl.h>
+# include <stdint.h>
 # define IN 0
 # define OUT 1
 # define APPEND 2
@@ -157,6 +158,11 @@ void		expand_doller_dq(char **dst, char **rest, char *p);
 void		append_char(char **s, char c);
 void		expand_dolleeques(char **dst, char **rest, char *p);
 void		append_num(char **dst, unsigned int num);
+void		expand_specialparam(t_token *token);
+void		remake_token(t_token *token, t_token *re_token);
+void		expand_quote(t_token *token);
+char		*expand_args_quote(char *args, char *args_free);
+char		*expand_args_doller(char *args, char *args_free);
 
 /************* signal handler ************/
 
@@ -193,6 +199,9 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 size_t		ft_strlen(const char *string_row);
 char		*ft_strtrim(char const *s1, char const *set);
 char		**ft_split(char const *s, char c);
+int			ft_strcmp(const char *s1, const char *s2);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+void		ft_bzero(void *s, size_t n);
 
 /************* errorhandle *************/
 
