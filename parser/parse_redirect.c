@@ -14,7 +14,7 @@
 
 bool	parse_redirect(t_redirect **redirect, t_token **tok)
 {
-	*redirect = malloc(sizeof(t_redirect));
+	*redirect = malloc(sizeof(t_redirect)); // new_redirect
 	if (strcmp((*tok)->word, ">") == 0 && strcmp((*tok)->next->word, ">") == 0)
 	{
 		(*redirect)->type = APPEND;
@@ -35,4 +35,17 @@ bool	parse_redirect(t_redirect **redirect, t_token **tok)
 	else
 		fatal_error("redirection end or not?\n");
 	return (true);
+}
+
+void	free_redirect(t_redirect *redirect)
+{
+	t_redirect	*next;
+
+	if (redirect == NULL)
+		return ;
+	next = redirect->next;
+	if (redirect->file_path != NULL)
+		free(redirect->file_path);
+	free(redirect);
+	free_redirect(next);
 }
