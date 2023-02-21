@@ -43,7 +43,7 @@ void	ready_redirectionfile(t_node *node)
 
 	while (node != NULL)
 	{
-		redirect = *(node->command->redirect);
+		redirect = node->command->redirect;
 		while (redirect != NULL)
 		{
 			if (redirect->type == IN)
@@ -70,7 +70,7 @@ void	redirect_reconect(t_command *command)
 
 	if (command->redirect == NULL)
 		return ;
-	redirect = *(command->redirect);
+	redirect = command->redirect;
 	while (redirect != NULL)
 	{
 		if (redirect->type == IN || redirect->type == HEREDOC)

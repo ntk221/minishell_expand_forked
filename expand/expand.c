@@ -62,7 +62,7 @@ void	expand(t_node *node)
 		}
 		if (node->command->redirect != NULL)
 		{
-			redirect = *(node->command->redirect);
+			redirect = node->command->redirect;
 			while (redirect != NULL)
 			{
 				if (redirect->type != HEREDOC)

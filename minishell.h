@@ -80,7 +80,7 @@ typedef struct	s_redirect
 typedef struct s_command
 {
 	t_token		 	*args;
-	t_redirect		**redirect;
+	t_redirect		*redirect;
 	int				in_fd[2];
 	int				out_fd[2];
 	int				now_in;
