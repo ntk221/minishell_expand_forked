@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/21 08:39:27 by user             ###   ########.fr       */
+/*   Updated: 2023/02/22 20:59:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	exec_check(t_node *node, char *path)
 	redirect = *(node->command->redirect);
 	while (redirect != NULL)
 	{
-		if (redirect->redirectfile == -1)
+		if (redirect->redirectfile == -1) //&& redirect->ambigous==true
 		{
 			if (redirect->file_path == NULL)
 				printf("minishell: ambiguous redirect\n");
@@ -106,7 +106,7 @@ void	exec_check(t_node *node, char *path)
 		}
 		redirect = redirect->next;
 	}
-	if (path[0] != '/' && path[0] != '.' && searchpath(path) == NULL && ft_strcmp("exit", path) != 0)
+	if (is_builtin(path) == false && path[0] != '/' && path[0] != '.' && searchpath(path) == NULL && ft_strcmp("exit", path) != 0)
 	{
 		printf("bash: %s: command not found :x\n", path);
 		g_env->err_status = 127;

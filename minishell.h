@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/21 22:45:52 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/22 19:39:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct s_redirect
 	char				*file_path;
 	int					stashed_fd;
 	int					redirectfile;
-	int					ambiguous;
 	t_redirect			*next;
 	t_redirect			*before;
 }	t_redirect;
@@ -163,6 +162,9 @@ void		remake_token(t_token *token, t_token *re_token);
 void		expand_quote(t_token *token);
 char		*expand_args_quote(char *args, char *args_free);
 char		*expand_args_doller(char *args, char *args_free);
+t_redirect	*expand_redirect_ten(t_redirect *redirect);
+void		append_single(char **args, char **new);
+void		append_double(char **args, char **new, char *args_dummy);
 
 /************* signal handler ************/
 

@@ -6,34 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/21 22:47:40 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/22 20:27:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static	void	append_single(char **args, char **new)
-{
-	while (**args != '\'')
-	{
-		append_char(&(*new), **args);
-		(*args)++;
-	}
-}
-
-static	void	append_double(char **args, char **new, char *args_dummy)
-{
-	while (**args != '\"')
-	{
-		if (**args == '$')
-			expand_doller_dq(&(*new), &(*args), args_dummy);
-		else
-		{
-			append_char(&(*new), **args);
-			(*args)++;
-		}
-	}
-}
 
 char	*expand_args(char *args, char *args_free)
 {
@@ -72,19 +49,6 @@ void	expand_redirect(t_redirect *redirect)
 		redirect = redirect->next;
 	}
 }
-
-/*
-t_redirect	*expand_redirect_ten(t_redirect *redirect)
-{
-	t_redirect	*f_redirect;
-	t_redirect	*redirect;
-
-	specialparam_check(redirect);
-	remake_token(token, re_token);
-	expand_quote(re_token);
-	return (f_re_tok);
-}
-*/
 
 t_token	*expand_simplecommand(t_token *token)
 {

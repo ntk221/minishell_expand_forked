@@ -12,29 +12,6 @@
 
 #include "../minishell.h"
 
-static	void	append_single(char **args, char **new)
-{
-	while (**args != '\'')
-	{
-		append_char(&(*new), **args);
-		(*args)++;
-	}
-}
-
-static	void	append_double(char **args, char **new, char *args_dummy)
-{
-	while (**args != '\"')
-	{
-		if (**args == '$')
-			expand_doller_dq(&(*new), &(*args), args_dummy);
-		else
-		{
-			append_char(&(*new), **args);
-			(*args)++;
-		}
-	}
-}
-
 bool	word_blankcheck(char *string)
 {
 	while (*string != '\0')

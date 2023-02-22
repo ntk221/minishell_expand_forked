@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_appendchar.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:03:13 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 14:18:28 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/22 13:22:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,30 @@ void	append_char(char **s, char c)
 	if (*s)
 		free(*s);
 	*s = new;
+}
+
+void	append_single(char **args, char **new)
+{
+	while (**args != '\'')
+	{
+		append_char(&(*new), **args);
+		(*args)++;
+	}
+}
+
+void	append_double(char **args, char **new, char *args_dummy)
+{
+	while (**args != '\"')
+	{
+		if (**args == '$')
+		{
+			expand_doller_dq(&(*new), &(*args), args_dummy);
+			args_dummy = *args;
+		}
+		else
+		{
+			append_char(&(*new), **args);
+			(*args)++;
+		}
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/20 15:09:03 by user             ###   ########.fr       */
+/*   Updated: 2023/02/22 20:27:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_node	*ready_nextnode(bool *flag, t_node *node, t_token **token)
 {
 	if (*flag == true)
 		(*(node->command->redirect)) = NULL;
+	*flag = true;
 	node->next = new_node(ND_SIMPLE_CMD);
 	ready_redirectinout(node->next, &(*flag), false);
 	node->next->command->redirect = \
@@ -41,7 +42,11 @@ void	tok_parsing(t_token *tok, t_node *node, bool first_action)
 			tok = tok->next->next;
 		}
 		else if (tok->kind == TK_OP)
+		{
+			if (first_action == false)
+				redirection_node->next = NULL;
 			node = ready_nextnode(&first_action, node, &tok);
+		}
 		else
 			fatal_error("Implement parser");
 	}
