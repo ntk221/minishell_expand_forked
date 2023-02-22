@@ -59,15 +59,19 @@ void	free_token(t_token *head)
 	t_token	*itr;
 	t_token	*next;
 
+  if (head == NULL)
+    return;
 	itr = head;
 	next = itr->next;
 	while (next != NULL)
 	{
-		free(itr->word);
+    if (itr->word)
+		  free(itr->word);
 		free(itr);
 		itr = next;
 		next = itr->next;
 	}
-	free(itr->word);
+  if (itr->word)
+	  free(itr->word);
 	free(itr);
 }

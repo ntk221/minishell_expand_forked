@@ -21,6 +21,7 @@ t_token	*new_token(char *word, t_token_kind kind)
 		fatal_error("calloc");
 	tok->word = word;
 	tok->kind = kind;
+  tok->next = NULL;
 	return (tok);
 }
 

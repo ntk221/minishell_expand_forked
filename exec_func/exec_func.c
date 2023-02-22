@@ -65,11 +65,14 @@ pid_t	exec_pipeline(t_node *node)
 	pid_t		pid;
 	char		**argv;
 
-	if (node == NULL)
-		return (-1);
+  if (node == NULL)
+    return (-1);
   if (node->command->args == NULL)
-    fatal_error("syntax error");
-	if (searchpath(args_to_argv(node->command->args)[0]) == NULL)
+  {
+    printf("syntax error\n");
+    return (-1);
+  }
+  else if (searchpath(args_to_argv(node->command->args)[0]) == NULL)
 		printf("command not found :x\n");
 	prepare_pipe(node);
 	pid = fork();
@@ -115,6 +118,8 @@ int	exec(t_node *node)
 
 	ready_redirectionfile(node);
 	last_pid = exec_pipeline(node);
+  if (last_pid == -1)
+    return (-1);
 	status = wait_pipeline(last_pid);
 	return (status);
 }
