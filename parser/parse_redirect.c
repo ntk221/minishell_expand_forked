@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 23:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/22 20:07:51 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/22 22:23:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_redirect	*tok_to_redirect_f(bool *flag, t_node *node, t_token **tok)
 {
 	parse_redirect(&(*node->command->redirect), &(*tok));
+	(*node->command->redirect)->ambigous = false;
 	*flag = false;
 	(*node->command->redirect)->before = NULL;
 	return (*node->command->redirect);
@@ -23,6 +24,7 @@ t_redirect	*tok_to_redirect_f(bool *flag, t_node *node, t_token **tok)
 t_redirect	*tok_to_redirect(t_redirect *redirect, t_token **tok)
 {
 	parse_redirect(&(redirect->next), &(*tok));
+	redirect->next->ambigous = false;
 	redirect->next->before = redirect;
 	return (redirect->next);
 }

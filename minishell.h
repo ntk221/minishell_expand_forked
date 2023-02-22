@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/22 19:39:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/22 22:23:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_redirect
 	int					redirectfile;
 	t_redirect			*next;
 	t_redirect			*before;
+	bool				ambigous;
 }	t_redirect;
 
 typedef struct s_command
