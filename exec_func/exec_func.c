@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/22 20:59:26 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/23 00:31:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ void	exec_check(t_node *node, char *path)
 	redirect = *(node->command->redirect);
 	while (redirect != NULL)
 	{
-		if (redirect->redirectfile == -1) //&& redirect->ambigous==true
+		if (redirect->redirectfile == -1 || redirect->ambigous == true) //&& redirect->ambigous==true
 		{
-			if (redirect->file_path == NULL)
-				printf("minishell: ambiguous redirect\n");
+			if (redirect->file_path == NULL || redirect->ambigous == true)
+				printf("minishell: %s: ambiguous redirect\n", redirect->file_path);
 			else
 				printf("minishell: %s: No such file or directory\n", redirect->file_path);
 			g_env->err_status = 1;
