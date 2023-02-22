@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:32:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 05:19:58 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/21 08:36:46 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	int	heredoc(const char *deli)
 		line = readline("input > ");
 		if (line == NULL)
 			break ;
-		else if (strcmp(line, deli) == 0)
+		else if (ft_strcmp(line, deli) == 0)
 		{
 			free(line);
 			break ;
@@ -57,22 +57,25 @@ void	ready_redirectionfile(t_node *node)
 				fd = open(redirect->file_path, \
 				O_CREAT | O_WRONLY | O_APPEND, 0644);
 			redirect->redirectfile = fd;
-			//redirect->redirectfile = stashfd(fd);
 			redirect = redirect->next;
 		}
 		node = node->next;
 	}
 }
 
-void	redirect_reconect(t_command *command)
+int	redirect_reconect(t_command *command)
 {
 	t_redirect	*redirect;
+	int			flag;
 
+	flag = 0;
 	if (command->redirect == NULL)
-		return ;
+		return (flag);
 	redirect = *(command->redirect);
 	while (redirect != NULL)
 	{
+		if (redirect->redirectfile == -1)
+			return 1;
 		if (redirect->type == IN || redirect->type == HEREDOC)
 		{
 			dup2(redirect->redirectfile, 0);
@@ -87,4 +90,5 @@ void	redirect_reconect(t_command *command)
 		}
 		redirect = redirect->next;
 	}
+	return (flag);
 }

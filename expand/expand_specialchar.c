@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strdup.c                                           :+:      :+:    :+:   */
+/*   expand_specialchar.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 05:48:44 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/21 11:49:17 by user             ###   ########.fr       */
+/*   Created: 2023/02/20 21:08:20 by user              #+#    #+#             */
+/*   Updated: 2023/02/20 21:53:56 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	ft_rewrite(const char *src, char *src_2)
+void	append_num(char **dst, unsigned int num)
 {
-	while ((*src) != '\0')
+	if (num == 0)
 	{
-		*src_2 = *src;
-		src_2 = src_2 + 1;
-		src = src + 1;
+		append_char(dst, '0');
+		return ;
 	}
-	*src_2 = '\0';
+	if (num / 10 != 0)
+		append_num(dst, num / 10);
+	append_char(dst, '0' + (num % 10));
 }
 
-char	*ft_strdup(const char *s)
+void	expand_dolleeques(char **dst, char **rest, char *p)
 {
-	size_t		len;
-	char		*src_sub;
-
-	if (s == NULL)
-		return (NULL);
-	len = ft_strlen(s);
-	src_sub = (char *)malloc(sizeof(char) * (len + 1));
-	if (src_sub == NULL)
-		return (NULL);
-	ft_rewrite(s, src_sub);
-	return (src_sub);
+	p = p + 2;
+	append_num(dst, g_env->err_status);
+	*rest = p;
 }

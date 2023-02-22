@@ -6,72 +6,70 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:37:59 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 05:41:03 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 21:15:26 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+void	re_check(bool *flag, char **line, char *start)
+{
+	*flag = true;
+	*line = start;
+}
+
+char	*ready_quotestring(char *start, bool *flag, char type)
+{
+	char	*append_line;
+
+	append_line = NULL;
+	if (type == '\'')
+	{
+		append_line = ft_strjoin(append_line, token_append(SINGLE));
+		while (strchr(append_line, type) == NULL)
+			append_line = ft_strjoin(append_line, token_append(SINGLE));
+	}
+	else
+	{
+		append_line = ft_strjoin(append_line, token_append(DOUBLE));
+		while (strchr(append_line, type) == NULL)
+			append_line = ft_strjoin(append_line, token_append(DOUBLE));
+	}
+	start = ft_strjoin(start, append_line);
+	*flag = false;
+	return (start);
+}
+
+void	lackquote_check(char **line, char **start, bool *flag, char type)
+{
+	(*line)++;
+	while (**line != type)
+	{
+		if (**line == '\0')
+		{
+			*start = ready_quotestring(*start, &(*flag), type);
+			break ;
+		}
+		(*line)++;
+	}
+	(*line)++;
+}
+
 t_token	*word(char **rest, char *line)
 {
 	char	*start;
 	char	*returnword;
-	char	*append_line;
 	bool	flag;
 
 	start = line;
 	flag = false;
 	while (*line != '\0' && !is_metacharactert(*line) && !is_blank(*line))
 	{
-		if (*line == '\'')
+		if (*line == '\'' || *line == '\"')
 		{
-			line++;
-			while (*line != '\'')
-			{
-				if (*line == '\0')
-				{
-					append_line = NULL;
-					append_line = ft_strjoin(append_line, token_append(SINGLE));
-					while (strchr(append_line, '\'') == NULL)
-						append_line = ft_strjoin(append_line, token_append(SINGLE));
-					start = ft_strjoin(start, append_line);
-					flag = false;
-					break ;
-				}
-				else
-					line++;
-			}
-			line++;
+			lackquote_check(&line, &start, &flag, *line);
 			if (flag == false)
-			{
-				flag = true;
-				line = start;
-			}
-		}
-		else if (*line == '\"')
-		{
-			line++;
-			while (*line != '\"')
-			{
-				if (*line == '\0')
-				{
-					append_line = NULL;
-					append_line = ft_strjoin(append_line, token_append(DOUBLE));
-					while (strchr(append_line, '\"') == NULL)
-						append_line = ft_strjoin(append_line, token_append(DOUBLE));
-					start = ft_strjoin(start, append_line);
-					flag = false;
-					break ;
-				}
-				else
-					line++;
-			}
-			line++;
-			if (flag == false)
-			{
-				flag = true;
-				line = start;
-			}
+				re_check(&flag, &line, start);
 		}
 		else
 			line++;

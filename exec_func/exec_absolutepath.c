@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_absolutepath.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:56:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 05:12:04 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 22:45:47 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 static	char	**line_to_argv(char *line)
 {
 	char	**argv;
+	size_t	position;
 
-	for (int i = 0; line[i] != '\0'; i++)
+	position = 0;
+	while (line[position] != '\0')
 	{
-		if (isspace(line[i]))
+		if (isspace(line[position]))
 		{
 			argv = ft_split(line, ' ');
 			return (argv);
 		}
+		position++;
 	}
 	argv = malloc(sizeof(char *) * 2);
 	argv[0] = line;

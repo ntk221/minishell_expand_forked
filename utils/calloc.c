@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 09:57:20 by kazuki            #+#    #+#             */
-/*   Updated: 2023/02/21 21:43:33 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/06 11:10:48 by kazuki            #+#    #+#             */
+/*   Updated: 2023/02/21 21:43:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../minishell.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	unsigned char	*str1;
-	unsigned char	*str2;
-	size_t			i;
+	void	*mem;
 
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	i = 0;
-	while (i < n)
-	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
-		i++;
-	}
-	return (0);
+	if (nmemb != 0)
+		if (SIZE_MAX / nmemb < size)
+			return (NULL);
+	mem = (void *)malloc(nmemb * size);
+	if (!mem)
+		return (NULL);
+	ft_bzero(mem, size * nmemb);
+	return (mem);
 }

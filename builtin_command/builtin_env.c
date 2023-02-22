@@ -23,9 +23,9 @@ void	ms_env(void)
 	{
 		size = ft_strlen(itr->name) + ft_strlen(itr->value) + 2;
 		name_and_value = malloc(size);
-		strlcat(name_and_value, itr->name, size);
-		strlcat(name_and_value, "=", size);
-		strlcat(name_and_value, itr->value, size);
+		ft_strlcat(name_and_value, itr->name, size);
+		ft_strlcat(name_and_value, "=", size);
+		ft_strlcat(name_and_value, itr->value, size);
 		printf("%s\n", name_and_value);
 		free(name_and_value);
 		itr = itr->next;

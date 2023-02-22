@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 23:25:16 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 05:31:51 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/20 14:46:57 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	parse_word(t_token **args, t_token *tok)
+void	parse_word(t_token **args, t_token *tok, t_token **tok_o)
 {
 	append_tok(args, tok);
+	*tok_o = (*tok_o)->next;
 }

@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:42:10 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/18 05:42:41 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:15:13 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	consume_blank(char **rest, char *line)
 
 bool	startswith(const char *s, const char *keyword)
 {
-	return (memcmp(s, keyword, strlen(keyword)) == 0);
+	return (ft_memcmp(s, keyword, strlen(keyword)) == 0);
 }
 
 t_token	*tokenizer(char *line)
@@ -41,12 +41,16 @@ t_token	*tokenizer(char *line)
 	{
 		if (consume_blank(&line, line))
 			continue ;
-		else if (is_operator(line))
-			tok = tok->next = operator(&line, line);
-		else if (is_word(line))
-			tok = tok->next = word(&line, line);
-		else if (is_redirect(line))
-			tok = tok->next = redirect(&line, line);
+		else if (is_operator(line) || is_word(line) || is_redirect(line))
+		{
+			if (is_operator(line))
+				tok->next = operator(&line, line);
+			else if (is_word(line))
+				tok->next = word(&line, line);
+			else if (is_redirect(line))
+				tok->next = redirect(&line, line);
+			tok = tok->next;
+		}
 		else
 			tokenize_error("Unexpected Token", &line, line);
 	}

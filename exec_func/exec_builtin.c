@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:46:37 by user              #+#    #+#             */
-/*   Updated: 2023/02/17 22:02:54 by user             ###   ########.fr       */
+/*   Updated: 2023/02/21 07:49:09 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	do_builtin(char *line, t_command *command)
 {
-	if (strcmp(line, "env") == 0)
+	if (ft_strcmp(command->args->word, "env") == 0)
 		ms_env();
-	else if (strncmp(line, "export", 6) == 0)
+	else if (ft_strncmp(command->args->word, "export", 6) == 0)
 		ms_export(line, command);
-	else if (strcmp(line, "pwd") == 0)
+	else if (ft_strncmp(command->args->word, "pwd", 3) == 0)
 		ms_pwd();
-	else if (strncmp(line, "cd", 2) == 0)
+	else if (ft_strncmp(command->args->word, "cd", 2) == 0)
 		ms_cd(line, command);
-	else if (strncmp(line, "exit", 4) == 0)
+	else if (ft_strncmp(command->args->word, "exit", 4) == 0)
 		ms_exit(line, command);
-	else if (strncmp(line, "unset", 5) == 0)
+	else if (ft_strncmp(command->args->word, "unset", 5) == 0)
 		ms_unset(line, command);
-	else if (strncmp(line, "echo", 4) == 0)
+	else if (ft_strncmp(command->args->word, "echo", 4) == 0)
 		ms_echo(line, command);
 	return (0);
 }

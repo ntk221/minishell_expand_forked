@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:19:18 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 02:22:26 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/21 20:46:07 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,33 @@
 int	ms_echo(char *line, t_command *command)
 {
 	char	**commands;
+	size_t	position;
 
 	(void)line;
+	position = 1;
 	commands = command_to_array(command);
 	if (commands == NULL || commands[1] == NULL)
 		return (0);
-	if (strcmp(commands[1], "-n") == 0)
-		write(1, commands[2], ft_strlen(commands[2]));
+	if (strcmp(commands[position], "-n") == 0)
+	{
+		position++;
+		while (commands[position] != NULL)
+		{
+			write(1, commands[position], ft_strlen(commands[position]));
+			if (commands[position + 1] != NULL)
+				write(1, " ", ft_strlen(" "));
+			position++;
+		}
+	}
 	else
 	{
-		write(1, commands[1], ft_strlen(commands[1]));
+		while (commands[position] != NULL)
+		{
+			write(1, commands[position], ft_strlen(commands[position]));
+			if (commands[position + 1] != NULL)
+				write(1, " ", ft_strlen(" "));
+			position++;
+		}
 		write(1, "\n", ft_strlen("\n"));
 	}
 	return (0);

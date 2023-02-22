@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:32:06 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 05:41:24 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/19 19:36:44 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_token	*new_token(char *word, t_token_kind kind)
 {
 	t_token	*tok;
 
-	tok = calloc(1, sizeof(*tok));
+	tok = ft_calloc(1, sizeof(*tok));
 	if (tok == NULL)
 		fatal_error("calloc");
 	tok->word = word;
