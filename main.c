@@ -30,7 +30,7 @@ static void	readline_execpart(char *line)
 	tok = tokenizer(line);
 	node = parse(tok);
 	expand(node);
-	exec(node);
+	printf("%d\n", exec(node));
 	if (tok != NULL)
 		free_token(tok);
 	if (node != NULL)
