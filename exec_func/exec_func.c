@@ -67,6 +67,8 @@ pid_t	exec_pipeline(t_node *node)
 
 	if (node == NULL)
 		return (-1);
+  if (node->command->args == NULL)
+    fatal_error("syntax error");
 	if (searchpath(args_to_argv(node->command->args)[0]) == NULL)
 		printf("command not found :x\n");
 	prepare_pipe(node);

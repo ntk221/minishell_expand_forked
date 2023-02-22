@@ -17,14 +17,15 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/expand.c tokenizer/error.c tokenizer/crea
 			map/map.c\
 			env_ready.c main.c
 OBJS	=	$(SRCS:%.c=%.o)
-CC  	=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -g
+CC  	=	clang
+CFLAGS	=	-Wall -Werror -Wextra -g 
+SANI	= -fsanitize=address
 RLDIR	=	$(shell brew --prefix readline)
 
 all:$(NAME)
 
 $(NAME):$(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -Llibft -L$(RLDIR)/lib -I$(RLDIR)/include -o $(NAME) -lreadline -lft
+	$(CC) $(CFLAGS) $(SANI) $(OBJS) -Llibft -L$(RLDIR)/lib -I$(RLDIR)/include -o $(NAME) -lreadline 
 
 $(OBJS): %.o : %.c
 	$(CC) $(CFLAGS) -I$(RLDIR)/include -c  $< -o $@ 
