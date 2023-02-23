@@ -17,6 +17,33 @@
 
 // }
 
+char	*expand_args_redirect(char *args, char *args_free)
+{
+	char	*new_word;
+
+	new_word = NULL;
+	while (*args != '\0')
+	{
+		if (*args == '\'' || *args == '\"')
+		{
+			args++;
+			if (*(args - 1) == '\'')
+				append_single(&args, &new_word);
+			else if (*(args - 1) == '\"')
+				append_double(&args, &new_word, args);
+			args++;
+		}
+		else if (*args == '$' && *(args + 1) == '?')
+			expand_dolleeques(&new_word, &args, args);
+		else if (*args == '$')
+			expand_doller(&new_word, &args, args);
+		else
+			append_char(&new_word, *args++);
+	}
+	free(args_free);
+	return (new_word);
+}
+
 void	check_doller(char **rest, char *p, t_redirect *redirect)
 {
 	char	*name;
@@ -52,7 +79,6 @@ void    specialparam_check(t_redirect *redirect)
     while (redirect != NULL)
     {
         args = redirect->file_path;
-        printf("filepath is > %s\n", redirect->file_path);
         while (*args != '\0')
         {
             if (*args == '\'' || *args == '\"')
@@ -70,18 +96,21 @@ void    specialparam_check(t_redirect *redirect)
             else
                 args++;
         }
-		printf("ambigous is > %d\n", redirect->ambigous);
         redirect = redirect->next;
     }
 }
 
 t_redirect	*expand_redirect_ten(t_redirect *redirect)
 {
-	//t_redirect	*f_redirect;
+	t_redirect	*f_redirect;
 
+	f_redirect = redirect;
 	specialparam_check(redirect);
-	return NULL;
-	//remake_token(token, re_token);
-	//expand_quote(re_token);
-	//return (f_re_tok);
+	while (redirect != NULL)
+	{
+		if (redirect->ambigous == false)
+			redirect->file_path = expand_args_redirect(redirect->file_path, redirect->file_path);
+		redirect = redirect->next;
+	}
+	return (f_redirect);
 }

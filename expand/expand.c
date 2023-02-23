@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/22 22:32:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/23 00:19:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	expand(t_node *node)
 		{
 			redirect = *(node->command->redirect);
 			//expand_redirect(redirect);
-			expand_redirect_ten(redirect);
+			*(node->command->redirect) = expand_redirect_ten(redirect);
 		}
 		node = node->next;
 	}
