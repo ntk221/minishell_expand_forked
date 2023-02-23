@@ -15,76 +15,19 @@ builtin_command/builtin_pwd.c: OK!
 builtin_command/builtin_unset.c: OK!
 builtin_command/command_to_array.c: OK!
 exec_func/exec_absolutepath.c: OK!
-exec_func/exec_argsready.c: OK!
 exec_func/exec_builtin.c: OK!
-exec_func/exec_func.c: Error!
-Error: LINE_TOO_LONG        (line: 100, col:  82):	line too long
-Error: TOO_MANY_FUNCS       (line: 117, col:   1):	Too many functions in file
-Error: TOO_MANY_FUNCS       (line: 139, col:   1):	Too many functions in file
+exec_func/exec_func.c: OK!
+exec_func/exec_utils.c: OK!
 exec_func/pipe_func.c: OK!
-exec_func/redirect_file.c: Error!
-Error: RETURN_PARENTHESIS   (line:  78, col:  20):	Return value must be in parenthesis
-Error: TOO_MANY_LINES       (line:  94, col:   1):	Function has more than 25 lines
+exec_func/redirect_file.c: OK!
 expand/expand.c: Error!
 Error: SPACE_REPLACE_TAB    (line:  55, col:  12):	Found space when expecting tab
-Error: WRONG_SCOPE_COMMENT  (line:  80, col:  13):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  78, col:  13):	Comment is invalid in this scope
 expand/expand_appendchar.c: OK!
 expand/expand_doller.c: OK!
-expand/expand_redirection.c: Error!
-Error: TOO_FEW_TAB          (line:  59, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  59, col:   9):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  69, col:   1):	Missing tabs for indent level
-Error: SPACE_EMPTY_LINE     (line:  69, col:   5):	Space on empty line
-Error: CONSECUTIVE_SPC      (line:  74, col:   5):	Two or more consecutives spaces
-Error: SPACE_BEFORE_FUNC    (line:  74, col:   8):	space before function name
-Error: TOO_FEW_TAB          (line:  76, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  76, col:   5):	Found space when expecting tab
-Error: CONSECUTIVE_SPC      (line:  76, col:   9):	Two or more consecutives spaces
-Error: SPACE_REPLACE_TAB    (line:  76, col:   9):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  77, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  77, col:   5):	Found space when expecting tab
-Error: CONSECUTIVE_SPC      (line:  77, col:   9):	Two or more consecutives spaces
-Error: SPACE_REPLACE_TAB    (line:  77, col:   9):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  79, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  79, col:   5):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  80, col:   1):	Missing tabs for indent level
-Error: SPACE_EMPTY_LINE     (line:  80, col:   5):	Space on empty line
-Error: SPACE_REPLACE_TAB    (line:  81, col:   9):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  82, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  82, col:   9):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  83, col:   1):	Missing tabs for indent level
-Error: SPACE_EMPTY_LINE     (line:  83, col:   9):	Space on empty line
-Error: TOO_FEW_TAB          (line:  84, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  84, col:  13):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  85, col:   1):	Missing tabs for indent level
-Error: SPACE_EMPTY_LINE     (line:  85, col:  13):	Space on empty line
-Error: SPACE_REPLACE_TAB    (line:  86, col:  17):	Found space when expecting tab
-Error: SPACE_REPLACE_TAB    (line:  87, col:  17):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  88, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  88, col:  17):	Found space when expecting tab
-Error: SPACE_REPLACE_TAB    (line:  89, col:  21):	Found space when expecting tab
-Error: SPACE_REPLACE_TAB    (line:  90, col:  17):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  91, col:   1):	Missing tabs for indent level
-Error: SPACE_EMPTY_LINE     (line:  91, col:  13):	Space on empty line
-Error: TOO_FEW_TAB          (line:  92, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  92, col:  13):	Found space when expecting tab
-Error: SPACE_REPLACE_TAB    (line:  93, col:  17):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  94, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  94, col:  13):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  95, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  95, col:  17):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  96, col:   1):	Missing tabs for indent level
-Error: SPACE_EMPTY_LINE     (line:  96, col:  13):	Space on empty line
-Error: SPACE_REPLACE_TAB    (line:  97, col:  17):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  98, col:   1):	Missing tabs for indent level
-Error: SPACE_EMPTY_LINE     (line:  98, col:   9):	Space on empty line
-Error: SPACE_REPLACE_TAB    (line:  99, col:   9):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line: 100, col:   1):	Missing tabs for indent level
-Error: SPACE_EMPTY_LINE     (line: 100, col:   5):	Space on empty line
-Error: LINE_TOO_LONG        (line: 112, col:  85):	line too long
-Error: BRACE_SHOULD_EOL     (line: 116, col:   1):	Expected newline after brace
+expand/expand_redirection.c: OK!
 expand/expand_simplecommand.c: Error!
-Error: TOO_MANY_FUNCS       (line:  96, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line:  95, col:   1):	Too many functions in file
 Error: TOO_MANY_FUNCS       (line: 105, col:   1):	Too many functions in file
 Error: BRACE_SHOULD_EOL     (line: 130, col:   1):	Expected newline after brace
 expand/expand_specialchar.c: Error!
@@ -156,27 +99,7 @@ utils/putchar_fd.c: OK!
 utils/putstr_fd.c: OK!
 utils/split.c: OK!
 utils/strchr.c: OK!
-utils/strcmp.c: Error!
-Error: SPACE_BEFORE_FUNC    (line:  15, col:   4):	space before function name
-Error: TOO_FEW_TAB          (line:  17, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  17, col:   5):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  18, col:   1):	Missing tabs for indent level
-Error: SPACE_EMPTY_LINE     (line:  18, col:   5):	Space on empty line
-Error: TOO_FEW_TAB          (line:  19, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  19, col:   9):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  20, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  20, col:  13):	Found space when expecting tab
-Error: SPACE_REPLACE_TAB    (line:  21, col:   9):	Found space when expecting tab
-Error: SPACE_REPLACE_TAB    (line:  22, col:   9):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  23, col:   1):	Missing tabs for indent level
-Error: SPACE_EMPTY_LINE     (line:  23, col:   5):	Space on empty line
-Error: TOO_FEW_TAB          (line:  24, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  24, col:   5):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  25, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  25, col:   9):	Found space when expecting tab
-Error: TOO_FEW_TAB          (line:  26, col:   1):	Missing tabs for indent level
-Error: SPACE_REPLACE_TAB    (line:  26, col:   5):	Found space when expecting tab
-Error: BRACE_SHOULD_EOL     (line:  27, col:   1):	Expected newline after brace
+utils/strcmp.c: OK!
 utils/strdup.c: OK!
 utils/strjoin.c: OK!
 utils/strlcat.c: OK!

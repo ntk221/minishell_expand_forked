@@ -12,11 +12,6 @@
 
 #include "../minishell.h"
 
-// char    *open_redirectspecialparam()
-// {
-
-// }
-
 char	*expand_args_redirect(char *args, char *args_free)
 {
 	char	*new_word;
@@ -56,7 +51,7 @@ void	check_doller(char **rest, char *p, t_redirect *redirect)
 	if (!isalpha(*p) && *p != '_')
 	{
 		*rest = p + 1;
-        free(name);
+		free(name);
 		return ;
 	}
 	append_char(&name,*p++);
@@ -66,38 +61,38 @@ void	check_doller(char **rest, char *p, t_redirect *redirect)
 	free(name);
 	if (value == NULL || strchr(value, ' ') != NULL)
 		redirect->ambigous = true;
-    else
+	else
 		redirect->ambigous = false;
 	*rest = p;
 }
 
-void    specialparam_check(t_redirect *redirect)
+void	specialparam_check(t_redirect *redirect)
 {
-    char    *args;
-    char    type;
+	char	*args;
+	char	type;
 
-    while (redirect != NULL)
-    {
-        args = redirect->file_path;
-        while (*args != '\0')
-        {
-            if (*args == '\'' || *args == '\"')
-            {
-                type = *args;
-                args++;
-                while (*args != type)
-                    args++;
-                args++;
-            }
-            else if (*args == '$' && *(args + 1) == '?')
-                args = args + 2;
-            else if (*args == '$')
-                check_doller(&args, args, redirect);
-            else
-                args++;
-        }
-        redirect = redirect->next;
-    }
+	while (redirect != NULL)
+	{
+		args = redirect->file_path;
+		while (*args != '\0')
+		{
+			if (*args == '\'' || *args == '\"')
+			{
+				type = *args;
+				args++;
+				while (*args != type)
+					args++;
+				args++;
+			}
+			else if (*args == '$' && *(args + 1) == '?')
+				args = args + 2;
+			else if (*args == '$')
+				check_doller(&args, args, redirect);
+			else
+				args++;
+		}
+		redirect = redirect->next;
+	}
 }
 
 t_redirect	*expand_redirect_ten(t_redirect *redirect)
@@ -109,7 +104,8 @@ t_redirect	*expand_redirect_ten(t_redirect *redirect)
 	while (redirect != NULL)
 	{
 		if (redirect->ambigous == false)
-			redirect->file_path = expand_args_redirect(redirect->file_path, redirect->file_path);
+			redirect->file_path = \
+			expand_args_redirect(redirect->file_path, redirect->file_path);
 		redirect = redirect->next;
 	}
 	return (f_redirect);

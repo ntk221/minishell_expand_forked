@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:32:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/23 00:29:44 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/23 20:18:38 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,13 @@ void	ready_redirectionfile(t_node *node)
 	}
 }
 
+void	inout_reconnect(int file_fd, int fd, t_command *command)
+{
+	dup2(file_fd, fd);
+	close(file_fd);
+	command->now_in = file_fd;
+}
+
 int	redirect_reconect(t_command *command)
 {
 	t_redirect	*redirect;
@@ -75,19 +82,11 @@ int	redirect_reconect(t_command *command)
 	while (redirect != NULL)
 	{
 		if (redirect->redirectfile == -1 || redirect->ambigous == true)
-			return 1;
+			return (1);
 		if (redirect->type == IN || redirect->type == HEREDOC)
-		{
-			dup2(redirect->redirectfile, 0);
-			close(redirect->redirectfile);
-			command->now_in = redirect->redirectfile;
-		}
+			inout_reconnect(redirect->redirectfile, 0, command);
 		if (redirect->type == OUT || redirect->type == APPEND)
-		{
-			dup2(redirect->redirectfile, 1);
-			close(redirect->redirectfile);
-			command->now_out = redirect->redirectfile;
-		}
+			inout_reconnect(redirect->redirectfile, 1, command);
 		redirect = redirect->next;
 	}
 	return (flag);
