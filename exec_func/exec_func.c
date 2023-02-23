@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/23 20:03:47 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/23 20:07:48 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,6 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// char	*accessok_file(char *path)
-// {
-// 	char	*dup;
-
-// 	dup = ft_strdup(path);
-// 	if (dup == NULL)
-// 		fatal_error("strdup");
-// 	return (dup);
-// }
-
-// char	*searchpath(const char *filename)
-// {
-// 	char	*path;
-// 	char	*value;
-// 	char	*end;
-
-// 	value = getenv("PATH");
-// 	path = (char *)malloc(sizeof(char) * PATH_MAX);
-// 	if (ft_strlen(filename) > PATH_MAX)
-// 		fatal_error("strlen");
-// 	while (*value != '\0')
-// 	{
-// 		bzero(path, PATH_MAX);
-// 		end = ft_strchr(value, ':');
-// 		if (end)
-// 			strncpy(path, value, end - value);
-// 		else
-// 			ft_strlcpy(path, value, PATH_MAX);
-// 		ft_strlcat(path, "/", PATH_MAX);
-// 		ft_strlcat(path, filename, PATH_MAX);
-// 		if (access(path, X_OK) == 0)
-// 			return (accessok_file(path));
-// 		if (end == NULL)
-// 			return (NULL);
-// 		value = end + 1;
-// 	}
-// 	return (NULL);
-// }
 
 void	child_process(t_node *node, char *path, char **argv, char **environ)
 {
