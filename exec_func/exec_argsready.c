@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:00:35 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/21 11:50:07 by user             ###   ########.fr       */
+/*   Updated: 2023/02/23 15:21:35 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ char	**args_to_argv(t_token *args)
 	itr = args;
 	while (i != len)
 	{
-		argv[i] = ft_strdup(itr->word);
+		if (itr->word != NULL)
+			argv[i] = ft_strdup(itr->word);
+		else
+			argv[i] = NULL;
 		itr = itr->next;
 		i++;
 	}

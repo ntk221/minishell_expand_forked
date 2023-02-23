@@ -71,10 +71,9 @@ void	remake_token(t_token *token, t_token *re_token)
 
 	while (token != NULL)
 	{
-		printf("%s\n", token->word);
-		if (token->word != NULL)
+		if (token->word == NULL)
 			re_token_in_null(token, &re_token);
-		if (word_blankcheck(token->word))
+		else if (word_blankcheck(token->word))
 			split_tokenword(token, &re_token);
 		else
 		{
@@ -97,7 +96,8 @@ void	expand_quote(t_token *token)
 {
 	while (token != NULL)
 	{
-		token->word = expand_args_quote(token->word, token->word);
+		if (token->word != NULL)
+			token->word = expand_args_quote(token->word, token->word);
 		token = token->next;
 	}
 }
