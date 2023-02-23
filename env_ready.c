@@ -55,6 +55,7 @@ void	env_init(t_map **env)
 		name = get_name(environ[i]);
 		value = getenv(name);
 		map_set(env, name, value);
+		free(name);
 		i++;
 	}
 }
