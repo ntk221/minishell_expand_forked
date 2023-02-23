@@ -3,66 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/23 00:31:52 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/23 20:07:48 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*   Updated: 2023/02/23 15:57:58 by user             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../minishell.h"
-
-char	*accessok_file(char *path)
-{
-	char	*dup;
-
-	dup = ft_strdup(path);
-	if (dup == NULL)
-		fatal_error("strdup");
-	return (dup);
-}
-
-char	*searchpath(const char *filename)
-{
-	char	*path;
-	char	*value;
-	char	*end;
-
-	value = getenv("PATH");
-	path = (char *)malloc(sizeof(char) * PATH_MAX);
-	if (ft_strlen(filename) > PATH_MAX)
-		fatal_error("strlen");
-	while (*value != '\0')
-	{
-		bzero(path, PATH_MAX);
-		end = ft_strchr(value, ':');
-		if (end)
-			strncpy(path, value, end - value);
-		else
-			ft_strlcpy(path, value, PATH_MAX);
-		ft_strlcat(path, "/", PATH_MAX);
-		ft_strlcat(path, filename, PATH_MAX);
-		if (access(path, X_OK) == 0)
-			return (accessok_file(path));
-		if (end == NULL)
-			return (NULL);
-		value = end + 1;
-	}
-	return (NULL);
-}
-
-int	stashfd(int fd)
-{
-	int	stashfd;
-
-	stashfd = fcntl(fd, F_DUPFD, 10);
-	if (stashfd < 0)
-		fatal_error("fcntl");
-	if (close(fd) < 0)
-		fatal_error("close");
-	return (stashfd);
-}
 
 void	child_process(t_node *node, char *path, char **argv, char **environ)
 {
@@ -95,18 +47,21 @@ void	exec_check(t_node *node, char *path)
 	redirect = *(node->command->redirect);
 	while (redirect != NULL)
 	{
-		if (redirect->redirectfile == -1 || redirect->ambigous == true) //&& redirect->ambigous==true
+		if (redirect->redirectfile == -1 || redirect->ambigous == true)
 		{
 			if (redirect->file_path == NULL || redirect->ambigous == true)
-				printf("minishell: %s: ambiguous redirect\n", redirect->file_path);
+				printf("minishell: %s: ambiguous redirect\n", \
+				redirect->file_path);
 			else
-				printf("minishell: %s: No such file or directory\n", redirect->file_path);
+				printf("minishell: %s: No such file or directory\n", \
+				redirect->file_path);
 			g_env->err_status = 1;
 			return ;
 		}
 		redirect = redirect->next;
 	}
-	if (is_builtin(path) == false && path[0] != '/' && path[0] != '.' && searchpath(path) == NULL && ft_strcmp("exit", path) != 0)
+	if (is_builtin(path) == false && path[0] != '/' && path[0] != '.' \
+	&& searchpath(path) == NULL && ft_strcmp("exit", path) != 0)
 	{
 		printf("bash: %s: command not found :x\n", path);
 		g_env->err_status = 127;

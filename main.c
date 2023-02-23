@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
+/*   Updated: 2023/02/23 23:25:42 by user             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_map	*g_env;
@@ -21,7 +33,7 @@ static void	readline_execpart(char *line)
 		free_token(tok);
 }
 
-int main()
+int	main(void)
 {
 	char		*line;
 
@@ -33,7 +45,7 @@ int main()
 	{
 		line = readline("minishell$ ");
 		if (line == NULL)
-			break;
+			break ;
 		if (*line != 0)
 		{
 			if (*line)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/23 00:19:47 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/23 21:23:57 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	expand_redirect(t_redirect *redirect)
 
 t_token	*expand_simplecommand(t_token *token)
 {
-	t_token *re_token;
+	t_token	*re_token;
 	t_token	*f_re_tok;
 
 	re_token = (t_token *)malloc(sizeof(t_token) * 1);
@@ -75,7 +75,6 @@ void	expand(t_node *node)
 		if (node->command->redirect != NULL)
 		{
 			redirect = *(node->command->redirect);
-			//expand_redirect(redirect);
 			*(node->command->redirect) = expand_redirect_ten(redirect);
 		}
 		node = node->next;

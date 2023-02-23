@@ -5,7 +5,7 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/error.c tokenizer/create_token.c\
 			expand/expand.c expand/expand_doller.c expand/expand_appendchar.c expand/expand_specialchar.c\
 			expand/expand_simplecommand.c expand/expand_redirection.c\
 			exec_func/exec_func.c exec_func/exec_builtin.c exec_func/pipe_func.c exec_func/redirect_file.c\
-			exec_func/exec_absolutepath.c exec_func/exec_argsready.c\
+			exec_func/exec_absolutepath.c exec_func/exec_utils.c\
 			word_rolechecker/is_blank.c word_rolechecker/is_metacharacter.c\
 			word_rolechecker/is_operator.c word_rolechecker/is_redirect.c word_rolechecker/is_word.c\
 			utils/split.c utils/putstr_fd.c utils/strlcat.c utils/strlcpy.c utils/strlen.c\

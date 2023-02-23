@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:18:23 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 02:22:31 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/23 17:28:38 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ms_cd(char *line, t_command *command)
 
 	(void)line;
 	commands = command_to_array(command);
-	// TODO: ~ を解釈する
 	if (commands == 0 || commands[1] == NULL)
 	{
 		puts("TODO: print usage");
