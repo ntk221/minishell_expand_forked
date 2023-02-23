@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_ready.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:39:39 by user              #+#    #+#             */
-/*   Updated: 2023/02/20 21:52:36 by user             ###   ########.fr       */
+/*   Updated: 2023/02/23 15:05:05 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char  *get_name(char *name_and_value)
+char	*get_name(char *name_and_value)
 {
 	size_t	len;
 	size_t	j;
@@ -22,7 +22,7 @@ char  *get_name(char *name_and_value)
 	while (name_and_value[len] != '\0')
 	{
 		if (name_and_value[len] == '=')
-			break;
+			break ;
 		len++;
 	}
 	name = malloc(sizeof(char) * (len + 1));
