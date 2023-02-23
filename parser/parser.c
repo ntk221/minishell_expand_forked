@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/23 15:48:29 by user             ###   ########.fr       */
+/*   Updated: 2023/02/23 23:32:00 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	tok_parsing(t_token *tok, t_node *node, bool first_action)
 			parse_word(&node->command->args, tokdup(tok), &tok);
 		else if (tok->kind == TK_REDIRECT)
 		{
+			if (at_eof(tok->next) || tok->next->kind == TK_OP)
+				fatal_error("syntax error\n");
 			if (first_action == true)
 				redirection_node = tok_to_redirect_f(&first_action, node, &tok);
 			else
