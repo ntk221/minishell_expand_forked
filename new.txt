@@ -20,9 +20,7 @@ exec_func/exec_func.c: OK!
 exec_func/exec_utils.c: OK!
 exec_func/pipe_func.c: OK!
 exec_func/redirect_file.c: OK!
-expand/expand.c: Error!
-Error: SPACE_REPLACE_TAB    (line:  55, col:  12):	Found space when expecting tab
-Error: WRONG_SCOPE_COMMENT  (line:  78, col:  13):	Comment is invalid in this scope
+expand/expand.c: OK!
 expand/expand_appendchar.c: OK!
 expand/expand_doller.c: OK!
 expand/expand_redirection.c: OK!
@@ -30,8 +28,7 @@ expand/expand_simplecommand.c: Error!
 Error: TOO_MANY_FUNCS       (line:  95, col:   1):	Too many functions in file
 Error: TOO_MANY_FUNCS       (line: 105, col:   1):	Too many functions in file
 Error: BRACE_SHOULD_EOL     (line: 130, col:   1):	Expected newline after brace
-expand/expand_specialchar.c: Error!
-Error: BRACE_SHOULD_EOL     (line:  32, col:   1):	Expected newline after brace
+expand/expand_specialchar.c: OK!
 libft/ft_atoi.c: OK!
 libft/ft_bzero.c: OK!
 libft/ft_calloc.c: OK!
@@ -83,8 +80,7 @@ parser/parse_redirect.c: OK!
 parser/parse_word.c: OK!
 parser/parser.c: Error!
 Error: TOO_MANY_LINES       (line:  58, col:   1):	Function has more than 25 lines
-parser/parser_utils.c: Error!
-Error: WRONG_SCOPE_COMMENT  (line:  29, col:   5):	Comment is invalid in this scope
+parser/parser_utils.c: OK!
 signalhandler/sigint_handler.c: OK!
 tokenizer/create_token.c: OK!
 tokenizer/error.c: OK!
