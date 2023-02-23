@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/23 00:19:47 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/23 14:19:19 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ t_token	*expand_simplecommand(t_token *token)
 	f_re_tok = re_token;
 	expand_specialparam(token);
 	remake_token(token, re_token);
+	printf("check\n");
 	expand_quote(re_token);
+	printf("check\n");
 	return (f_re_tok);
 }
 

@@ -6,17 +6,44 @@ static void	readline_execpart(char *line)
 {
 	t_token		*tok;
 	t_node		*node;
+	t_node		*fnode;
+
+	t_redirect	*redirect;
+	t_token		*args_s;
 
 	tok = tokenizer(line);
 	node = parse(tok);
-	expand(node);
-	if (node->next == NULL && is_builtin(node->command->args->word))
+	fnode = node;
+	while (node != NULL)
 	{
-		redirect_reconect(node->command);
-		g_env->err_status = do_builtin("test", node->command);
+		args_s = node->command->args;
+		while (args_s != NULL)
+		{
+			printf("args is > %s\n", args_s->word);
+			args_s = args_s->next;
+		}
+		if ((node->command->redirect) != NULL)
+		{
+			redirect = *node->command->redirect;
+			while (redirect != NULL)
+			{
+				printf("file path is > %s\n", redirect->file_path);
+				redirect = redirect->next;
+			}
+		}
+		node = node->next;
+	}
+	expand(fnode);
+	if (fnode->next == NULL && is_builtin(fnode->command->args->word))
+	{
+		redirect_reconect(fnode->command);
+		g_env->err_status = do_builtin("test", fnode->command);
 	}
 	else
-		g_env->err_status = exec(node);
+	{
+		printf("check\n");
+		g_env->err_status = exec(fnode);
+	}
 	if (tok != NULL)
 		free_token(tok);
 }

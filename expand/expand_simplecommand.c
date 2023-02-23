@@ -54,12 +54,26 @@ void	expand_specialparam(t_token *token)
 	}
 }
 
+void	re_token_in_null(t_token *token, t_token **re_token)
+{
+	(*re_token)->word = NULL;
+	(*re_token)->kind = TK_WORD;
+	if (token->next != NULL)
+	{
+		(*re_token)->next = (t_token *)malloc(sizeof(t_token) * 1);
+		(*re_token) = (*re_token)->next;
+	}
+}
+
 void	remake_token(t_token *token, t_token *re_token)
 {
 	t_token	*tmp_token;
 
 	while (token != NULL)
 	{
+		printf("%s\n", token->word);
+		if (token->word != NULL)
+			re_token_in_null(token, &re_token);
 		if (word_blankcheck(token->word))
 			split_tokenword(token, &re_token);
 		else
