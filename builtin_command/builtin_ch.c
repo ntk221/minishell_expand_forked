@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_ch.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:45:47 by user              #+#    #+#             */
-/*   Updated: 2023/02/22 20:41:42 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/23 17:29:06 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ bool	is_builtin(char *line)
 	else if (strncmp("echo", line, ft_strlen("echo")) == 0)
 		return (true);
 	else
-    	return (false);
+		return (false);
 }

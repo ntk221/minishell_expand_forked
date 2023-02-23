@@ -18,9 +18,16 @@ exec_func/exec_absolutepath.c: OK!
 exec_func/exec_argsready.c: OK!
 exec_func/exec_builtin.c: OK!
 exec_func/exec_func.c: Error!
-Error: LINE_TOO_LONG        (line: 100, col:  82):	line too long
-Error: TOO_MANY_FUNCS       (line: 117, col:   1):	Too many functions in file
-Error: TOO_MANY_FUNCS       (line: 139, col:   1):	Too many functions in file
+Error: CONSECUTIVE_NEWLINES (line:  13, col:   1):	Consecutive newlines
+Error: LINE_TOO_LONG        (line:  98, col:  73):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  98, col:  73):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  98, col:  73):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  98, col: 102):	line too long
+Error: LINE_TOO_LONG        (line: 101, col:  82):	line too long
+Error: LINE_TOO_LONG        (line: 103, col:  88):	line too long
+Error: LINE_TOO_LONG        (line: 109, col:  84):	line too long
+Error: TOO_MANY_FUNCS       (line: 116, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 138, col:   1):	Too many functions in file
 exec_func/pipe_func.c: OK!
 exec_func/redirect_file.c: Error!
 Error: RETURN_PARENTHESIS   (line:  78, col:  20):	Return value must be in parenthesis
