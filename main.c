@@ -18,7 +18,6 @@ static void	readline_execpart(char *line)
 {
 	t_token		*tok;
 	t_node		*node;
-	t_node		*fnode;
 
 	tok = tokenizer(line);
 	node = parse(tok);
