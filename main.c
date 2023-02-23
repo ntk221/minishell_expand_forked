@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/23 23:25:42 by user             ###   ########.fr       */
+/*   Updated: 2023/02/24 08:42:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ static void	readline_execpart(char *line)
 	t_node		*node;
 
 	tok = tokenizer(line);
+	if (tokcheck(tok) == false)
+	{
+		free_token(tok);
+		return ;
+	}
 	node = parse(tok);
 	expand(node);
 	if (node->next == NULL && is_builtin(node->command->args->word))

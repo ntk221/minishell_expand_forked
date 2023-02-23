@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/23 20:05:44 by user             ###   ########.fr       */
+/*   Updated: 2023/02/24 08:39:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,10 @@ char		**command_to_array(t_command *command);
 
 void		env_init(t_map **env);
 char		*get_name(char *name_and_value);
+
+/**************** tokcheck ***************/
+
+bool		tokcheck(t_token *tok);
 
 /*************** torkenizer **************/
 
