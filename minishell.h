@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/22 22:23:06 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/23 20:05:44 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,8 @@ void		prepare_pipe_child(t_node *node);
 void		prepare_pipe_parent(t_node *node);
 int			wait_pipeline(pid_t last_pid);
 char		**args_to_argv(t_token *args);
+char		*searchpath(const char *filename);
+char		*accessok_file(char *path);
 
 /************* role checker ************/
 
