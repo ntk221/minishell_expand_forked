@@ -18,6 +18,8 @@ void	ms_exit(char *line, t_command *command)
 
 	(void)line;
 	commands = command_to_array(command);
+	if (!commands)
+		fatal_error("malloc");
 	if (commands[1] == NULL)
 	{
 		printf("exit\n");
