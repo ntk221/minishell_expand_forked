@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 19:59:30 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/24 19:39:31 by user             ###   ########.fr       */
+/*   Updated: 2023/02/24 19:43:55 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ char	*accessok_file(char *path)
 
 	dup = ft_strdup(path);
 	if (dup == NULL)
-		fatal_error("strdup");
+		return (NULL);
 	return (dup);
 }
