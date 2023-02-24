@@ -24,11 +24,11 @@ bool	exportwd_check(char *arg)
 	if (ch_word_alphabet(*arg) == false)
 		return (false);
 	arg++;
-	while (*arg != '\0')
+	/*while (*arg != '\0')
 	{
 		if (!(0 <= *arg && *arg <= 127))
 			return (false);
-	}
+	}*/
 	return (true);
 }
 
