@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:04:15 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/21 22:33:39 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/24 10:06:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	*expand_args_doller(char *args, char *args_free)
 				append_char(&new_word, *args++);
 			append_char(&new_word, *args++);
 		}
+		else if (*args == '$' && (*(args + 1) == '\0' || *(args + 1) == '\'' || *(args + 1) == '\"'))
+			append_char(&new_word, *args++);
 		else if (*args == '$' && *(args + 1) == '?')
 			expand_dolleeques(&new_word, &args, args);
 		else if (*args == '$')

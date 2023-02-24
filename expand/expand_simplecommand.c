@@ -23,12 +23,12 @@ bool	word_blankcheck(char *string)
 	return (false);
 }
 
-void	split_tokenword(t_token *token, t_token **re_token)
+void	split_tokenword(t_token **token, t_token **re_token)
 {
 	char	**tokenwd_split;
 	size_t	position;
 
-	tokenwd_split = ft_split(token->word, ' ');
+	tokenwd_split = ft_split((*token)->word, ' ');
 	position = 0;
 	while (tokenwd_split[position] != NULL)
 	{
@@ -43,6 +43,7 @@ void	split_tokenword(t_token *token, t_token **re_token)
 		position++;
 	}
 	free(tokenwd_split);
+	(*token) = (*token)->next;
 }
 
 void	expand_specialparam(t_token *token)
@@ -54,15 +55,16 @@ void	expand_specialparam(t_token *token)
 	}
 }
 
-void	re_token_in_null(t_token *token, t_token **re_token)
+void	re_token_in_null(t_token **token, t_token **re_token)
 {
 	(*re_token)->word = NULL;
 	(*re_token)->kind = TK_WORD;
-	if (token->next != NULL)
+	if ((*token)->next != NULL)
 	{
 		(*re_token)->next = (t_token *)malloc(sizeof(t_token) * 1);
 		(*re_token) = (*re_token)->next;
 	}
+	(*token) = (*token)->next;
 }
 
 void	remake_token(t_token *token, t_token *re_token)
@@ -71,10 +73,13 @@ void	remake_token(t_token *token, t_token *re_token)
 
 	while (token != NULL)
 	{
-		if (token->word == NULL)
-			re_token_in_null(token, &re_token);
-		else if (word_blankcheck(token->word))
-			split_tokenword(token, &re_token);
+		tmp_token = token;
+		if (token->word == NULL && (token->next == NULL || token->next->kind == TK_OP))
+			re_token_in_null(&token, &re_token);
+		else if (token->word == NULL)
+			token = token->next;
+		else if (word_blankcheck(token->word) && (token->word[0] != '\'' && token->word[0] != '\"'))
+			split_tokenword(&token, &re_token);
 		else
 		{
 			re_token->word = ft_strdup(token->word);
@@ -84,9 +89,8 @@ void	remake_token(t_token *token, t_token *re_token)
 				re_token->next = (t_token *)malloc(sizeof(t_token) * 1);
 				re_token = re_token->next;
 			}
+			token = token->next;
 		}
-		tmp_token = token;
-		token = token->next;
 		free(tmp_token);
 	}
 	re_token->next = NULL;
@@ -117,6 +121,8 @@ char	*expand_args_quote(char *args, char *args_free)
 				append_double(&args, &new_word, args);
 			args++;
 		}
+		else if (*args == '$' && (*(args + 1) == '\0' || *(args + 1) == '\'' || *(args + 1) == '\"'))
+			append_char(&new_word, *args++);
 		else if (*args == '$' && *(args + 1) == '?')
 			expand_dolleeques(&new_word, &args, args);
 		else if (*args == '$')
