@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/23 23:32:00 by user             ###   ########.fr       */
+/*   Updated: 2023/02/24 14:20:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_node	*ready_nextnode(bool *flag, t_node *node, t_token **token)
 	ready_redirectinout(node->next, &(*flag), false);
 	node->next->command->redirect = \
 	(t_redirect **)malloc(sizeof(t_redirect *) * 1);
+	node->next->command->args = NULL;
 	*token = (*token)->next;
 	return (node->next);
 }
@@ -35,8 +36,6 @@ void	tok_parsing(t_token *tok, t_node *node, bool first_action)
 			parse_word(&node->command->args, tokdup(tok), &tok);
 		else if (tok->kind == TK_REDIRECT)
 		{
-			if (at_eof(tok->next) || tok->next->kind == TK_OP)
-				fatal_error("syntax error\n");
 			if (first_action == true)
 				redirection_node = tok_to_redirect_f(&first_action, node, &tok);
 			else

@@ -39,12 +39,12 @@ static bool	check_redirectsyntax(t_token *tok)
 		printf("-minishell: syntax error near unexpected token `newline'\n");
 		return (false);
 	}
-	if (tok->next->kind == TK_REDIRECT && tok->word != tok->next->word)
+	if (tok->next->kind == TK_REDIRECT && tok->word[0] != tok->next->word[0])
 	{
 		printf("-minishell: syntax error near unexpected token `%s'\n", tok->next->word);
 		return (false);
 	}
-	if (tok->next->kind == TK_REDIRECT && tok->next->kind == TK_REDIRECT && tok->next->kind == TK_REDIRECT)
+	if (tok->kind == TK_REDIRECT && tok->next->kind == TK_REDIRECT && tok->next->next->kind == TK_REDIRECT)
 	{
 		printf("-minishell: syntax error near unexpected token `%s'\n", tok->next->next->word);
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/24 08:39:06 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/24 16:20:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ int			wait_pipeline(pid_t last_pid);
 char		**args_to_argv(t_token *args);
 char		*searchpath(const char *filename);
 char		*accessok_file(char *path);
+int			stashfd(int fd);
 
 /************* role checker ************/
 

@@ -6,13 +6,35 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/24 13:08:28 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/24 17:39:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_map	*g_env;
+
+void	redirect_recover(t_redirect **redirect_array)
+{
+	t_redirect	*redirect;
+	redirect = *redirect_array;
+	if (redirect == NULL)
+		return ;
+	while (redirect->next != NULL)
+		redirect = redirect->next;
+	while (redirect->before != NULL)
+	{
+		if (redirect->type == IN || redirect->type == HEREDOC)
+			dup2(redirect->stashed_fd, 0);
+		else
+			dup2(redirect->stashed_fd, 1);
+		redirect = redirect->before;
+	}
+	if (redirect->type == IN || redirect->type == HEREDOC)
+		dup2(redirect->stashed_fd, 0);
+	else
+		dup2(redirect->stashed_fd, 1);
+}
 
 static void	readline_execpart(char *line)
 {
@@ -27,7 +49,9 @@ static void	readline_execpart(char *line)
 	}
 	node = parse(tok);
 	expand(node);
-	if (node->next == NULL && is_builtin(node->command->args->word))
+	if (node->command->args == NULL && node->command->redirect != NULL)
+		ready_redirectionfile(node);
+	else if (node->next == NULL && is_builtin(node->command->args->word))
 	{
 		ready_redirectionfile(node);
 		exec_check(node, args_to_argv(node->command->args)[0]);
@@ -37,6 +61,7 @@ static void	readline_execpart(char *line)
 			return ;
 		}
 		g_env->err_status = do_builtin("test", node->command);
+		redirect_recover(node->command->redirect);
 	}
 	else
 		g_env->err_status = exec(node);
