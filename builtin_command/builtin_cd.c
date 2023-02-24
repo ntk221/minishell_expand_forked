@@ -20,8 +20,11 @@ void	ms_cd(char *line, t_command *command)
 
 	(void)line;
 	commands = command_to_array(command);
-	if (commands == 0 || commands[1] == NULL)
+	if (!commands)
+		fatal_error("malloc");
+	if (commands[1] == NULL)
 	{
+		free_commands(commands);
 		puts("TODO: print usage");
 		return ;
 	}
@@ -29,7 +32,9 @@ void	ms_cd(char *line, t_command *command)
 	if (chdir(path) < 0)
 	{
 		perror("chdir");
+		free_commands(commands);
 		return ;
 	}
 	map_set(&g_env, "PWD", getcwd(buf, sizeof(buf)));
+	free_commands(commands);
 }
