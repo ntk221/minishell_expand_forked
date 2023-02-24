@@ -111,10 +111,9 @@ char	*expand_args_quote(char *args, char *args_free)
 	{
 		if (*args == '\'' || *args == '\"')
 		{
-			args++;
-			if (*(args - 1) == '\'')
+			if (*args == '\'')
 				append_single(&args, &new_word);
-			else if (*(args - 1) == '\"')
+			else if (*args == '\"')
 				append_double(&args, &new_word, args);
 			args++;
 		}
