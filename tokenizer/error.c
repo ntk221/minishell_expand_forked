@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:56:53 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 05:41:30 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/24 20:37:56 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	fatal_error(const char *msg)
 {
-	dprintf(STDERR_FILENO, "Fatal Error: %s", msg);
+	write(STDERR_FILENO, "Fatal Error: ", ft_strlen("Fatal Error: "));
+	write(STDERR_FILENO, msg, ft_strlen(msg));
+	write(STDERR_FILENO, "\n", ft_strlen("\n"));
 	exit(1);
 }
 
