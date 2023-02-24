@@ -1,6 +1,7 @@
 NAME	=	minishell
 SRCS	=	tokenizer/tokenizer.c tokenizer/error.c tokenizer/create_token.c\
 			tokenizer/make_op_token.c tokenizer/make_redirect_token.c tokenizer/make_wd_token.c\
+			syntax_check/syntax_check.c\
 			parser/parser.c parser/parse_word.c parser/parse_redirect.c parser/parser_utils.c\
 			expand/expand.c expand/expand_doller.c expand/expand_appendchar.c expand/expand_specialchar.c\
 			expand/expand_simplecommand.c expand/expand_redirection.c\
