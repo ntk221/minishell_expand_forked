@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/24 11:57:55 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/24 13:08:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@ static void	readline_execpart(char *line)
 	expand(node);
 	if (node->next == NULL && is_builtin(node->command->args->word))
 	{
-		redirect_reconect(node->command);
+		ready_redirectionfile(node);
+		exec_check(node, args_to_argv(node->command->args)[0]);
+		if (redirect_reconect(node->command) == 1)
+		{
+			g_env->err_status = -1;
+			return ;
+		}
 		g_env->err_status = do_builtin("test", node->command);
 	}
 	else
@@ -61,3 +67,6 @@ int	main(void)
 	}
 	exit(0);
 }
+
+// /home/user/.local/bin/norminette
+// /home/user/.local/lib/python3.10/site-packages/norminette

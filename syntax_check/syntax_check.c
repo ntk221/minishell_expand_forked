@@ -13,7 +13,12 @@
 #include "../minishell.h"
 
 static bool	check_opsyntax(t_token *tok)
-{	
+{
+	if (tok->next->kind == TK_EOF)
+	{
+		printf("-minishell: syntax error near unexpected token `newline'\n");
+		return (false);
+	}
 	if (ft_strcmp(tok->word, "||") == 0)
 	{
 		printf("-minishell: syntax error near unexpected token `%s'\n", tok->word);
@@ -29,6 +34,11 @@ static bool	check_opsyntax(t_token *tok)
 
 static bool	check_redirectsyntax(t_token *tok)
 {
+	if (tok->next->kind == TK_EOF)
+	{
+		printf("-minishell: syntax error near unexpected token `newline'\n");
+		return (false);
+	}
 	if (tok->next->kind == TK_REDIRECT && tok->word != tok->next->word)
 	{
 		printf("-minishell: syntax error near unexpected token `%s'\n", tok->next->word);
