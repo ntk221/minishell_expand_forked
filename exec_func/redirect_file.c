@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:32:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/23 20:18:38 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/24 16:19:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ready_redirectionfile(t_node *node)
 			if (redirect->type == APPEND)
 				fd = open(redirect->file_path, \
 				O_CREAT | O_WRONLY | O_APPEND, 0644);
+			fd = stashfd(fd);
 			redirect->redirectfile = fd;
 			redirect = redirect->next;
 		}
@@ -84,9 +85,15 @@ int	redirect_reconect(t_command *command)
 		if (redirect->redirectfile == -1 || redirect->ambigous == true)
 			return (1);
 		if (redirect->type == IN || redirect->type == HEREDOC)
+		{
+			redirect->stashed_fd = stashfd(0);
 			inout_reconnect(redirect->redirectfile, 0, command);
+		}
 		if (redirect->type == OUT || redirect->type == APPEND)
+		{
+			redirect->stashed_fd = stashfd(1);
 			inout_reconnect(redirect->redirectfile, 1, command);
+		}
 		redirect = redirect->next;
 	}
 	return (flag);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 19:18:58 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/23 21:21:44 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/24 14:21:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_node	*new_node(t_node_kind kind)
 		fatal_error("calloc");
 	node->kind = kind;
 	node->command = calloc(1, sizeof(t_command));
+	node->command->args = NULL;
 	node->next = NULL;
 	node->command->redirect = NULL;
 	return (node);

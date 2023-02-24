@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/24 11:53:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/24 14:01:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	expand(t_node *node)
 	while (node != NULL)
 	{
 		token = node->command->args;
-		node->command->args = expand_simplecommand(token);
+		if (node->command->args != NULL)
+			node->command->args = expand_simplecommand(token);
 		if (node->command->redirect != NULL)
 		{
 			redirect = *(node->command->redirect);
