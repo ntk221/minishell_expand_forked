@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:32:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/24 16:19:46 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/24 19:32:30 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	ready_redirectionfile(t_node *node)
 			if (redirect->type == APPEND)
 				fd = open(redirect->file_path, \
 				O_CREAT | O_WRONLY | O_APPEND, 0644);
-			fd = stashfd(fd);
+			if (fd != -1)
+				fd = stashfd(fd);
 			redirect->redirectfile = fd;
 			redirect = redirect->next;
 		}

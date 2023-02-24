@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 19:59:30 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/23 20:00:57 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/24 19:39:31 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ int	stashfd(int fd)
 	int	stashfd;
 
 	stashfd = fcntl(fd, F_DUPFD, 10);
-	if (stashfd < 0)
-		fatal_error("fcntl");
-	if (close(fd) < 0)
-		fatal_error("close");
+	close(fd);
 	return (stashfd);
 }
 
@@ -60,7 +57,7 @@ char	*searchpath(const char *filename)
 	value = getenv("PATH");
 	path = (char *)malloc(sizeof(char) * PATH_MAX);
 	if (ft_strlen(filename) > PATH_MAX)
-		fatal_error("strlen");
+		return (NULL);
 	while (*value != '\0')
 	{
 		bzero(path, PATH_MAX);
