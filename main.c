@@ -67,6 +67,8 @@ static void	readline_execpart(char *line)
 		g_env->err_status = exec(node);
 	if (tok != NULL)
 		free_token(tok);
+	if (node != NULL)
+		free_node(node);
 }
 
 int	main(void)

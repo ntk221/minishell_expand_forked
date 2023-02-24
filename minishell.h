@@ -217,6 +217,8 @@ void		ft_bzero(void *s, size_t n);
 
 void		fatal_error(const char *msg) __attribute__((noreturn));
 void		free_token(t_token *head);
+void		free_node(t_node *node);
+void		free_commands(char **commands);
 pid_t		exec_pipeline(t_node *node);
 void		env_init(t_map **env);
 bool		startswith(const char *s, const char *keyword);

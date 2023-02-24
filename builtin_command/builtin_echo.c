@@ -43,5 +43,6 @@ int	ms_echo(char *line, t_command *command)
 		echo_helper(commands, position);
 		write(1, "\n", ft_strlen("\n"));
 	}
+	free_commands(commands);
 	return (0);
 }
