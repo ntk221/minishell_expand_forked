@@ -74,9 +74,14 @@ char	*searchpath(const char *filename)
 		if (access(path, X_OK) == 0)
 			return (accessok_file(path));
 		if (end == NULL)
+		{
+			free(path);
 			return (NULL);
+		}
 		value = end + 1;
 	}
+	free(path);
+	assert(false);
 	return (NULL);
 }
 
