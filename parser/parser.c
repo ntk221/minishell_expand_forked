@@ -61,12 +61,12 @@ void	tok_parsing(t_token *tok, t_node *node, bool first_action)
 t_node	*parse(t_token *tok)
 {
 	t_node		*node;
-	t_node		*fnode;
+	t_node		*head;
 	bool		first_action;
 
 	node = new_node(ND_SIMPLE_CMD);
-	fnode = node;
+	head = node;
 	ready_redirectinout(node, &first_action, true);
 	tok_parsing(tok, node, first_action);
-	return (fnode);
+	return (head);
 }

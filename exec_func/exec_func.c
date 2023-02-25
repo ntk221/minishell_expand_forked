@@ -73,10 +73,13 @@ pid_t	exec_pipeline(t_node *node)
 	extern char	**environ;
 	pid_t		pid;
 	char		**argv;
+	size_t		i;
 
 	if (node == NULL)
 		return (-1);
 	argv = args_to_argv(node->command->args);
+ 	if (!argv)
+		fatal_error("malloc");
 	exec_check(node, argv[0]);
 	prepare_pipe(node);
 	pid = fork();
@@ -85,6 +88,13 @@ pid_t	exec_pipeline(t_node *node)
 	else if (pid == 0)
 		child_process(node, argv[0], argv, environ);
 	prepare_pipe_parent(node);
+	i = 0;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
 	if (node->next)
 		return (exec_pipeline(node->next));
 	return (pid);

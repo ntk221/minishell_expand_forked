@@ -31,9 +31,9 @@ int	ms_echo(char *line, t_command *command)
 	(void)line;
 	position = 1;
 	commands = command_to_array(command);
-	if (commands == NULL || commands[1] == NULL)
-		return (0);
-	if (strcmp(commands[position], "-n") == 0)
+	if (!commands)
+		fatal_error("malloc");
+	if (commands[1] != NULL && strcmp(commands[position], "-n") == 0)
 	{
 		position++;
 		echo_helper(commands, position);
@@ -43,5 +43,6 @@ int	ms_echo(char *line, t_command *command)
 		echo_helper(commands, position);
 		write(1, "\n", ft_strlen("\n"));
 	}
+	free_commands(commands);
 	return (0);
 }

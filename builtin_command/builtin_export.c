@@ -24,11 +24,11 @@ bool	exportwd_check(char *arg)
 	if (ch_word_alphabet(*arg) == false)
 		return (false);
 	arg++;
-	while (*arg != '\0')
+	/*while (*arg != '\0')
 	{
 		if (!(0 <= *arg && *arg <= 127))
 			return (false);
-	}
+	}*/
 	return (true);
 }
 
@@ -39,21 +39,33 @@ void	ms_export(char *line, t_command *command)
 
 	(void)line;
 	commands = command_to_array(command);
-	if (commands != 0 && commands[0] != NULL)
+	if (!commands)
+		fatal_error("malloc");
+	if (commands[0] != NULL)
 	{
 		if (exportwd_check(commands[1]) == false)
 		{
 			printf("minishell: export: `%s': not a valid identifier\n", command->args->next->word);
+			free_commands(commands);
 			return ;
 		}
 		name_and_value = ft_split(commands[1], '=');
+		if (!name_and_value)
+			fatal_error("malloc");
 		if (name_and_value[0] && name_and_value[1])
 		{
 			map_set(&g_env, name_and_value[0], name_and_value[1]);
+			free_commands(commands);
+			free_commands(name_and_value);
 			return ;
 		}
 		else
+		{
+			free_commands(commands);
+			free_commands(name_and_value);
 			return ;
+		}
 	}
+	free_commands(commands);
 	puts("TODO: print usage");
 }
