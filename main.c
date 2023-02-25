@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 17:30:13 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:01:58 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_map	*g_env;
 void	redirect_recover(t_redirect **redirect_array)
 {
 	t_redirect	*redirect;
+
 	redirect = *redirect_array;
 	if (redirect == NULL)
 		return ;
@@ -36,47 +37,17 @@ void	redirect_recover(t_redirect **redirect_array)
 		dup2(redirect->stashed_fd, 1);
 }
 
-bool	wdcheck(char **str)
+static void	builtin_exec(t_node *node)
 {
-	char	type;
-	char	*tmp_str;
-
-	tmp_str = *str;
-	if (strchr(*str, '\'') != NULL || strchr(*str, '\"') != NULL)
+	ready_redirectionfile(node);
+	exec_check(node, args_to_argv(node->command->args)[0]);
+	if (redirect_reconect(node->command) == 1)
 	{
-		while (**str != '\'' && **str != '\"')
-			(*str)++;
-		type = **str;
-		(*str)++;
-		while (**str != type && **str != '\0')
-			(*str)++;
-		if (**str == '\0')
-		{
-			printf("bash: syntax error near quote `%s'\n", tmp_str);
-			return (false);
-		}
+		g_env->err_status = -1;
+		return ;
 	}
-	return (true);
-}
-
-bool	tokwdcheck(t_token *tok)
-{
-	char	*str;
-	bool	tok_ok;
-
-	tok_ok = true;
-	while (tok != NULL && tok->kind != TK_EOF)
-	{
-		str = tok->word;
-		while (*str != '\0')
-		{
-			if (false == wdcheck(&str))
-				return (false);
-			str++;
-		}
-		tok = tok->next;
-	}
-	return (true);
+	g_env->err_status = do_builtin("test", node->command);
+	redirect_recover(node->command->redirect);
 }
 
 static void	readline_execpart(char *line)
@@ -95,17 +66,7 @@ static void	readline_execpart(char *line)
 	if (node->command->args == NULL && node->command->redirect != NULL)
 		ready_redirectionfile(node);
 	else if (node->next == NULL && is_builtin(node->command->args->word))
-	{
-		ready_redirectionfile(node);
-		exec_check(node, args_to_argv(node->command->args)[0]);
-		if (redirect_reconect(node->command) == 1)
-		{
-			g_env->err_status = -1;
-			return ;
-		}
-		g_env->err_status = do_builtin("test", node->command);
-		redirect_recover(node->command->redirect);
-	}
+		builtin_exec(node);
 	else
 		g_env->err_status = exec(node);
 	if (tok != NULL)
