@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 14:44:26 by user             ###   ########.fr       */
+/*   Updated: 2023/02/25 15:04:11 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ bool	exportwd_check(char *arg)
 	{
 		if (!(0 <= *arg && *arg <= 127))
 			return (false);
+		arg++;
 	}
 	return (true);
 }
@@ -48,18 +49,20 @@ void	ms_export(char *line, t_command *command)
 			printf("output\n");
 			return ;
 		}
-		while (ft_strchr(commands[command_position], '=') == NULL)
+		while (commands[command_position] != NULL && ft_strchr(commands[command_position], '=') == NULL)
 		{
 			if (exportwd_check(commands[command_position]) == false)
 			{
-				printf("minishell: export: `%s': not a valid identifier\n", command->args->next->word);
+				printf("minishell: export: `%s': not a valid identifier\n", commands[command_position]);
 				return ;
 			}
 			command_position++;
 		}
+		if (commands[command_position] == NULL)
+			return ;
 		if (exportwd_check(commands[command_position]) == false)
 		{
-			printf("minishell: export: `%s': not a valid identifier\n", command->args->next->word);
+			printf("minishell: export: `%s': not a valid identifier\n", commands[command_position]);
 			return ;
 		}
 		name_and_value = ft_split(commands[command_position], '=');

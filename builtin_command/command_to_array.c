@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:26:48 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 13:11:44 by user             ###   ########.fr       */
+/*   Updated: 2023/02/25 15:03:24 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	**command_to_array(t_command *command)
 	args = command->args;
 	while (args != NULL && args->word != NULL)
 	{
-		printf("args is > %s\n", args->word);
 		array_num++;
 		args = args->next;
 	}
