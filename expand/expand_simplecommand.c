@@ -74,11 +74,11 @@ void	re_token_in_null(t_token **token, t_token **re_token)
 
 void	remake_token(t_token *token, t_token *re_token)
 {
-	t_token	*tmp_token;
+	t_token	*head;
 
+	head = token;
 	while (token != NULL)
 	{
-		tmp_token = token;
 		if (token->word == NULL && (token->next == NULL || token->next->kind == TK_OP))
 			re_token_in_null(&token, &re_token);
 		else if (token->word == NULL)
@@ -96,8 +96,8 @@ void	remake_token(t_token *token, t_token *re_token)
 			}
 			token = token->next;
 		}
-		free(tmp_token);
 	}
+	free_token(head);
 	re_token->next = NULL;
 }
 
