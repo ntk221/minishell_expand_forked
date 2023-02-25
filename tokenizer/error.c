@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:56:53 by user              #+#    #+#             */
-/*   Updated: 2023/02/24 20:37:56 by user             ###   ########.fr       */
+/*   Updated: 2023/02/24 20:45:25 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	fatal_error(const char *msg)
 
 void	tokenize_error(const char *location, char **rest, char *line)
 {
-	dprintf(STDERR_FILENO, "Fatal Error: %s", location);
+	write(STDERR_FILENO, "Fatal Error: ", ft_strlen("Fatal Error: "));
+	write(STDERR_FILENO, location, ft_strlen(location));
+	write(STDERR_FILENO, "\n", ft_strlen("\n"));
 	while (*line)
 		line++;
 	*rest = line;

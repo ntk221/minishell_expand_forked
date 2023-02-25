@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_wd_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:37:59 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 21:15:26 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/25 00:33:53 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ char	*ready_quotestring(char *start, bool *flag, char type)
 	return (start);
 }
 
-void	lackquote_check(char **line, char **start, bool *flag, char type)
+void	lackquote_check(char **line, bool *flag, char type)
 {
 	(*line)++;
 	while (**line != type)
 	{
 		if (**line == '\0')
 		{
-			*start = ready_quotestring(*start, &(*flag), type);
-			break ;
+			//*start = ready_quotestring(*start, &(*flag), type);//ここを変える
+			*flag = true;
+			return ;
 		}
 		(*line)++;
 	}
@@ -67,9 +68,9 @@ t_token	*word(char **rest, char *line)
 	{
 		if (*line == '\'' || *line == '\"')
 		{
-			lackquote_check(&line, &start, &flag, *line);
-			if (flag == false)
-				re_check(&flag, &line, start);
+			lackquote_check(&line, &flag, *line);
+			if (flag == true)
+				break ;
 		}
 		else
 			line++;
