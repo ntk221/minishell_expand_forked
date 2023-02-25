@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 17:42:39 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:40:35 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-bool	ch_word_alphabet(char ch)
+bool	ch_word_alphabet(unsigned char ch)
 {
 	if ((('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z')) || ch == '_')
 		return (true);
@@ -33,6 +33,34 @@ bool	exportwd_check(char *arg)
 	return (true);
 }
 
+bool	exporterrorcheck(char **command, size_t *count)
+{
+	while (command[*count] != NULL && ft_strchr(command[*count], '=') == NULL)
+	{
+		if (exportwd_check(command[*count]) == false)
+		{
+			puts_errorstring_export(command[*count]);
+			g_env->err_status = 1;
+			return (false);
+		}
+		(*count)++;
+	}
+	if (command[*count] == NULL)
+		return (true);
+	if (exportwd_check(command[*count]) == false)
+	{
+		puts_errorstring_export(command[*count]);
+		g_env->err_status = 1;
+		return (false);
+	}
+	return (true);
+}
+
+void	show_sortedmap(void)
+{
+	return ;
+}
+
 void	ms_export(char *line, t_command *command)
 {
 	char	**commands;
@@ -46,42 +74,17 @@ void	ms_export(char *line, t_command *command)
 		fatal_error("malloc");
 	if (commands[0] != NULL)
 	{
-		if (commands[1] == NULL)
-		{
-			printf("output\n");
-			return ;
-		}
-		while (commands[command_position] != NULL && ft_strchr(commands[command_position], '=') == NULL)
-		{
-			if (exportwd_check(commands[command_position]) == false)
-			{
-				printf("minishell: export: `%s': not a valid identifier\n", commands[command_position]);
-				return ;
-			}
-			command_position++;
-		}
 		if (commands[command_position] == NULL)
+			return (show_sortedmap());
+		if (exporterrorcheck(commands, &command_position) == false || \
+		commands[command_position] == NULL)
 			return ;
-		if (exportwd_check(commands[command_position]) == false)
-		{
-			printf("minishell: export: `%s': not a valid identifier\n", commands[command_position]);
-			return ;
-		}
 		name_and_value = ft_split(commands[command_position], '=');
 		if (!name_and_value)
 			fatal_error("malloc");
 		if (name_and_value[0] && name_and_value[1])
-		{
 			map_set(&g_env, name_and_value[0], name_and_value[1]);
-			free_commands(commands);
-			free_commands(name_and_value);
-			return ;
-		}
-		else
-		{
-			free_commands(commands);
-			free_commands(name_and_value);
-			return ;
-		}
+		free_commands(commands);
+		free_commands(name_and_value);
 	}
 }
