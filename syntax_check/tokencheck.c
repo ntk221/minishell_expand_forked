@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokencheck.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 18:01:14 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 18:03:12 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:09:20 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minisheli.h"
+#include "../minishell.h"
 
 bool	wdcheck(char **str)
 {
