@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 12:21:57 by user             ###   ########.fr       */
+/*   Updated: 2023/02/25 12:28:51 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,3 @@ int	main(void)
 	}
 	exit(0);
 }
-
-// /home/user/.local/bin/norminette
-// /home/user/.local/lib/python3.10/site-packages/norminette
