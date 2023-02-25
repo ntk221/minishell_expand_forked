@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/24 19:42:57 by user             ###   ########.fr       */
+/*   Updated: 2023/02/25 18:51:01 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,7 @@ pid_t	exec_pipeline(t_node *node)
 	char		**argv;
 	size_t		i;
 
-	if (node == NULL)
-		return (-1);
 	argv = args_to_argv(node->command->args);
- 	if (!argv)
-		fatal_error("malloc");
 	exec_check(node, argv[0]);
 	prepare_pipe(node);
 	pid = fork();
@@ -105,8 +101,13 @@ int	exec(t_node *node)
 	pid_t	last_pid;
 	int		status;
 
-	ready_redirectionfile(node);
-	last_pid = exec_pipeline(node);
+	if (node == NULL)
+		last_pid = -1;
+	else
+	{
+		ready_redirectionfile(node);
+		last_pid = exec_pipeline(node);
+	}
 	status = wait_pipeline(last_pid);
 	return (status);
 }

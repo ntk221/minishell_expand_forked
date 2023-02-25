@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 19:59:30 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 18:12:42 by user             ###   ########.fr       */
+/*   Updated: 2023/02/25 18:48:29 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	**args_to_argv(t_token *args)
 		itr = itr->next;
 	}
 	argv = malloc(sizeof(char *) * (len + 1));
+	if (argv == NULL)
+		fatal_error("malloc");
 	itr = args;
 	while (i != len)
 	{
