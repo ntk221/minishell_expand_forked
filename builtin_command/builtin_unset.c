@@ -18,7 +18,13 @@ void	ms_unset(char *line, t_command *command)
 
 	(void)line;
 	commands = command_to_array(command);
-	if (commands == NULL || commands[1] == NULL)
+	if (!commands)
+		fatal_error("malloc");
+	if (commands[1] == NULL)
+	{
+		free_commands(commands);
 		return ;
+	}
 	map_unset(&g_env, commands[1]);
+	free_commands(commands);
 }

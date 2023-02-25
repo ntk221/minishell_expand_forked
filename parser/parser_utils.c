@@ -51,3 +51,23 @@ void	append_tok(t_token **tokens, t_token *tok)
 	}
 	append_tok(&(*tokens)->next, tok);
 }
+
+void	free_node(t_node *node)
+{
+	t_node *itr;
+	t_node *next;
+
+	itr = node;
+	while (itr != NULL)
+	{
+		if((*itr->command->redirect) != NULL)
+		{
+			free(itr->command->redirect);
+		}
+		free_token(itr->command->args);
+		free(itr->command);
+		next = itr->next;
+		free(itr);
+		itr = next;
+	}
+}

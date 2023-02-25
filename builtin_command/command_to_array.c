@@ -38,3 +38,16 @@ char	**command_to_array(t_command *command)
 	cmd_array[position] = NULL;
 	return (cmd_array);
 }
+
+void	free_commands(char **commands)
+{
+	size_t	i;
+
+	i = 0;
+	while (commands[i])
+	{
+		free(commands[i]);
+		i++;
+	}
+	free(commands);
+}

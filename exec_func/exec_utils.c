@@ -56,6 +56,8 @@ char	*searchpath(const char *filename)
 
 	value = getenv("PATH");
 	path = (char *)malloc(sizeof(char) * PATH_MAX);
+	if (!path)
+		fatal_error("malloc");
 	if (ft_strlen(filename) > PATH_MAX)
 		return (NULL);
 	while (*value != '\0')
@@ -78,7 +80,6 @@ char	*searchpath(const char *filename)
 		value = end + 1;
 	}
 	free(path);
-	assert(false);
 	return (NULL);
 }
 
@@ -87,6 +88,7 @@ char	*accessok_file(char *path)
 	char	*dup;
 
 	dup = ft_strdup(path);
+	free(path);
 	if (dup == NULL)
 		return (NULL);
 	return (dup);

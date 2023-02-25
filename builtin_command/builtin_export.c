@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 15:04:11 by user             ###   ########.fr       */
+/*   Updated: 2023/02/25 17:42:39 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	ms_export(char *line, t_command *command)
 	(void)line;
 	command_position = 1;
 	commands = command_to_array(command);
-	if (commands != 0 && commands[0] != NULL)
+	if (!commands)
+		fatal_error("malloc");
+	if (commands[0] != NULL)
 	{
 		if (commands[1] == NULL)
 		{
@@ -66,12 +68,20 @@ void	ms_export(char *line, t_command *command)
 			return ;
 		}
 		name_and_value = ft_split(commands[command_position], '=');
+		if (!name_and_value)
+			fatal_error("malloc");
 		if (name_and_value[0] && name_and_value[1])
 		{
 			map_set(&g_env, name_and_value[0], name_and_value[1]);
+			free_commands(commands);
+			free_commands(name_and_value);
 			return ;
 		}
 		else
+		{
+			free_commands(commands);
+			free_commands(name_and_value);
 			return ;
+		}
 	}
 }

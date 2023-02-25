@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 12:28:51 by user             ###   ########.fr       */
+/*   Updated: 2023/02/25 17:30:13 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ static void	readline_execpart(char *line)
 		g_env->err_status = exec(node);
 	if (tok != NULL)
 		free_token(tok);
+	if (node != NULL)
+		free_node(node);
 }
 
 int	main(void)
