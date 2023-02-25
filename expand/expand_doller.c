@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   expand_doller.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:04:15 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/24 10:06:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/25 21:49:36 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static char	quote_append(char type, char **new, char **args)
+{
+	append_char(&(*new), (*args)++);
+	while (**args != type)
+		append_char(&(*new), (*args)++);
+	append_char(&(*new), (*args)++);
+}
 
 char	*expand_args_doller(char *args, char *args_free)
 {
@@ -21,14 +29,9 @@ char	*expand_args_doller(char *args, char *args_free)
 	while (*args != '\0')
 	{
 		if (*args == '\'' || *args == '\"')
-		{
-			type = *args;
-			append_char(&new_word, *args++);
-			while (*args != type)
-				append_char(&new_word, *args++);
-			append_char(&new_word, *args++);
-		}
-		else if (*args == '$' && (*(args + 1) == '\0' || *(args + 1) == '\'' || *(args + 1) == '\"'))
+			quote_append(*args, &new_word, &args);
+		else if (*args == '$' && (*(args + 1) == '\0' || *(args + 1) == '\'' \
+		|| *(args + 1) == '\"'))
 			append_char(&new_word, *args++);
 		else if (*args == '$' && *(args + 1) == '?')
 			expand_dolleeques(&new_word, &args, args);

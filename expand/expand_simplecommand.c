@@ -121,7 +121,8 @@ char	*expand_args_quote(char *args, char *args_free)
 				append_double(&args, &new_word, args);
 			args++;
 		}
-		else if (*args == '$' && (*(args + 1) == '\0' || *(args + 1) == '\'' || *(args + 1) == '\"'))
+		else if (*args == '$' && (*(args + 1) == '\0' || \
+		*(args + 1) == '\'' || *(args + 1) == '\"'))
 			append_char(&new_word, *args++);
 		else if (*args == '$' && *(args + 1) == '?')
 			expand_dolleeques(&new_word, &args, args);
