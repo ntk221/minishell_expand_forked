@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_wd_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:37:59 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 00:33:53 by user             ###   ########.fr       */
+/*   Updated: 2023/02/25 15:32:06 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	lackquote_check(char **line, bool *flag, char type)
 	{
 		if (**line == '\0')
 		{
-			//*start = ready_quotestring(*start, &(*flag), type);//ここを変える
 			*flag = true;
 			return ;
 		}
