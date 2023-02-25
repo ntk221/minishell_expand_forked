@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 19:59:30 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 15:40:06 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:12:42 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*searchpath(const char *filename)
 		ft_bzero(path, PATH_MAX);
 		end = ft_strchr(value, ':');
 		if (end)
-			ft_strncpy(path, value, end - value);
+			strncpy(path, value, end - value);
 		else
 			ft_strlcpy(path, value, PATH_MAX);
 		ft_strlcat(path, "/", PATH_MAX);
