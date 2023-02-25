@@ -48,9 +48,14 @@ void	split_tokenword(t_token **token, t_token **re_token)
 
 void	expand_specialparam(t_token *token)
 {
+	char	*tmp;
+
 	while (token != NULL)
 	{
-		token->word = expand_args_doller(token->word, token->word);
+		tmp = ft_strdup(tmp);
+		free(token->word);
+		token->word = expand_args_doller(tmp);
+		free(tmp);
 		token = token->next;
 	}
 }

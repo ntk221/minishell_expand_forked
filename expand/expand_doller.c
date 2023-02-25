@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_doller.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:04:15 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 22:09:16 by user             ###   ########.fr       */
+/*   Updated: 2023/02/25 22:25:48 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	quote_append(char type, char **new, char **args)
 	(*args)++;
 }
 
-char	*expand_args_doller(char *args, char *args_free)
+char	*expand_args_doller(char *args)
 {
 	char	*new_word;
 
@@ -44,7 +44,6 @@ char	*expand_args_doller(char *args, char *args_free)
 		else
 			append_char(&new_word, *args++);
 	}
-	free(args_free);
 	return (new_word);
 }
 
