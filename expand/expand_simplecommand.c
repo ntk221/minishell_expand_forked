@@ -52,7 +52,7 @@ void	expand_specialparam(t_token *token)
 
 	while (token != NULL)
 	{
-		tmp = ft_strdup(tmp);
+		tmp = ft_strdup(token->word);
 		free(token->word);
 		token->word = expand_args_doller(tmp);
 		free(tmp);
