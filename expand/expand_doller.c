@@ -3,27 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   expand_doller.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:04:15 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 21:49:36 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/25 22:09:16 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	quote_append(char type, char **new, char **args)
+static void	quote_append(char type, char **new, char **args)
 {
-	append_char(&(*new), (*args)++);
+	append_char(&(*new), **args);
+	(*args)++;
 	while (**args != type)
-		append_char(&(*new), (*args)++);
-	append_char(&(*new), (*args)++);
+	{
+		append_char(&(*new), **args);
+		(*args)++;
+	}
+	append_char(&(*new), **args);
+	(*args)++;
 }
 
 char	*expand_args_doller(char *args, char *args_free)
 {
 	char	*new_word;
-	char	type;
 
 	new_word = NULL;
 	while (*args != '\0')
