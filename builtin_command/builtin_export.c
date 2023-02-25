@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 18:37:41 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:40:35 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	ch_word_alphabet(unsigned char ch)
 	return (false);
 }
 
-bool	exportwd_check(unsigned char *arg)
+bool	exportwd_check(char *arg)
 {
 	if (ch_word_alphabet(*arg) == false)
 		return (false);
