@@ -20,7 +20,7 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/create_token.c\
 			env_ready.c main.c
 OBJS	=	$(SRCS:%.c=%.o)
 CC  	=	gcc
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra -g
 RLDIR	=	$(shell brew --prefix readline)
 
 all:$(NAME)
