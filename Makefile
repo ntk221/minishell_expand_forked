@@ -14,7 +14,7 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/create_token.c\
 			utils/strjoin.c utils/strcmp.c utils/strncmp.c utils/memcmp.c utils/calloc.c utils/bzero.c\
 			builtin_command/builtin_cd.c builtin_command/builtin_echo.c builtin_command/builtin_env.c\
 			builtin_command/builtin_exit.c builtin_command/builtin_export.c builtin_command/builtin_pwd.c\
-			builtin_command/builtin_unset.c builtin_command/command_to_array.c builtin_command/builtin_check.c\
+			builtin_command/builtin_unset.c builtin_command/command_to_array.c builtin_command/builtin_check.c builtin_command/puts_errorstring.c\
 			signalhandler/sigint_handler.c\
 			map/map.c\
 			env_ready.c main.c

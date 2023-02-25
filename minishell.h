@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 18:02:41 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:19:56 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void		ms_export(char *line, t_command *command);
 void		ms_pwd(void);
 void		ms_unset(char *line, t_command *command);
 char		**command_to_array(t_command *command);
+void		puts_errorstring_export(char *str);
 
 /******************* env *****************/
 
