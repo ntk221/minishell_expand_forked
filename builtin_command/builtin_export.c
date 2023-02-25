@@ -26,7 +26,7 @@ bool	exportwd_check(char *arg)
 	arg++;
 	while (*arg != '\0' && *arg != '=')
 	{
-		if (!(0 <= *arg && *arg <= 127))
+		if (!isascii(*arg))
 			return (false);
 		arg++;
 	}

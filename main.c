@@ -39,8 +39,22 @@ void	redirect_recover(t_redirect **redirect_array)
 
 static void	builtin_exec(t_node *node)
 {
+	char	**argv;
+
+	argv = args_to_argv(node->command->args);
+	if (!argv)
+		fatal_error("malloc");
 	ready_redirectionfile(node);
-	exec_check(node, args_to_argv(node->command->args)[0]);
+	exec_check(node, argv[0]);
+	size_t	i;
+
+	i = 0;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
 	if (redirect_reconect(node->command) == 1)
 	{
 		g_env->err_status = -1;

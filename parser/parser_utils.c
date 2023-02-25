@@ -60,8 +60,12 @@ void	free_node(t_node *node)
 	itr = node;
 	while (itr != NULL)
 	{
-		if((*itr->command->redirect) != NULL)
+		if (itr->command->redirect != NULL)
 		{
+			if((*itr->command->redirect) != NULL)
+			{
+				free_redirect(*itr->command->redirect);
+			}
 			free(itr->command->redirect);
 		}
 		free_token(itr->command->args);
