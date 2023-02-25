@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_to_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:26:48 by user              #+#    #+#             */
-/*   Updated: 2023/02/18 02:23:34 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/25 13:11:44 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	**command_to_array(t_command *command)
 	args = command->args;
 	while (args != NULL && args->word != NULL)
 	{
+		printf("args is > %s\n", args->word);
 		array_num++;
 		args = args->next;
 	}
