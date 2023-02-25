@@ -1,5 +1,5 @@
 NAME	=	minishell
-SRCS	=	tokenizer/tokenizer.c tokenizer/error.c tokenizer/create_token.c\
+SRCS	=	tokenizer/tokenizer.c tokenizer/create_token.c\
 			tokenizer/make_op_token.c tokenizer/make_redirect_token.c tokenizer/make_wd_token.c\
 			syntax_check/syntax_check.c\
 			parser/parser.c parser/parse_word.c parser/parse_redirect.c parser/parser_utils.c\
@@ -9,12 +9,12 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/error.c tokenizer/create_token.c\
 			exec_func/exec_absolutepath.c exec_func/exec_utils.c\
 			word_rolechecker/is_blank.c word_rolechecker/is_metacharacter.c\
 			word_rolechecker/is_operator.c word_rolechecker/is_redirect.c word_rolechecker/is_word.c\
-			utils/split.c utils/putstr_fd.c utils/strlcat.c utils/strlcpy.c utils/strlen.c\
+			utils/split.c utils/putstr_fd.c utils/strlcat.c utils/strlcpy.c utils/strlen.c utils/error.c \
 			utils/strtrim.c utils/putchar_fd.c utils/strchr.c utils/strdup.c\
 			utils/strjoin.c utils/strcmp.c utils/strncmp.c utils/memcmp.c utils/calloc.c utils/bzero.c\
 			builtin_command/builtin_cd.c builtin_command/builtin_echo.c builtin_command/builtin_env.c\
 			builtin_command/builtin_exit.c builtin_command/builtin_export.c builtin_command/builtin_pwd.c\
-			builtin_command/builtin_unset.c builtin_command/command_to_array.c builtin_command/builtin_ch.c\
+			builtin_command/builtin_unset.c builtin_command/command_to_array.c builtin_command/builtin_check.c\
 			signalhandler/sigint_handler.c\
 			map/map.c\
 			env_ready.c main.c

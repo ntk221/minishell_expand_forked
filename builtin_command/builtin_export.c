@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/24 20:01:35 by user             ###   ########.fr       */
+/*   Updated: 2023/02/25 17:42:39 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ bool	exportwd_check(char *arg)
 	if (ch_word_alphabet(*arg) == false)
 		return (false);
 	arg++;
-	/*while (*arg != '\0')
+	while (*arg != '\0' && *arg != '=')
 	{
 		if (!(0 <= *arg && *arg <= 127))
 			return (false);
-	}*/
+		arg++;
+	}
 	return (true);
 }
 
@@ -36,20 +37,37 @@ void	ms_export(char *line, t_command *command)
 {
 	char	**commands;
 	char	**name_and_value;
+	size_t	command_position;
 
 	(void)line;
+	command_position = 1;
 	commands = command_to_array(command);
 	if (!commands)
 		fatal_error("malloc");
 	if (commands[0] != NULL)
 	{
-		if (exportwd_check(commands[1]) == false)
+		if (commands[1] == NULL)
 		{
-			printf("minishell: export: `%s': not a valid identifier\n", command->args->next->word);
-			free_commands(commands);
+			printf("output\n");
 			return ;
 		}
-		name_and_value = ft_split(commands[1], '=');
+		while (commands[command_position] != NULL && ft_strchr(commands[command_position], '=') == NULL)
+		{
+			if (exportwd_check(commands[command_position]) == false)
+			{
+				printf("minishell: export: `%s': not a valid identifier\n", commands[command_position]);
+				return ;
+			}
+			command_position++;
+		}
+		if (commands[command_position] == NULL)
+			return ;
+		if (exportwd_check(commands[command_position]) == false)
+		{
+			printf("minishell: export: `%s': not a valid identifier\n", commands[command_position]);
+			return ;
+		}
+		name_and_value = ft_split(commands[command_position], '=');
 		if (!name_and_value)
 			fatal_error("malloc");
 		if (name_and_value[0] && name_and_value[1])
@@ -66,6 +84,4 @@ void	ms_export(char *line, t_command *command)
 			return ;
 		}
 	}
-	free_commands(commands);
-	puts("TODO: print usage");
 }
