@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:32:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/24 19:32:30 by user             ###   ########.fr       */
+/*   Updated: 2023/02/26 16:04:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	stashfd(int fd)
+{
+	int	stashfd;
+
+	stashfd = fcntl(fd, F_DUPFD, 10);
+	close(fd);
+	return (stashfd);
+}
 
 static	int	heredoc(const char *deli)
 {
@@ -18,7 +27,7 @@ static	int	heredoc(const char *deli)
 	int		pfd[2];
 
 	if (pipe(pfd) < 0)
-		return (25555);
+		fatal_error("pipe");
 	while (1)
 	{
 		line = readline("input > ");
