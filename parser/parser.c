@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/26 20:23:01 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/26 20:28:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_node	*ready_nextnode(bool *flag, t_node *node, t_token **token)
 	return (node->next);
 }
 
-void	parse_nullinsert(bool first_action, t_node *node, t_redirect *redirection_node)
+void	parse_nullinsert(bool first_action, t_node *node, \
+t_redirect *redirection_node)
 {
 	if (first_action == true)
 		(*(node->command->redirect)) = NULL;

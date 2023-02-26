@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:30:12 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 20:18:23 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/26 20:45:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_item	*item_new(char *name, char *value)
 	item->next = NULL;
 	return (item);
 }
-
-void	append_item(t_item **itr, t_item *item);
 
 t_map	*map_new(void)
 {
@@ -121,17 +119,17 @@ char	*map_get(t_map *map, const char *name)
 	return (NULL);
 }
 
-void	append_item(t_item **target, t_item *item)
-{
-	if ((*target) == NULL)
-	{
-		(*target) = item;
-		return ;
-	}
-	append_item(&(*target)->next, item);
-}
+// void	append_item(t_item **target, t_item *item)
+// {
+// 	if ((*target) == NULL)
+// 	{
+// 		(*target) = item;
+// 		return ;
+// 	}
+// 	append_item(&(*target)->next, item);
+// }
 
-#ifdef TEST
+// #ifdef TEST
 
 // #include <assert.h>
 // void	test_item(void)
@@ -197,4 +195,4 @@ void	append_item(t_item **target, t_item *item)
 //         itr = itr->next;
 //     }*/
 // }
-#endif
+// #endif

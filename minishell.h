@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 22:31:18 by user             ###   ########.fr       */
+/*   Updated: 2023/02/26 20:43:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ t_map		*map_new(void);
 char		*map_get(t_map *map, const char *name);
 void		map_set(t_map **map, char *name, char *value);
 void		map_unset(t_map **map, char *name);
+void		append_item(t_item **itr, t_item *item);
 
 /************* builtin command ************/
 
@@ -174,6 +175,11 @@ char		*expand_args_doller(char *args);
 t_redirect	*expand_redirect_ten(t_redirect *redirect);
 void		append_single(char **args, char **new);
 void		append_double(char **args, char **new, char *args_dummy);
+bool		word_blankcheck(char *string);
+void		re_token_in_null(t_token **token, t_token **re_token);
+void		re_token_make(t_token **retoken, t_token *token);
+void		remake_token(t_token *token, t_token *re_token);
+void		split_tokenword(t_token **token, t_token **re_token);
 
 /************* signal handler ************/
 
