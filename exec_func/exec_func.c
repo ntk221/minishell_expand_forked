@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 18:51:01 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/26 16:44:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ void	child_process(t_node *node, char *path, char **argv, char **environ)
 	}
 }
 
+static void	redirectfile_check(t_redirect *redirect)
+{
+	if (redirect->file_path == NULL || redirect->ambigous == true)
+		printf("minishell: %s: ambiguous redirect\n", \
+		redirect->file_path);
+	else
+		printf("minishell: %s: No such file or directory\n", \
+		redirect->file_path);
+	g_env->err_status = 1;
+}
+
 void	exec_check(t_node *node, char *path)
 {
 	t_redirect	*redirect;
@@ -49,16 +60,7 @@ void	exec_check(t_node *node, char *path)
 	while (redirect != NULL)
 	{
 		if (redirect->redirectfile == -1 || redirect->ambigous == true)
-		{
-			if (redirect->file_path == NULL || redirect->ambigous == true)
-				printf("minishell: %s: ambiguous redirect\n", \
-				redirect->file_path);
-			else
-				printf("minishell: %s: No such file or directory\n", \
-				redirect->file_path);
-			g_env->err_status = 1;
-			return ;
-		}
+			return (redirectfile_check(redirect));
 		redirect = redirect->next;
 	}
 	checked_path = searchpath(path);
