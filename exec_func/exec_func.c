@@ -43,6 +43,7 @@ void	child_process(t_node *node, char *path, char **argv, char **environ)
 void	exec_check(t_node *node, char *path)
 {
 	t_redirect	*redirect;
+	char		*checked_path;
 
 	redirect = *(node->command->redirect);
 	while (redirect != NULL)
@@ -60,12 +61,14 @@ void	exec_check(t_node *node, char *path)
 		}
 		redirect = redirect->next;
 	}
+	checked_path = searchpath(path);
 	if (is_builtin(path) == false && path[0] != '/' && path[0] != '.' \
-	&& searchpath(path) == NULL && ft_strcmp("exit", path) != 0)
+	&& checked_path == NULL && ft_strcmp("exit", path) != 0)
 	{
 		printf("bash: %s: command not found :x\n", path);
 		g_env->err_status = 127;
 	}
+	free(checked_path);
 }
 
 pid_t	exec_pipeline(t_node *node)

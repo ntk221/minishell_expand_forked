@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 19:59:30 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 18:48:29 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/26 16:35:22 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,19 @@ char	**args_to_argv(t_token *args)
 	return (argv);
 }
 
-int	stashfd(int fd)
+static char	*searchpath_utils(char *path, char *value, const char *filename)
 {
-	int	stashfd;
+	char	*end;
 
-	stashfd = fcntl(fd, F_DUPFD, 10);
-	close(fd);
-	return (stashfd);
+	ft_bzero(path, PATH_MAX);
+	end = ft_strchr(value, ':');
+	if (end)
+		strncpy(path, value, end - value);
+	else
+		ft_strlcpy(path, value, PATH_MAX);
+	ft_strlcat(path, "/", PATH_MAX);
+	ft_strlcat(path, filename, PATH_MAX);
+	return (end);
 }
 
 char	*searchpath(const char *filename)
@@ -64,14 +70,7 @@ char	*searchpath(const char *filename)
 		return (NULL);
 	while (*value != '\0')
 	{
-		ft_bzero(path, PATH_MAX);
-		end = ft_strchr(value, ':');
-		if (end)
-			strncpy(path, value, end - value);
-		else
-			ft_strlcpy(path, value, PATH_MAX);
-		ft_strlcat(path, "/", PATH_MAX);
-		ft_strlcat(path, filename, PATH_MAX);
+		end = searchpath_utils(path, value, filename);
 		if (access(path, X_OK) == 0)
 			return (accessok_file(path));
 		if (end == NULL)

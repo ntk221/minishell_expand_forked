@@ -48,9 +48,14 @@ void	split_tokenword(t_token **token, t_token **re_token)
 
 void	expand_specialparam(t_token *token)
 {
+	char	*tmp;
+
 	while (token != NULL)
 	{
-		token->word = expand_args_doller(token->word, token->word);
+		tmp = ft_strdup(token->word);
+		free(token->word);
+		token->word = expand_args_doller(tmp);
+		free(tmp);
 		token = token->next;
 	}
 }
@@ -69,11 +74,11 @@ void	re_token_in_null(t_token **token, t_token **re_token)
 
 void	remake_token(t_token *token, t_token *re_token)
 {
-	t_token	*tmp_token;
+	t_token	*head;
 
+	head = token;
 	while (token != NULL)
 	{
-		tmp_token = token;
 		if (token->word == NULL && (token->next == NULL || token->next->kind == TK_OP))
 			re_token_in_null(&token, &re_token);
 		else if (token->word == NULL)
@@ -91,8 +96,8 @@ void	remake_token(t_token *token, t_token *re_token)
 			}
 			token = token->next;
 		}
-		free(tmp_token);
 	}
+	free_token(head);
 	re_token->next = NULL;
 }
 
@@ -121,7 +126,8 @@ char	*expand_args_quote(char *args, char *args_free)
 				append_double(&args, &new_word, args);
 			args++;
 		}
-		else if (*args == '$' && (*(args + 1) == '\0' || *(args + 1) == '\'' || *(args + 1) == '\"'))
+		else if (*args == '$' && (*(args + 1) == '\0' || \
+		*(args + 1) == '\'' || *(args + 1) == '\"'))
 			append_char(&new_word, *args++);
 		else if (*args == '$' && *(args + 1) == '?')
 			expand_dolleeques(&new_word, &args, args);

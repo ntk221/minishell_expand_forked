@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 18:19:56 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/25 22:31:18 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void		expand_specialparam(t_token *token);
 void		remake_token(t_token *token, t_token *re_token);
 void		expand_quote(t_token *token);
 char		*expand_args_quote(char *args, char *args_free);
-char		*expand_args_doller(char *args, char *args_free);
+char		*expand_args_doller(char *args);
 t_redirect	*expand_redirect_ten(t_redirect *redirect);
 void		append_single(char **args, char **new);
 void		append_double(char **args, char **new, char *args_dummy);
@@ -223,6 +223,7 @@ void		fatal_error(const char *msg) __attribute__((noreturn));
 void		free_token(t_token *head);
 void		free_node(t_node *node);
 void		free_commands(char **commands);
+void		free_redirect(t_redirect *redirect);
 pid_t		exec_pipeline(t_node *node);
 void		env_init(t_map **env);
 bool		startswith(const char *s, const char *keyword);

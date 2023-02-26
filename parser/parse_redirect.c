@@ -55,6 +55,19 @@ bool	parse_redirect(t_redirect **redirect, t_token **tok)
 	return (true);
 }
 
+void	free_redirect(t_redirect *redirect)
+{
+	t_redirect	*next;
+
+	if (redirect == NULL)
+		return ;
+	next = redirect->next;
+	if (redirect->file_path != NULL)
+		free(redirect->file_path);
+	free(redirect);
+	free_redirect(next);
+}
+
 void	ready_redirectinout(t_node *node, bool *flag, bool f_content)
 {
 	if (f_content == true)

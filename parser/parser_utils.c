@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 19:18:58 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/24 14:21:01 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/26 14:52:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,18 @@ void	append_tok(t_token **tokens, t_token *tok)
 
 void	free_node(t_node *node)
 {
-	t_node *itr;
-	t_node *next;
+	t_node	*itr;
+	t_node	*next;
 
 	itr = node;
 	while (itr != NULL)
 	{
-		if((*itr->command->redirect) != NULL)
+		if (itr->command->redirect != NULL)
 		{
+			if ((*itr->command->redirect) != NULL)
+			{
+				free_redirect(*itr->command->redirect);
+			}
 			free(itr->command->redirect);
 		}
 		free_token(itr->command->args);
