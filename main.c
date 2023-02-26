@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/26 14:49:52 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/26 20:16:50 by kazuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void	readline_execpart(char *line)
 	t_token		*tok;
 	t_node		*node;
 
+  	signal(SIGINT, SIG_IGN);
 	tok = tokenizer(line);
 	if (tokcheck(tok) == false || tokwdcheck(tok) == false)
 	{
@@ -81,7 +82,7 @@ static void	readline_execpart(char *line)
 	else if (node->next == NULL && is_builtin(node->command->args->word))
 		builtin_exec(node);
 	else
-		g_env->err_status = exec(node);
+		exec(node);
 	if (tok != NULL)
 		free_token(tok);
 	if (node != NULL)
@@ -92,12 +93,12 @@ int	main(void)
 {
 	char		*line;
 
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
 	rl_outstream = stderr;
 	env_init(&g_env);
 	while (1)
 	{
+		signal(SIGINT, sigint_handler);
+		signal(SIGQUIT, SIG_IGN);
 		line = readline("minishell$ ");
 		if (line == NULL)
 			break ;

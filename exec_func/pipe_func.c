@@ -52,6 +52,8 @@ int	wait_pipeline(pid_t last_pid)
 	int		status;
 	int		wstatus;
 
+  signal(SIGINT, signal_handler2);
+  signal(SIGQUIT, signal_handler2);
 	while (1)
 	{
 		wait_result = wait(&wstatus);
@@ -59,8 +61,8 @@ int	wait_pipeline(pid_t last_pid)
 			status = WEXITSTATUS(wstatus);
 		else if (wait_result < 0)
 		{
-			if (errno == ECHILD)
-				break ;
+      if (errno == ECHILD)
+        break ;
 		}
 	}
 	return (status);

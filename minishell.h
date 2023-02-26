@@ -178,10 +178,11 @@ void		append_double(char **args, char **new, char *args_dummy);
 /************* signal handler ************/
 
 void		sigint_handler();
+void    signal_handler2(int signal);
 
 /************* execfunction ************/
 
-int			exec(t_node *node);
+void    exec(t_node *node);
 void		exec_check(t_node *node, char *path);
 int			do_builtin(char *line, t_command *command);
 int			abusolute_path(char *line);
