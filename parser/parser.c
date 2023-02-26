@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:32:46 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/24 14:20:45 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/26 20:23:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ t_node	*ready_nextnode(bool *flag, t_node *node, t_token **token)
 	node->next->command->args = NULL;
 	*token = (*token)->next;
 	return (node->next);
+}
+
+void	parse_nullinsert(bool first_action, t_node *node, t_redirect *redirection_node)
+{
+	if (first_action == true)
+		(*(node->command->redirect)) = NULL;
+	else
+		redirection_node->next = NULL;
+	node->next = NULL;
 }
 
 void	tok_parsing(t_token *tok, t_node *node, bool first_action)
@@ -48,14 +57,8 @@ void	tok_parsing(t_token *tok, t_node *node, bool first_action)
 				redirection_node->next = NULL;
 			node = ready_nextnode(&first_action, node, &tok);
 		}
-		else
-			fatal_error("Implement parser");
 	}
-	if (first_action == true)
-		(*(node->command->redirect)) = NULL;
-	else
-		redirection_node->next = NULL;
-	node->next = NULL;
+	parse_nullinsert(first_action, node, redirection_node);
 }
 
 t_node	*parse(t_token *tok)

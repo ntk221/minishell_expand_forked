@@ -101,13 +101,6 @@ void	remake_token(t_token *token, t_token *re_token)
 		else
 		{
 			re_token_make(&re_token, token);
-			// re_token->word = ft_strdup(token->word);
-			// re_token->kind = token->kind;
-			// if (token->next != NULL)
-			// {
-			// 	re_token->next = (t_token *)malloc(sizeof(t_token) * 1);
-			// 	re_token = re_token->next;
-			// }
 			token = token->next;
 		}
 	}
