@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 18:40:35 by user             ###   ########.fr       */
+/*   Updated: 2023/02/26 21:38:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,6 @@ bool	exporterrorcheck(char **command, size_t *count)
 		return (false);
 	}
 	return (true);
-}
-
-void	show_sortedmap(void)
-{
-	return ;
 }
 
 void	ms_export(char *line, t_command *command)

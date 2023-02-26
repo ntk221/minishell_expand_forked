@@ -4,7 +4,7 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/create_token.c\
 			syntax_check/syntax_check.c syntax_check/tokencheck.c\
 			parser/parser.c parser/parse_word.c parser/parse_redirect.c parser/parser_utils.c\
 			expand/expand.c expand/expand_doller.c expand/expand_appendchar.c expand/expand_specialchar.c\
-			expand/expand_simplecommand.c expand/expand_redirection.c\
+			expand/expand_simplecommand.c expand/expand_redirection.c expand/simplecommand_utils.c\
 			exec_func/exec_func.c exec_func/exec_builtin.c exec_func/pipe_func.c exec_func/redirect_file.c\
 			exec_func/exec_absolutepath.c exec_func/exec_utils.c\
 			word_rolechecker/is_blank.c word_rolechecker/is_metacharacter.c\
@@ -14,9 +14,10 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/create_token.c\
 			utils/strjoin.c utils/strcmp.c utils/strncmp.c utils/memcmp.c utils/calloc.c utils/bzero.c\
 			builtin_command/builtin_cd.c builtin_command/builtin_echo.c builtin_command/builtin_env.c\
 			builtin_command/builtin_exit.c builtin_command/builtin_export.c builtin_command/builtin_pwd.c\
-			builtin_command/builtin_unset.c builtin_command/command_to_array.c builtin_command/builtin_check.c builtin_command/puts_errorstring.c\
+			builtin_command/builtin_unset.c builtin_command/command_to_array.c builtin_command/builtin_check.c\
+			builtin_command/puts_errorstring.c builtin_command/builtin_export_no.c\
 			signalhandler/sigint_handler.c\
-			map/map.c\
+			map/map.c map/map_utils.c\
 			env_ready.c main.c
 OBJS	=	$(SRCS:%.c=%.o)
 CC  	=	gcc

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 22:31:18 by user             ###   ########.fr       */
+/*   Updated: 2023/02/26 21:54:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@
 # define SINGLE 1
 # define DOUBLE 2
 
-typedef struct s_token	t_token;
+typedef struct s_token		t_token;
 typedef struct s_redirect	t_redirect;
+typedef struct s_node		t_node;
 
 typedef enum e_token_kind{
 	TK_WORD,
@@ -78,8 +79,6 @@ typedef struct s_command
 	int			now_out;
 }	t_command;
 
-typedef struct s_node	t_node;
-
 struct s_node {
 	t_command	*command;
 	t_node_kind	kind;
@@ -94,12 +93,19 @@ typedef struct s_item {
 	struct s_item	*next;
 }				t_item;
 
+typedef struct	s_map_copy{
+	char				*name;
+	char				*value;
+	struct s_map_copy	*next;
+	bool				sorted;
+}	t_map_copy;
+
 typedef struct s_map{
 	t_item	*item_head;
 	int		err_status;
 }				t_map;
 
-extern t_map	*g_env;
+extern t_map				*g_env;
 
 /****************** MAP *******************/
 
@@ -108,6 +114,7 @@ t_map		*map_new(void);
 char		*map_get(t_map *map, const char *name);
 void		map_set(t_map **map, char *name, char *value);
 void		map_unset(t_map **map, char *name);
+void		append_item(t_item **itr, t_item *item);
 
 /************* builtin command ************/
 
@@ -117,6 +124,7 @@ void		ms_env(void);
 int			ms_echo(char *line, t_command *command);
 void		ms_exit(char *line, t_command *command);
 void		ms_export(char *line, t_command *command);
+void		show_sortedmap(void);
 void		ms_pwd(void);
 void		ms_unset(char *line, t_command *command);
 char		**command_to_array(t_command *command);
@@ -132,7 +140,6 @@ char		*get_name(char *name_and_value);
 bool		tokcheck(t_token *tok);
 bool		tokwdcheck(t_token *tok);
 bool		wdcheck(char **str);
-
 
 /*************** torkenizer **************/
 
@@ -174,6 +181,11 @@ char		*expand_args_doller(char *args);
 t_redirect	*expand_redirect_ten(t_redirect *redirect);
 void		append_single(char **args, char **new);
 void		append_double(char **args, char **new, char *args_dummy);
+bool		word_blankcheck(char *string);
+void		re_token_in_null(t_token **token, t_token **re_token);
+void		re_token_make(t_token **retoken, t_token *token);
+void		remake_token(t_token *token, t_token *re_token);
+void		split_tokenword(t_token **token, t_token **re_token);
 
 /************* signal handler ************/
 
