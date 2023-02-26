@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 18:01:58 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/26 14:49:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,13 @@ void	redirect_recover(t_redirect **redirect_array)
 static void	builtin_exec(t_node *node)
 {
 	char	**argv;
+	size_t	i;
 
 	argv = args_to_argv(node->command->args);
 	if (!argv)
 		fatal_error("malloc");
 	ready_redirectionfile(node);
 	exec_check(node, argv[0]);
-	size_t	i;
-
 	i = 0;
 	while (argv[i])
 	{
