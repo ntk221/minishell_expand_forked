@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_test.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/26 20:59:01 by marvin            #+#    #+#             */
+/*   Updated: 2023/02/26 20:59:09 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	append_char(char **s, char c)
@@ -19,7 +31,8 @@ void	append_char(char **s, char c)
 		free(*s);
 	*s = new;
 }
-int main(void)
+
+int	main(void)
 {
 	char	*line;
 

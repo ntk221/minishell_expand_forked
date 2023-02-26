@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/26 20:43:32 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/26 21:03:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@
 # define SINGLE 1
 # define DOUBLE 2
 
-typedef struct s_token	t_token;
+typedef struct s_token		t_token;
 typedef struct s_redirect	t_redirect;
+typedef struct s_node		t_node;
 
 typedef enum e_token_kind{
 	TK_WORD,
@@ -78,8 +79,6 @@ typedef struct s_command
 	int			now_out;
 }	t_command;
 
-typedef struct s_node	t_node;
-
 struct s_node {
 	t_command	*command;
 	t_node_kind	kind;
@@ -99,7 +98,7 @@ typedef struct s_map{
 	int		err_status;
 }				t_map;
 
-extern t_map	*g_env;
+extern t_map				*g_env;
 
 /****************** MAP *******************/
 
@@ -133,7 +132,6 @@ char		*get_name(char *name_and_value);
 bool		tokcheck(t_token *tok);
 bool		tokwdcheck(t_token *tok);
 bool		wdcheck(char **str);
-
 
 /*************** torkenizer **************/
 
