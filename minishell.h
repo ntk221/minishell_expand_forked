@@ -203,7 +203,7 @@ int			redirect_reconect(t_command *command);
 void		prepare_pipe(t_node *node);
 void		prepare_pipe_child(t_node *node);
 void		prepare_pipe_parent(t_node *node);
-int			wait_pipeline(pid_t last_pid);
+void    wait_pipeline(pid_t last_pid);
 char		**args_to_argv(t_token *args);
 char		*searchpath(const char *filename);
 char		*accessok_file(char *path);
