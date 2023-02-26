@@ -72,6 +72,17 @@ void	re_token_in_null(t_token **token, t_token **re_token)
 	(*token) = (*token)->next;
 }
 
+void	re_token_make(t_token **retoken, t_token *token)
+{
+	(*re_token)->word = ft_strdup(token->word);
+	(*re_token)->kind = token->kind;
+	if (token->next != NULL)
+	{
+		(*re_token)->next = (t_token *)malloc(sizeof(t_token) * 1);
+		(*re_token) = (*re_token)->next;
+	}
+}
+
 void	remake_token(t_token *token, t_token *re_token)
 {
 	t_token	*head;
@@ -79,21 +90,24 @@ void	remake_token(t_token *token, t_token *re_token)
 	head = token;
 	while (token != NULL)
 	{
-		if (token->word == NULL && (token->next == NULL || token->next->kind == TK_OP))
+		if (token->word == NULL && (token->next == NULL \
+		|| token->next->kind == TK_OP))
 			re_token_in_null(&token, &re_token);
 		else if (token->word == NULL)
 			token = token->next;
-		else if (word_blankcheck(token->word) && (token->word[0] != '\'' && token->word[0] != '\"'))
+		else if (word_blankcheck(token->word) && \
+		(token->word[0] != '\'' && token->word[0] != '\"'))
 			split_tokenword(&token, &re_token);
 		else
 		{
-			re_token->word = ft_strdup(token->word);
-			re_token->kind = token->kind;
-			if (token->next != NULL)
-			{
-				re_token->next = (t_token *)malloc(sizeof(t_token) * 1);
-				re_token = re_token->next;
-			}
+			re_token_make(&re_token, token);
+			// re_token->word = ft_strdup(token->word);
+			// re_token->kind = token->kind;
+			// if (token->next != NULL)
+			// {
+			// 	re_token->next = (t_token *)malloc(sizeof(t_token) * 1);
+			// 	re_token = re_token->next;
+			// }
 			token = token->next;
 		}
 	}
