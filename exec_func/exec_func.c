@@ -114,5 +114,5 @@ void  exec(t_node *node)
 		ready_redirectionfile(node);
 		last_pid = exec_pipeline(node);
 	}
-	g_env->err_status = wait_pipeline(last_pid);
+	wait_pipeline(last_pid);
 }

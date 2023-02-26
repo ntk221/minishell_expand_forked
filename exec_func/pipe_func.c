@@ -46,24 +46,20 @@ void	prepare_pipe_parent(t_node *node)
 		close(node->command->out_fd[1]);
 }
 
-int	wait_pipeline(pid_t last_pid)
+void  wait_pipeline(pid_t last_pid)
 {
 	pid_t	wait_result;
-	int		status;
 	int		wstatus;
 
-  signal(SIGINT, signal_handler2);
-  signal(SIGQUIT, signal_handler2);
-	while (1)
+  while (1)
 	{
 		wait_result = wait(&wstatus);
 		if (wait_result == last_pid)
-			status = WEXITSTATUS(wstatus);
+			g_env->err_status = WEXITSTATUS(wstatus);
 		else if (wait_result < 0)
 		{
       if (errno == ECHILD)
         break ;
 		}
 	}
-	return (status);
 }
