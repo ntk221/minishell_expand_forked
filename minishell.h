@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/26 21:03:20 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/26 21:54:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,13 @@ typedef struct s_item {
 	struct s_item	*next;
 }				t_item;
 
+typedef struct	s_map_copy{
+	char				*name;
+	char				*value;
+	struct s_map_copy	*next;
+	bool				sorted;
+}	t_map_copy;
+
 typedef struct s_map{
 	t_item	*item_head;
 	int		err_status;
@@ -117,6 +124,7 @@ void		ms_env(void);
 int			ms_echo(char *line, t_command *command);
 void		ms_exit(char *line, t_command *command);
 void		ms_export(char *line, t_command *command);
+void		show_sortedmap(void);
 void		ms_pwd(void);
 void		ms_unset(char *line, t_command *command);
 char		**command_to_array(t_command *command);
