@@ -34,7 +34,7 @@ void	map_copy(t_map_copy *copy)
 
 bool	sortedcheck(t_map_copy *copy)
 {
-	t_map_copy *check_map;
+	t_map_copy	*check_map;
 
 	check_map = copy;
 	while (check_map != NULL)
@@ -75,7 +75,8 @@ void	check_smallestword(t_map_copy *copy)
 	{
 		while (check_map != NULL)
 		{
-			if (check_map->sorted == false && ft_strcmp(minimum->name, check_map->name) > 0)
+			if (check_map->sorted == false && \
+			ft_strcmp(minimum->name, check_map->name) > 0)
 				minimum = check_map;
 			check_map = check_map->next;
 		}
