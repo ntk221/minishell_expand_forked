@@ -74,12 +74,12 @@ void	re_token_in_null(t_token **token, t_token **re_token)
 
 void	re_token_make(t_token **retoken, t_token *token)
 {
-	(*re_token)->word = ft_strdup(token->word);
-	(*re_token)->kind = token->kind;
+	(*retoken)->word = ft_strdup(token->word);
+	(*retoken)->kind = token->kind;
 	if (token->next != NULL)
 	{
-		(*re_token)->next = (t_token *)malloc(sizeof(t_token) * 1);
-		(*re_token) = (*re_token)->next;
+		(*retoken)->next = (t_token *)malloc(sizeof(t_token) * 1);
+		(*retoken) = (*retoken)->next;
 	}
 }
 
