@@ -53,13 +53,14 @@ void	remake_token(t_token *token, t_token *re_token)
 	head = token;
 	while (token != NULL)
 	{
+		//printf("tokne word %s\n", token->word);
 		if (token->word == NULL && (token->next == NULL \
 		|| token->next->kind == TK_OP))
 			re_token_in_null(&token, &re_token);
 		else if (token->word == NULL)
 			token = token->next;
 		else if (word_blankcheck(token->word) && \
-		(token->word[0] != '\'' && token->word[0] != '\"'))
+		(ft_strchr(token->word, '\'') == NULL && ft_strchr(token->word, '\"') == NULL)) //token->word[0] != '\'' && token->word[0] != '\"'
 			split_tokenword(&token, &re_token);
 		else
 		{

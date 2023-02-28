@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   is_metacharacter.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:04:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/16 22:05:46 by user             ###   ########.fr       */
+/*   Updated: 2023/02/28 22:27:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+//|&;()<>\t\n
+
 bool	is_metacharactert(char c)
 {
-	return (c && strchr("|&;()<>\t\n", c));
+	return (c && strchr("|\n", c));
 }
