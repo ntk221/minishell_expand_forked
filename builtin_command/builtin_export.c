@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/26 21:38:36 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 22:50:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,11 @@ void	ms_export(char *line, t_command *command)
 		if (exporterrorcheck(commands, &command_position) == false || \
 		commands[command_position] == NULL)
 			return ;
+		//printf("%s\n", commands[command_position]);
 		name_and_value = ft_split(commands[command_position], '=');
 		if (!name_and_value)
 			fatal_error("malloc");
+		printf("%s\n", name_and_value[1]);
 		if (name_and_value[0] && name_and_value[1])
 			map_set(&g_env, name_and_value[0], name_and_value[1]);
 		free_commands(commands);
