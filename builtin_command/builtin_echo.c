@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:19:18 by user              #+#    #+#             */
-/*   Updated: 2023/02/23 17:32:12 by satushi          ###   ########.fr       */
+/*   Updated: 2023/03/01 00:10:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@ int	ms_echo(char *line, t_command *command)
 	commands = command_to_array(command);
 	if (!commands)
 		fatal_error("malloc");
-	if (commands[1] != NULL && strcmp(commands[position], "-n") == 0)
+	if (commands[1] != NULL && ft_strcmp(commands[position], "-n") == 0)
 	{
-		position++;
-		echo_helper(commands, position);
+		while (commands[position] != NULL)
+		{
+			if (ft_strcmp(commands[position], "-n") != 0)
+				echo_helper(commands, position);
+			position++;
+		}
 	}
 	else
 	{
