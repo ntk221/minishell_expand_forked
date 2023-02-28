@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/26 14:49:52 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 20:14:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_map	*g_env;
+t_map				*g_env;
 
 void	redirect_recover(t_redirect **redirect_array)
 {

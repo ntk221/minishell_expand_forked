@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/26 21:54:10 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 21:38:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct s_item {
 	struct s_item	*next;
 }				t_item;
 
-typedef struct	s_map_copy{
+typedef struct s_map_copy {
 	char				*name;
 	char				*value;
 	struct s_map_copy	*next;
@@ -189,7 +189,7 @@ void		split_tokenword(t_token **token, t_token **re_token);
 
 /************* signal handler ************/
 
-void		sigint_handler();
+void		sigint_handler(int sig);
 
 /************* execfunction ************/
 
