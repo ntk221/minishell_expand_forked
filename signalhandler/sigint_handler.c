@@ -20,3 +20,17 @@ void	sigint_handler(int sig)
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
+
+void  signal_handler2(int signal)
+{
+  if (signal == SIGINT)
+  {
+    write(1, "\n", 1);
+    g_env->err_status = 130;
+  }
+  else if (signal == SIGQUIT)
+  {
+    write(1, "\n", 1);
+    g_env->err_status = 131;
+  }
+}

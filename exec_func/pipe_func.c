@@ -46,22 +46,31 @@ void	prepare_pipe_parent(t_node *node)
 		close(node->command->out_fd[1]);
 }
 
-int	wait_pipeline(pid_t last_pid)
+void  wait_pipeline(pid_t last_pid)
 {
 	pid_t	wait_result;
-	int		status;
 	int		wstatus;
+  int   signal;
 
-	while (1)
+  while (1)
 	{
 		wait_result = wait(&wstatus);
 		if (wait_result == last_pid)
-			status = WEXITSTATUS(wstatus);
-		else if (wait_result < 0)
+			g_env->err_status = WEXITSTATUS(wstatus);
+		else if (WIFSIGNALED(wstatus))
 		{
-			if (errno == ECHILD)
-				break ;
-		}
+      signal = WTERMSIG(wstatus);
+      if (signal == SIGQUIT)
+        ft_putendl_fd("Quit: 3", STDERR_FILENO);
+      if (signal == SIGINT)
+        ft_putendl_fd("", STDERR_FILENO);
+      g_env->err_status = signal + 128;
+      break ;
+    }
+    else if (wait_result < 0)
+    {
+      if (errno = ECHILD)
+        break;
+    }
 	}
-	return (status);
 }
