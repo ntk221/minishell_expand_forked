@@ -6,10 +6,9 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/28 21:51:22 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 22:07:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -69,7 +68,7 @@ static void	readline_execpart(char *line)
 	t_token		*tok;
 	t_node		*node;
 
-  	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	tok = tokenizer(line);
 	if (tokcheck(tok) == false || tokwdcheck(tok) == false)
 	{

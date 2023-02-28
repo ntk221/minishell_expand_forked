@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/28 21:53:18 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 22:12:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ void		sigint_handler(int sig);
 
 /************* execfunction ************/
 
-void    exec(t_node *node);
+void		exec(t_node *node);
 void		exec_check(t_node *node, char *path);
 int			do_builtin(char *line, t_command *command);
 int			abusolute_path(char *line);
@@ -203,11 +203,12 @@ int			redirect_reconect(t_command *command);
 void		prepare_pipe(t_node *node);
 void		prepare_pipe_child(t_node *node);
 void		prepare_pipe_parent(t_node *node);
-void    wait_pipeline(pid_t last_pid);
+void		wait_pipeline(pid_t last_pid);
 char		**args_to_argv(t_token *args);
 char		*searchpath(const char *filename);
 char		*accessok_file(char *path);
 int			stashfd(int fd);
+void		aray_free(char **argv);
 
 /************* role checker ************/
 

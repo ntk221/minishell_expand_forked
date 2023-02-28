@@ -6,11 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/26 16:44:29 by marvin           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/*   Updated: 2023/02/23 15:57:58 by user             ###   ########.fr       */
+/*   Updated: 2023/02/28 22:12:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +50,7 @@ static void	redirectfile_check(t_redirect *redirect)
 void	exec_check(t_node *node, char *path)
 {
 	t_redirect	*redirect;
-	char		    *checked_path;
+	char		*checked_path;
 
 	redirect = *(node->command->redirect);
 	while (redirect != NULL)
@@ -78,11 +74,10 @@ pid_t	exec_pipeline(t_node *node)
 	extern char	**environ;
 	pid_t		pid;
 	char		**argv;
-	size_t		i;
 
 	argv = args_to_argv(node->command->args);
-  if (!argv)
-    fatal_error("malloc");
+	if (!argv)
+		fatal_error("malloc");
 	exec_check(node, argv[0]);
 	prepare_pipe(node);
 	pid = fork();
@@ -91,25 +86,19 @@ pid_t	exec_pipeline(t_node *node)
 	else if (pid == 0)
 		child_process(node, argv[0], argv, environ);
 	prepare_pipe_parent(node);
-	i = 0;
-	while (argv[i])
-	{
-		free(argv[i]);
-		i++;
-	}
-	free(argv);
+	aray_free(argv);
 	if (node->next)
 		return (exec_pipeline(node->next));
 	return (pid);
 }
 
-void  exec(t_node *node)
+void	exec(t_node *node)
 {
 	pid_t	last_pid;
 
 	if (node == NULL)
 		last_pid = -1;
-  else
+	else
 	{
 		ready_redirectionfile(node);
 		last_pid = exec_pipeline(node);
