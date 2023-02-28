@@ -53,7 +53,6 @@ void	remake_token(t_token *token, t_token *re_token)
 	head = token;
 	while (token != NULL)
 	{
-		//printf("tokne word %s\n", token->word);
 		if (token->word == NULL && (token->next == NULL \
 		|| token->next->kind == TK_OP))
 			re_token_in_null(&token, &re_token);
