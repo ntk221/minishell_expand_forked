@@ -190,10 +190,11 @@ void		split_tokenword(t_token **token, t_token **re_token);
 /************* signal handler ************/
 
 void		sigint_handler();
+void    signal_handler2(int signal);
 
 /************* execfunction ************/
 
-int			exec(t_node *node);
+void    exec(t_node *node);
 void		exec_check(t_node *node, char *path);
 int			do_builtin(char *line, t_command *command);
 int			abusolute_path(char *line);
@@ -202,7 +203,7 @@ int			redirect_reconect(t_command *command);
 void		prepare_pipe(t_node *node);
 void		prepare_pipe_child(t_node *node);
 void		prepare_pipe_parent(t_node *node);
-int			wait_pipeline(pid_t last_pid);
+void    wait_pipeline(pid_t last_pid);
 char		**args_to_argv(t_token *args);
 char		*searchpath(const char *filename);
 char		*accessok_file(char *path);
