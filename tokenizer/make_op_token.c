@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   make_op_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:38:37 by user              #+#    #+#             */
-/*   Updated: 2023/02/19 19:38:32 by satushi          ###   ########.fr       */
+/*   Updated: 2023/02/28 21:38:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+//{"||", "&", "&&", ";", ";;", "(", ")", "|", "\n"};
+
 t_token	*operator(char **rest, char *line)
 {
 	static char *const	operators[] = \
-	{"||", "&", "&&", ";", ";;", "(", ")", "|", "\n"};
+	{"|", "\n"};
 	size_t				i;
 	char				*op;
 

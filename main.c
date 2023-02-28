@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/26 20:16:50 by kazuki           ###   ########.fr       */
+/*   Updated: 2023/02/28 22:07:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_map	*g_env;
+t_map				*g_env;
 
 void	redirect_recover(t_redirect **redirect_array)
 {
@@ -68,7 +68,7 @@ static void	readline_execpart(char *line)
 	t_token		*tok;
 	t_node		*node;
 
-  	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	tok = tokenizer(line);
 	if (tokcheck(tok) == false || tokwdcheck(tok) == false)
 	{

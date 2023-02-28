@@ -11,7 +11,7 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/create_token.c\
 			word_rolechecker/is_operator.c word_rolechecker/is_redirect.c word_rolechecker/is_word.c\
 			utils/split.c utils/putstr_fd.c utils/strlcat.c utils/strlcpy.c utils/strlen.c utils/error.c \
 			utils/strtrim.c utils/putchar_fd.c utils/strchr.c utils/strdup.c\
-			utils/strjoin.c utils/strcmp.c utils/strncmp.c utils/memcmp.c utils/calloc.c utils/bzero.c\
+			utils/strjoin.c utils/strcmp.c utils/strncmp.c utils/memcmp.c utils/calloc.c\
 			builtin_command/builtin_cd.c builtin_command/builtin_echo.c builtin_command/builtin_env.c\
 			builtin_command/builtin_exit.c builtin_command/builtin_export.c builtin_command/builtin_pwd.c\
 			builtin_command/builtin_unset.c builtin_command/command_to_array.c builtin_command/builtin_check.c\
@@ -20,13 +20,25 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/create_token.c\
 			map/map.c map/map_utils.c\
 			env_ready.c main.c
 OBJS	=	$(SRCS:%.c=%.o)
+LIBSRCS	=	libft/ft_isalpha.c libft/ft_isdigit.c libft/ft_isascii.c libft/ft_isalnum.c libft/ft_isprint.c\
+			libft/ft_strlen.c libft/ft_memset.c libft/ft_bzero.c libft/ft_memcpy.c libft/ft_memmove.c libft/ft_strlcat.c\
+			libft/ft_strlcpy.c libft/ft_toupper.c libft/ft_tolower.c libft/ft_strnstr.c libft/ft_strncmp.c\
+			libft/ft_strchr.c libft/ft_strrchr.c libft/ft_atoi.c libft/ft_memcmp.c libft/ft_memchr.c \
+			libft/ft_calloc.c libft/ft_strdup.c libft/ft_strjoin.c libft/ft_split.c\
+			libft/ft_itoa.c libft/ft_substr.c libft/ft_strtrim.c\
+			libft/ft_putchar_fd.c libft/ft_putstr_fd.c libft/ft_putendl_fd.c libft/ft_putendl_fd.c libft/ft_putnbr_fd.c\
+			libft/ft_strmapi.c libft/ft_striteri.c libft/ft_strcmp.c\
+			libft/ft_lstnew.c libft/ft_lstadd_front.c libft/ft_lstsize.c libft/ft_lstlast.c libft/ft_lstadd_back.c\
+			libft/ft_lstclear.c libft/ft_lstiter.c libft/ft_lstmap.c
+LIBOBJ = $(LIBSRCS:%.c=%.o)
 CC  	=	gcc
 CFLAGS	=	-Wall -Werror -Wextra -g
 RLDIR	=	$(shell brew --prefix readline)
 
 all:$(NAME)
 
-$(NAME):$(OBJS)
+$(NAME):$(OBJS) $(LIBOBJ)
+	- make -C libft
 	$(CC) $(CFLAGS) $(OBJS) -Llibft -L$(RLDIR)/lib -I$(RLDIR)/include -o $(NAME) -lreadline -lft
 
 $(OBJS): %.o : %.c
@@ -39,6 +51,7 @@ clean:
 	rm -f $(OBJS)
 
 fclean: clean
+	- make fclean -C libft
 	rm -f $(NAME)
 
 re: fclean all

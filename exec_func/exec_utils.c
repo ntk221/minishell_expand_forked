@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 19:59:30 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/26 16:35:22 by user             ###   ########.fr       */
+/*   Updated: 2023/02/28 22:12:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,17 @@ char	*accessok_file(char *path)
 	if (dup == NULL)
 		return (NULL);
 	return (dup);
+}
+
+void	aray_free(char **argv)
+{
+	size_t	i;
+
+	i = 0;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
 }
