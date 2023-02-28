@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/28 22:12:52 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 23:57:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,6 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 size_t		ft_strlen(const char *string_row);
 char		*ft_strtrim(char const *s1, char const *set);
 char		**ft_split(char const *s, char c);
-int			ft_strcmp(const char *s1, const char *s2);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		ft_bzero(void *s, size_t n);
 
