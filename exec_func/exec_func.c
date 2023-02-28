@@ -54,7 +54,7 @@ static void	redirectfile_check(t_redirect *redirect)
 void	exec_check(t_node *node, char *path)
 {
 	t_redirect	*redirect;
-	char		*checked_path;
+	char		    *checked_path;
 
 	redirect = *(node->command->redirect);
 	while (redirect != NULL)
@@ -67,7 +67,7 @@ void	exec_check(t_node *node, char *path)
 	if (is_builtin(path) == false && path[0] != '/' && path[0] != '.' \
 	&& checked_path == NULL && ft_strcmp("exit", path) != 0)
 	{
-		printf("bash: %s: command not found :x\n", path);
+		printf("minishell: %s: command not found :x\n", path);
 		g_env->err_status = 127;
 	}
 	free(checked_path);
@@ -81,6 +81,8 @@ pid_t	exec_pipeline(t_node *node)
 	size_t		i;
 
 	argv = args_to_argv(node->command->args);
+  if (!argv)
+    fatal_error("malloc");
 	exec_check(node, argv[0]);
 	prepare_pipe(node);
 	pid = fork();
@@ -101,18 +103,16 @@ pid_t	exec_pipeline(t_node *node)
 	return (pid);
 }
 
-int	exec(t_node *node)
+void  exec(t_node *node)
 {
 	pid_t	last_pid;
-	int		status;
 
 	if (node == NULL)
 		last_pid = -1;
-	else
+  else
 	{
 		ready_redirectionfile(node);
 		last_pid = exec_pipeline(node);
 	}
-	status = wait_pipeline(last_pid);
-	return (status);
+	wait_pipeline(last_pid);
 }
