@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 19:59:30 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/28 22:12:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 23:44:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	**args_to_argv(t_token *args)
 	while (i != len)
 	{
 		argv[i] = ft_strdup(itr->word);
+		printf(">>%s\n", argv[i]);
 		itr = itr->next;
 		i++;
 	}

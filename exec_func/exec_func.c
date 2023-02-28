@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:39:08 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/28 22:12:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 23:47:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ pid_t	exec_pipeline(t_node *node)
 	argv = args_to_argv(node->command->args);
 	if (!argv)
 		fatal_error("malloc");
+	printf("%ld\n", ft_strlen(argv[0]));
 	exec_check(node, argv[0]);
 	prepare_pipe(node);
 	pid = fork();
