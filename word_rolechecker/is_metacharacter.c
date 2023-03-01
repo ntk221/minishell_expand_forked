@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:04:25 by user              #+#    #+#             */
-/*   Updated: 2023/02/28 22:27:47 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 00:58:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@
 
 bool	is_metacharactert(char c)
 {
-	return (c && strchr("|\n", c));
+	return (c && strchr("|<>\n", c));
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/28 23:41:38 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 20:17:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,26 @@ t_token	*expand_simplecommand(t_token *token)
 {
 	t_token	*re_token;
 	t_token	*f_re_tok;
+	bool	export_is;
 
 	re_token = (t_token *)malloc(sizeof(t_token) * 1);
 	f_re_tok = re_token;
-	expand_specialparam(token);// "a"a  b'b' //クオーテーションのチェックをして中に("a   a")奈良無視するが("a"a  "b")ならわける
-	remake_token(token, re_token);
-	expand_quote(re_token);
-	return (f_re_tok);
+	export_is = false;
+	if (ft_strcmp(token->word, "export") == 0)
+		export_is = true;
+	(void)export_is;
+	if (export_is == false)
+	{
+		expand_specialparam(token); // "a"a  b'b' //クオーテーションのチェックをして中に("a   a")奈良無視するが("a"a  "b")ならわける
+		remake_token(token, re_token);
+		expand_quote(re_token);
+		return (f_re_tok);
+	}
+	else
+	{
+		expand_quote(token);
+		return (token);
+	}
 }
 
 void	expand(t_node *node)

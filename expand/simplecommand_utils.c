@@ -46,6 +46,30 @@ void	re_token_make(t_token **retoken, t_token *token)
 	}
 }
 
+static	bool	check_tokenwdblank(char *string)
+{
+	char	type;
+
+	while (is_blank(*string))
+		string++;
+	while (*string != '\0')
+	{
+		if (is_blank(*string))
+			return (true);
+		if (*string == '\'' || *string == '\"')
+		{
+			type = *string;
+			string++;
+			while (*string != type)
+				string++;
+			string++;
+		}
+		else
+			string++;
+	}
+	return (false);
+}
+
 void	remake_token(t_token *token, t_token *re_token)
 {
 	t_token	*head;
@@ -58,8 +82,7 @@ void	remake_token(t_token *token, t_token *re_token)
 			re_token_in_null(&token, &re_token);
 		else if (token->word == NULL)
 			token = token->next;
-		else if (word_blankcheck(token->word) && \
-		(ft_strchr(token->word, '\'') == NULL && ft_strchr(token->word, '\"') == NULL)) //token->word[0] != '\'' && token->word[0] != '\"'
+		else if (check_tokenwdblank(token->word)) //token->word[0] != '\'' && token->word[0] != '\"'
 			split_tokenword(&token, &re_token);
 		else
 		{
