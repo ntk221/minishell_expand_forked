@@ -45,10 +45,10 @@ t_token	*tokenizer(char *line)
 		{
 			if (is_operator(line))
 				tok->next = operator(&line, line);
+      else if (is_redirect(line))
+				tok->next = redirect(&line, line);
 			else if (is_word(line))
 				tok->next = word(&line, line);
-			else if (is_redirect(line))
-				tok->next = redirect(&line, line);
 			tok = tok->next;
 		}
 		else
@@ -63,6 +63,8 @@ void	free_token(t_token *head)
 	t_token	*itr;
 	t_token	*next;
 
+  if (head == NULL)
+    return;
 	itr = head;
 	next = itr->next;
 	while (next != NULL)
