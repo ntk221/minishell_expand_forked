@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/01 20:17:23 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 23:39:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_token	*expand_simplecommand(t_token *token)
 	}
 	else
 	{
+		free(re_token);
 		expand_quote(token);
 		return (token);
 	}
