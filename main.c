@@ -81,7 +81,7 @@ static void	readline_execpart(char *line)
 		ready_redirectionfile(node);
 	else if (node->next == NULL && is_builtin(node->command->args->word))
 		builtin_exec(node);
-	else
+	else if (node->command->args->word != NULL)
 		exec(node);
 	if (tok != NULL)
 		free_token(tok);

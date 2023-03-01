@@ -14,6 +14,8 @@
 
 bool	is_builtin(char *line)
 {
+  if (line == NULL)
+    return (false);
 	if (ft_strcmp("export", line) == 0)
 		return (true);
 	else if (ft_strcmp("env", line) == 0)
