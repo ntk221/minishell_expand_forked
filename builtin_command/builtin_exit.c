@@ -25,12 +25,13 @@ void	ms_exit(char *line, t_command *command)
 		printf("exit\n");
 		exit(0);
 	}
-	if (!atoi(commands[1]) || (atoi(commands[1]) == -1 \
-	&& ft_strlen(commands[1]) > 2))
+	if (!ms_atoi(commands[1]) || (ms_atoi(commands[1]) == -1  \
+	    && ft_strlen(commands[1]) > 2))
 	{
+    printf("exit\n");
 		printf("minishell: exit: numeric argument required\n");
 		exit(255);
 	}
 	printf("exit\n");
-	exit(atoi(commands[1]));
+	exit(ms_atoi(commands[1]));
 }
