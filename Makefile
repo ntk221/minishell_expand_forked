@@ -9,16 +9,13 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/create_token.c\
 			exec_func/exec_absolutepath.c exec_func/exec_utils.c\
 			word_rolechecker/is_blank.c word_rolechecker/is_metacharacter.c\
 			word_rolechecker/is_operator.c word_rolechecker/is_redirect.c word_rolechecker/is_word.c\
-			utils/split.c utils/putstr_fd.c utils/strlcat.c utils/strlcpy.c utils/strlen.c utils/error.c \
-			utils/strtrim.c utils/putchar_fd.c utils/strchr.c utils/strdup.c\
-			utils/strjoin.c utils/strcmp.c utils/strncmp.c utils/memcmp.c utils/calloc.c\
 			builtin_command/builtin_cd.c builtin_command/builtin_echo.c builtin_command/builtin_env.c\
 			builtin_command/builtin_exit.c builtin_command/builtin_export.c builtin_command/builtin_pwd.c\
 			builtin_command/builtin_unset.c builtin_command/command_to_array.c builtin_command/builtin_check.c\
 			builtin_command/puts_errorstring.c builtin_command/builtin_export_no.c\
 			signalhandler/sigint_handler.c\
 			map/map.c map/map_utils.c\
-			env_ready.c main.c
+			env_ready.c main.c error.c ms_atoi.c
 OBJS	=	$(SRCS:%.c=%.o)
 LIBSRCS	=	libft/ft_isalpha.c libft/ft_isdigit.c libft/ft_isascii.c libft/ft_isalnum.c libft/ft_isprint.c\
 			libft/ft_strlen.c libft/ft_memset.c libft/ft_bzero.c libft/ft_memcpy.c libft/ft_memmove.c libft/ft_strlcat.c\
