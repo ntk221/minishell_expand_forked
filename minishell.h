@@ -229,6 +229,7 @@ char		*ft_strtrim(char const *s1, char const *set);
 char		**ft_split(char const *s, char c);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		ft_bzero(void *s, size_t n);
+long    ms_atoi(char *str);
 
 /************* errorhandle *************/
 
