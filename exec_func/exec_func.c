@@ -59,6 +59,7 @@ void	exec_check(t_node *node, char *path)
 			return (redirectfile_check(redirect));
 		redirect = redirect->next;
 	}
+  printf("%s\n", node->command->args->word);
 	checked_path = searchpath(path);
 	if (is_builtin(path) == false && path[0] != '/' && path[0] != '.' \
 	&& checked_path == NULL && ft_strcmp("exit", path) != 0)

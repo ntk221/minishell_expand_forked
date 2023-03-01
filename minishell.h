@@ -102,7 +102,8 @@ typedef struct s_map_copy {
 
 typedef struct s_map{
 	t_item	*item_head;
-	int		err_status;
+	int     err_status;
+  char    *pwd;
 }				t_map;
 
 extern t_map				*g_env;

@@ -28,15 +28,16 @@ LIBSRCS	=	libft/ft_isalpha.c libft/ft_isdigit.c libft/ft_isascii.c libft/ft_isal
 			libft/ft_lstnew.c libft/ft_lstadd_front.c libft/ft_lstsize.c libft/ft_lstlast.c libft/ft_lstadd_back.c\
 			libft/ft_lstclear.c libft/ft_lstiter.c libft/ft_lstmap.c
 LIBOBJ = $(LIBSRCS:%.c=%.o)
-CC  	=	gcc
+CC  	=	clang
 CFLAGS	=	-Wall -Werror -Wextra -g
 RLDIR	=	$(shell brew --prefix readline)
+SANI	= -fsanitize=address
 
 all:$(NAME)
 
 $(NAME):$(OBJS) $(LIBOBJ)
 	- make -C libft
-	$(CC) $(CFLAGS) $(OBJS) -Llibft -L$(RLDIR)/lib -I$(RLDIR)/include -o $(NAME) -lreadline -lft
+	$(CC) $(CFLAGS) $(OBJS) $(SANI) -Llibft -L$(RLDIR)/lib -I$(RLDIR)/include -o $(NAME) -lreadline -lft
 
 $(OBJS): %.o : %.c
 	$(CC) $(CFLAGS) -I$(RLDIR)/include -c  $< -o $@ 
