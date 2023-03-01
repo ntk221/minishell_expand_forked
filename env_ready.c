@@ -44,6 +44,7 @@ void	env_init(t_map **env)
 	size_t			i;
 	char			*name;
 	char			*value;
+  char      cwd[256];
 	extern char		**environ;
 
 	i = 0;
@@ -58,4 +59,8 @@ void	env_init(t_map **env)
 		free(name);
 		i++;
 	}
+  getcwd(cwd, sizeof(cwd));
+  if (getcwd(cwd, sizeof(cwd)) == NULL)
+    fatal_error("getcwd");
+  map_set(env, "PWD", cwd);
 }

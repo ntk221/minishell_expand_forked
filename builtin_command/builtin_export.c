@@ -78,7 +78,6 @@ void	ms_export(char *line, t_command *command)
 		name_and_value = ft_split(commands[command_position], '=');
 		if (!name_and_value)
 			fatal_error("malloc");
-		printf("%s\n", name_and_value[1]);
 		if (name_and_value[0] && name_and_value[1])
 			map_set(&g_env, name_and_value[0], name_and_value[1]);
 		free_commands(commands);
