@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_absolutepath.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:56:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 22:45:47 by user             ###   ########.fr       */
+/*   Updated: 2023/03/02 10:15:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	char	**line_to_argv(char *line)
 	position = 0;
 	while (line[position] != '\0')
 	{
-		if (isspace(line[position]))
+		if (ft_isspace(line[position]))
 		{
 			argv = ft_split(line, ' ');
 			return (argv);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 19:59:30 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/01 00:06:29 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 10:33:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*searchpath_utils(char *path, char *value, const char *filename)
 	ft_bzero(path, PATH_MAX);
 	end = ft_strchr(value, ':');
 	if (end)
-		strncpy(path, value, end - value);
+		ft_strlcpy(path, value, end - value + 1);
 	else
 		ft_strlcpy(path, value, PATH_MAX);
 	ft_strlcat(path, "/", PATH_MAX);

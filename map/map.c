@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:30:12 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/26 20:45:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 11:29:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_item	*item_new(char *name, char *value)
 	item = malloc(sizeof(t_item));
 	if (!item)
 		return (NULL);
-	item->name = strdup(name);
-	item->value = strdup(value);
+	item->name = ft_strdup(name);
+	item->value = ft_strdup(value);
 	item->next = NULL;
 	return (item);
 }
@@ -57,10 +57,10 @@ void	map_set(t_map **map, char *name, char *value)
 	itr = (*map)->item_head;
 	while (itr != NULL)
 	{
-		if (strcmp(itr->name, name) == 0)
+		if (ft_strcmp(itr->name, name) == 0)
 		{
 			free(itr->value);
-			itr->value = strdup(value);
+			itr->value = ft_strdup(value);
 			return ;
 		}
 		itr = itr->next;
@@ -83,7 +83,7 @@ void	map_unset(t_map **map, char *name)
 
 	prev = (*map)->item_head;
 	itr = prev->next;
-	if (strcmp(prev->name, name) == 0)
+	if (ft_strcmp(prev->name, name) == 0)
 	{
 		free(prev->name);
 		free(prev->value);
@@ -92,7 +92,7 @@ void	map_unset(t_map **map, char *name)
 	}
 	while (itr)
 	{
-		if (strcmp(itr->name, name) == 0)
+		if (ft_strcmp(itr->name, name) == 0)
 		{
 			free(itr->name);
 			free(itr->value);

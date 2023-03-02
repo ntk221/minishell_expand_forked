@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_wd_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:37:59 by user              #+#    #+#             */
-/*   Updated: 2023/02/25 15:32:06 by satushi          ###   ########.fr       */
+/*   Updated: 2023/03/02 11:33:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ char	*ready_quotestring(char *start, bool *flag, char type)
 	if (type == '\'')
 	{
 		append_line = ft_strjoin(append_line, token_append(SINGLE));
-		while (strchr(append_line, type) == NULL)
+		while (ft_strchr(append_line, type) == NULL)
 			append_line = ft_strjoin(append_line, token_append(SINGLE));
 	}
 	else
 	{
 		append_line = ft_strjoin(append_line, token_append(DOUBLE));
-		while (strchr(append_line, type) == NULL)
+		while (ft_strchr(append_line, type) == NULL)
 			append_line = ft_strjoin(append_line, token_append(DOUBLE));
 	}
 	start = ft_strjoin(start, append_line);
