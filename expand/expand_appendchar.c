@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_appendchar.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:03:13 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/22 13:22:53 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 23:52:26 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,28 @@ void	append_char(char **s, char c)
 
 void	append_single(char **args, char **new)
 {
+	bool	noaction;
+
+	noaction = true;
 	while (**args != '\'')
 	{
+		noaction = false;
 		append_char(&(*new), **args);
 		(*args)++;
 	}
+	if (noaction == true)
+		*new = ft_strdup("");
+	(*args)++;
 }
 
 void	append_double(char **args, char **new, char *args_dummy)
 {
+	bool	noaction;
+
+	noaction = true;
 	while (**args != '\"')
 	{
+		noaction = false;
 		if (**args == '$')
 		{
 			expand_doller_dq(&(*new), &(*args), args_dummy);
@@ -56,4 +67,7 @@ void	append_double(char **args, char **new, char *args_dummy)
 			(*args)++;
 		}
 	}
+	if (noaction == true)
+		*new = ft_strdup("");
+	(*args)++;
 }

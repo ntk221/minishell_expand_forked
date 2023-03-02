@@ -3,26 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/03/02 13:13:03 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 23:25:15 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-bool	ch_word_alphabet(unsigned char ch)
-{
-	if ((('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z')) || ch == '_')
-		return (true);
-	return (false);
-}
-
 bool	exportwd_check(char *arg)
 {
-	if (ch_word_alphabet(*arg) == false)
-		return (false);
+	if (!('a' <= *arg && *arg <= 'z'))
+		if (!('A' <= *arg && *arg <= 'Z'))
+			if (*arg != '_')
+				return (false);
 	arg++;
 	while (*arg != '\0' && *arg != '=')
 	{
@@ -32,6 +27,23 @@ bool	exportwd_check(char *arg)
 	}
 	return (true);
 }
+
+// void	replace_word(char *src)
+// {
+// 	while (*src != '\0')
+// 	{
+// 		if (*src == '"')
+// 		{
+// 			printf("check\n");
+// 			*src = '\"';
+// 		}
+// 		// if (*src == '$')
+// 		// 	*src = '\$';
+// 		if (*src == '\\')
+// 			*src = '\\';
+// 		src++;
+// 	}
+// }
 
 void	map_insert(char *s, char *e, char *l)
 {
@@ -44,6 +56,8 @@ void	map_insert(char *s, char *e, char *l)
 	else
 		set2 = ft_strndup(e + 1, l - e - 1);
 	map_set(&g_env, set1, set2);
+	//replace_word(set1);
+	//replace_word(set2);
 	free(set1);
 	free(set2);
 }

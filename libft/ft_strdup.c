@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:48:30 by kazuki            #+#    #+#             */
-/*   Updated: 2022/10/14 01:30:13 by kazuki           ###   ########.fr       */
+/*   Updated: 2023/03/02 23:40:13 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(char const *src)
 	size_t	len;
 	size_t	i;
 
+	if (src == NULL)
+		return (ft_strdup(""));
 	len = ft_strlen(src);
 	new = (char *)malloc(sizeof((*src)) * (len + 1));
 	if (!new)
