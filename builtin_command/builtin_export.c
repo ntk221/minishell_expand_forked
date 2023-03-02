@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/03/02 23:25:15 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/02 23:57:33 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,22 @@ bool	exportwd_check(char *arg)
 	return (true);
 }
 
-// void	replace_word(char *src)
-// {
-// 	while (*src != '\0')
-// 	{
-// 		if (*src == '"')
-// 		{
-// 			printf("check\n");
-// 			*src = '\"';
-// 		}
-// 		// if (*src == '$')
-// 		// 	*src = '\$';
-// 		if (*src == '\\')
-// 			*src = '\\';
-// 		src++;
-// 	}
-// }
+void	replace_word(char *src)
+{
+	while (*src != '\0')
+	{
+		if (*src == '"')
+		{
+			printf("check\n");
+			*src = '\"';
+		}
+		// if (*src == '$')
+		// 	*src = '\$';
+		if (*src == '\\')
+			*src = '\\';
+		src++;
+	}
+}
 
 void	map_insert(char *s, char *e, char *l)
 {
@@ -56,8 +56,8 @@ void	map_insert(char *s, char *e, char *l)
 	else
 		set2 = ft_strndup(e + 1, l - e - 1);
 	map_set(&g_env, set1, set2);
-	//replace_word(set1);
-	//replace_word(set2);
+	replace_word(set1);
+	replace_word(set2);
 	free(set1);
 	free(set2);
 }
