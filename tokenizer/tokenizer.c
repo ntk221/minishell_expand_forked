@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:42:10 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/19 20:15:13 by satushi          ###   ########.fr       */
+/*   Updated: 2023/03/02 12:40:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	consume_blank(char **rest, char *line)
 
 bool	startswith(const char *s, const char *keyword)
 {
-	return (ft_memcmp(s, keyword, strlen(keyword)) == 0);
+	return (ft_memcmp(s, keyword, ft_strlen(keyword)) == 0);
 }
 
 t_token	*tokenizer(char *line)
@@ -45,10 +45,10 @@ t_token	*tokenizer(char *line)
 		{
 			if (is_operator(line))
 				tok->next = operator(&line, line);
-			else if (is_word(line))
-				tok->next = word(&line, line);
 			else if (is_redirect(line))
 				tok->next = redirect(&line, line);
+			else if (is_word(line))
+				tok->next = word(&line, line);
 			tok = tok->next;
 		}
 		else
@@ -63,6 +63,8 @@ void	free_token(t_token *head)
 	t_token	*itr;
 	t_token	*next;
 
+	if (head == NULL)
+		return ;
 	itr = head;
 	next = itr->next;
 	while (next != NULL)

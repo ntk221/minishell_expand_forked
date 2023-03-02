@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:27:43 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/28 22:07:43 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:59:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	readline_execpart(char *line)
 		ready_redirectionfile(node);
 	else if (node->next == NULL && is_builtin(node->command->args->word))
 		builtin_exec(node);
-	else
+	else if (node->command->args->word != NULL)
 		exec(node);
 	if (tok != NULL)
 		free_token(tok);

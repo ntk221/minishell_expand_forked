@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_doller.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:04:15 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/25 22:25:48 by satushi          ###   ########.fr       */
+/*   Updated: 2023/03/02 12:41:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	expand_doller(char **dst, char **rest, char *p)
 		return ;
 	}
 	append_char(&name,*p++);
-	while (isalpha(*p) != 0 || *p == '_' || isdigit(*p) != 0)
+	while (ft_isalpha(*p) != 0 || *p == '_' || ft_isdigit(*p) != 0)
 		append_char(&name,*p++);
 	value = map_get(g_env, name);
 	free(name);
@@ -83,7 +83,7 @@ void	expand_doller_dq(char **dst, char **rest, char *p)
 	if (name == NULL)
 		fatal_error("calloc");
 	p++;
-	if (!isalpha(*p) && *p != '_')
+	if (!ft_isalpha(*p) && *p != '_')
 	{
 		append_char(dst, *(p - 1));
 		append_char(dst, *(p));
@@ -91,7 +91,8 @@ void	expand_doller_dq(char **dst, char **rest, char *p)
 		return ;
 	}
 	append_char(&name,*p++);
-	while ((isalpha(*p) != 0 || *p == '_' || isdigit(*p) != 0) && *p != '\"')
+	while ((ft_isalpha(*p) != 0 || *p == '_' \
+	|| ft_isdigit(*p) != 0) && *p != '\"')
 		append_char(&name,*p++);
 	value = getenv(name);
 	free(name);

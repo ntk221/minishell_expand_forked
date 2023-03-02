@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 18:01:14 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/26 14:53:43 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 11:32:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	wdcheck(char **str)
 	char	*tmp_str;
 
 	tmp_str = *str;
-	if (strchr(*str, '\'') != NULL || strchr(*str, '\"') != NULL)
+	if (ft_strchr(*str, '\'') != NULL || ft_strchr(*str, '\"') != NULL)
 	{
 		while (**str != '\'' && **str != '\"')
 			(*str)++;

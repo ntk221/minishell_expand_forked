@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 12:06:17 by kazuki            #+#    #+#             */
-/*   Updated: 2023/02/28 20:20:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 12:32:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ size_t	ft_strlen(const char *str);
 
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(char const *src);
+char	*ft_strndup(const char *s, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);

@@ -74,3 +74,18 @@ t_node	*parse(t_token *tok)
 	tok_parsing(tok, node, first_action);
 	return (head);
 }
+
+/*int main(void)
+{
+  char  *line = "<< test";
+  t_token *t = tokenizer(line);
+  t_node *n = new_node(ND_SIMPLE_CMD);
+  t_node *head = n;
+  printf("%d\n", t->kind);
+  assert(t->kind == TK_WORD);
+  bool first_action;
+  ready_redirectinout(n, &first_action, true);
+  tok_parsing(t, n, first_action);
+  printf("%s\n", head->command->args->word);
+}
+*/

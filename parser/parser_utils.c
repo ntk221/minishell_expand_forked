@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 19:18:58 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/26 14:52:55 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 11:30:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_node	*new_node(t_node_kind kind)
 {
 	t_node	*node;
 
-	node = calloc(1, sizeof(*node));
+	node = ft_calloc(1, sizeof(*node));
 	if (node == NULL)
 		fatal_error("calloc");
 	node->kind = kind;
@@ -36,7 +36,7 @@ t_token	*tokdup(t_token *tok)
 {
 	char	*word;
 
-	word = strdup(tok->word);
+	word = ft_strdup(tok->word);
 	if (word == NULL)
 		fatal_error("strdup");
 	return (new_token(word, tok->kind));

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:45:47 by user              #+#    #+#             */
-/*   Updated: 2023/02/28 23:58:22 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 12:39:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 bool	is_builtin(char *line)
 {
+	if (line == NULL)
+		return (false);
 	if (ft_strcmp("export", line) == 0)
 		return (true);
 	else if (ft_strcmp("env", line) == 0)
