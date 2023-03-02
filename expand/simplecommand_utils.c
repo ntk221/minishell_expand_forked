@@ -82,7 +82,7 @@ void	remake_token(t_token *token, t_token *re_token)
 			re_token_in_null(&token, &re_token);
 		else if (token->word == NULL)
 			token = token->next;
-		else if (check_tokenwdblank(token->word)) //token->word[0] != '\'' && token->word[0] != '\"'
+		else if (check_tokenwdblank(token->word))
 			split_tokenword(&token, &re_token);
 		else
 		{
