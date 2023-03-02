@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/03/02 11:17:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 12:50:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ typedef struct s_map_copy {
 
 typedef struct s_map{
 	t_item	*item_head;
-	int     err_status;
-  char    *pwd;
+	int		err_status;
+	char	*pwd;
 }				t_map;
 
 extern t_map				*g_env;

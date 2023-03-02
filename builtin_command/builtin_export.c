@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/03/02 12:39:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 13:13:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,12 @@ void	map_insert(char *s, char *e, char *l)
 {
 	char		*set1;
 	char		*set2;
-	long int	position;
 
-	position = 0;
-	set1 = (char *)malloc(sizeof(char) * (e - s + 1));
-	while (position != (e - s))
-	{
-		set1[position] = s[position];
-		position++;
-	}
-	set1[position] = '\0';
+	set1 = ft_strndup(s, e - s);
 	if (l == e)
 		set2 = ft_strdup("\0");
 	else
-	{
-		position = e - s + 1;
-		set2 = (char *)malloc(sizeof(char) * (l - e));
-		while (s[position] != '\0')
-		{
-			set2[position - (e - s + 1)] = s[position];
-			position++;
-		}
-		set2[position - (e - s + 1)] = '\0';
-	}
+		set2 = ft_strndup(e + 1, l - e - 1);
 	map_set(&g_env, set1, set2);
 	free(set1);
 	free(set2);
