@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_ready.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:39:39 by user              #+#    #+#             */
-/*   Updated: 2023/02/23 15:05:05 by satushi          ###   ########.fr       */
+/*   Updated: 2023/03/02 11:35:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	env_init(t_map **env)
 		free(name);
 		i++;
 	}
-  getcwd(cwd, sizeof(cwd));
-  if (getcwd(cwd, sizeof(cwd)) == NULL)
-    fatal_error("getcwd");
-  map_set(env, "PWD", cwd);
+	getcwd(cwd, sizeof(cwd));
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+		fatal_error("getcwd");
+	map_set(env, "PWD", cwd);
 }

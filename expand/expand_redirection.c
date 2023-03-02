@@ -44,22 +44,22 @@ void	check_doller(char **rest, char *p, t_redirect *redirect)
 	char	*name;
 	char	*value;
 
-	name = calloc(1, sizeof(char));
+	name = ft_calloc(1, sizeof(char));
 	if (name == NULL)
 		fatal_error("calloc");
 	p++;
-	if (!isalpha(*p) && *p != '_')
+	if (!ft_isalpha(*p) && *p != '_')
 	{
 		*rest = p + 1;
 		free(name);
 		return ;
 	}
 	append_char(&name,*p++);
-	while (isalpha(*p) != 0 || *p == '_' || isdigit(*p) != 0)
+	while (ft_isalpha(*p) != 0 || *p == '_' || ft_isdigit(*p) != 0)
 		append_char(&name,*p++);
 	value = map_get(g_env, name);
 	free(name);
-	if (value == NULL || strchr(value, ' ') != NULL)
+	if (value == NULL || ft_strchr(value, ' ') != NULL)
 		redirect->ambigous = true;
 	else
 		redirect->ambigous = false;

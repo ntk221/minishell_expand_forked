@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:32:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/26 16:04:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 11:16:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ int	stashfd(int fd)
 {
 	int	stashfd;
 
-	stashfd = fcntl(fd, F_DUPFD, 10);
-	close(fd);
+	stashfd = 10;
+	while (is_valid_fd(stashfd))
+		stashfd++;
+	stashfd = xdup2(fd, stashfd);
+	xclose(fd);
 	return (stashfd);
 }
 

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/03/01 22:52:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 10:09:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	exporterrorcheck(char **command)
 		(count)++;
 	}
 }
-///export aaa=bbb ccc=ddd
 
 void	ms_export(char *line, t_command *command)
 {

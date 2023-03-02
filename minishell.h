@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/02/28 23:57:07 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 11:17:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # include "./libft/libft.h"
 # include <fcntl.h>
 # include <stdint.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 # define IN 0
 # define OUT 1
 # define APPEND 2
@@ -218,6 +220,7 @@ bool		is_metacharactert(char c);
 bool		is_operator(const char *s);
 bool		is_redirect(const char *s);
 bool		is_word(const char *s);
+bool		ft_isspace(char c);
 
 /**************** utils ****************/
 
@@ -230,7 +233,10 @@ char		*ft_strtrim(char const *s1, char const *set);
 char		**ft_split(char const *s, char c);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		ft_bzero(void *s, size_t n);
-long    ms_atoi(char *str);
+long		ms_atoi(char *str);
+bool		is_valid_fd(int fd);
+int			xdup2(int fildes, int fildes2);
+int			xclose(int fd);
 
 /************* errorhandle *************/
 
