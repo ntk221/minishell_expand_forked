@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"//
+#include "../minishell.h"
 
 void	map_copy(t_map_copy *copy)
 {
