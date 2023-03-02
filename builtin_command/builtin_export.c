@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/03/02 10:09:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 12:39:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	exportwd_check(char *arg)
 	return (true);
 }
 
-void	map_insert(char *s, char *e, char *l) //aaa=bbb
+void	map_insert(char *s, char *e, char *l)
 {
 	char		*set1;
 	char		*set2;
@@ -106,4 +106,3 @@ void	ms_export(char *line, t_command *command)
 		free_commands(commands);
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:04:15 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/02 11:21:52 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 12:41:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	expand_doller_dq(char **dst, char **rest, char *p)
 		return ;
 	}
 	append_char(&name,*p++);
-	while ((ft_isalpha(*p) != 0 || *p == '_' || ft_isdigit(*p) != 0) && *p != '\"')
+	while ((ft_isalpha(*p) != 0 || *p == '_' \
+	|| ft_isdigit(*p) != 0) && *p != '\"')
 		append_char(&name,*p++);
 	value = getenv(name);
 	free(name);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:42:10 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/02 11:34:26 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 12:40:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	free_token(t_token *head)
 	t_token	*itr;
 	t_token	*next;
 
-  if (head == NULL)
-    return;
+	if (head == NULL)
+		return ;
 	itr = head;
 	next = itr->next;
 	while (next != NULL)

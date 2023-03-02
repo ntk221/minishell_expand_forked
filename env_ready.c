@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:39:39 by user              #+#    #+#             */
-/*   Updated: 2023/03/02 11:35:43 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 12:37:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	env_init(t_map **env)
 	size_t			i;
 	char			*name;
 	char			*value;
-  char      cwd[256];
+	char			cwd[256];
 	extern char		**environ;
 
 	i = 0;

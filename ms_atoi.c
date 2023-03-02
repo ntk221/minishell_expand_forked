@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 11:38:29 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/02 11:38:32 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 12:38:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include "minishell.h"
 
-long ms_atoi(char *line)
+long	ms_atoi(char *line)
 {
 	unsigned long	ans;
 	int				sign;
@@ -33,7 +33,7 @@ long ms_atoi(char *line)
 		line++;
 	}
 	else if (*line == '+')
-    	line++;
+		line++;
 	while (*line >= '0' && *line <= '9')
 	{
 		if (sign == 1 && ans * 10 + (*line - '0') > LONG_MAX)
@@ -47,53 +47,52 @@ long ms_atoi(char *line)
 	return (sign * (long)ans);
 }
 
-#ifdef MS_ATOL
-int main(void)
-{
-  char  *line = "1";
-  long ans = ms_atoi(line);
-  assert(ans == 1);
+// #ifdef MS_ATOL
+// int main(void)
+// {
+//   char  *line = "1";
+//   long ans = ms_atoi(line);
+//   assert(ans == 1);
 
-  line = "0";
-  ans = ms_atoi(line);
-  assert(ans == 0);
+//   line = "0";
+//   ans = ms_atoi(line);
+//   assert(ans == 0);
 
-  line = "10";
-  ans = ms_atoi(line);
-  assert(ans == 10);
+//   line = "10";
+//   ans = ms_atoi(line);
+//   assert(ans == 10);
 
-  line = "-1";
-  ans = ms_atoi(line);
-  assert(ans == -1);
+//   line = "-1";
+//   ans = ms_atoi(line);
+//   assert(ans == -1);
 
-  line = "9223372036854775807";
-  ans = ms_atoi(line);
-  assert(ans == LONG_MAX);
+//   line = "9223372036854775807";
+//   ans = ms_atoi(line);
+//   assert(ans == LONG_MAX);
 
-  line = "-9223372036854775808";
-  ans = ms_atoi(line);
-  printf("%ld\n", ans);
-  assert(ans == LONG_MIN);
+//   line = "-9223372036854775808";
+//   ans = ms_atoi(line);
+//   printf("%ld\n", ans);
+//   assert(ans == LONG_MIN);
 
-  line = "9223372036854775808";
-  ans = ms_atoi(line);
-  assert(ans == -1);
+//   line = "9223372036854775808";
+//   ans = ms_atoi(line);
+//   assert(ans == -1);
 
-  line = "-9223372036854775809";
-  ans = ms_atoi(line);
-  assert(ans == -1);
+//   line = "-9223372036854775809";
+//   ans = ms_atoi(line);
+//   assert(ans == -1);
 
-  line = "     1";
-  ans = ms_atoi(line);
-  assert(ans == 1);
+//   line = "     1";
+//   ans = ms_atoi(line);
+//   assert(ans == 1);
 
-  line = "++1"; // error
-  ans = ms_atoi(line);
-  assert(ans == 0);
+//   line = "++1"; // error
+//   ans = ms_atoi(line);
+//   assert(ans == 0);
 
-  line = "-hoge";
-  ans = ms_atoi(line);
-  assert(ans == 0);
-}
-#endif 
-
+//   line = "-hoge";
+//   ans = ms_atoi(line);
+//   assert(ans == 0);
+// }
+// #endif 

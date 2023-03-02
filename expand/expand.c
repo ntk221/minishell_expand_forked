@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/01 23:39:43 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 12:41:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_token	*expand_simplecommand(t_token *token)
 	(void)export_is;
 	if (export_is == false)
 	{
-		expand_specialparam(token); // "a"a  b'b' //クオーテーションのチェックをして中に("a   a")奈良無視するが("a"a  "b")ならわける
+		expand_specialparam(token);
 		remake_token(token, re_token);
 		expand_quote(re_token);
 		return (f_re_tok);
