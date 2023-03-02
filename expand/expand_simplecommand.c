@@ -66,13 +66,13 @@ char	*expand_args_quote(char *args, char *args_free)
 	new_word = NULL;
 	while (*args != '\0')
 	{
-		if (*args == '\'' || *args == '\"')
+		if ((*args == '\'' || *args == '\"') && *(args + 1) != '\0')
 		{
-			if (*args == '\'')
-				append_single(&args, &new_word);
-			else if (*args == '\"')
-				append_double(&args, &new_word, args);
 			args++;
+			if (*(args - 1) == '\'')
+				append_single(&args, &new_word);
+			else if (*(args - 1) == '\"')
+				append_double(&args, &new_word, args);
 		}
 		else if (*args == '$' && (*(args + 1) == '\0' || \
 		*(args + 1) == '\'' || *(args + 1) == '\"'))

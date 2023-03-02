@@ -56,7 +56,7 @@ static	bool	check_tokenwdblank(char *string)
 	{
 		if (is_blank(*string))
 			return (true);
-		if (*string == '\'' || *string == '\"')
+		if ((*string == '\'' || *string == '\"') && *(string + 1) != '\0')
 		{
 			type = *string;
 			string++;
