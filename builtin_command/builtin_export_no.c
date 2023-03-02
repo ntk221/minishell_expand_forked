@@ -84,7 +84,8 @@ void	check_smallestword(t_map_copy *copy)
 		}
 	}
 	minimum->sorted = true;
-	printf("declear -x %s=\"%s\"%d\n", minimum->name, minimum->value, minimum->sorted);
+	printf("declear -x %s=\"%s\"%d\n", minimum->name, \
+		minimum->value, minimum->sorted);
 }
 
 void	show_sortedmap(void)
