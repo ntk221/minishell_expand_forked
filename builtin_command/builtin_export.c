@@ -98,8 +98,11 @@ void	ms_export(char *line, t_command *command)
 	if (commands[0] != NULL)
 	{
 		if (commands[1] == NULL)
+		{
+			free_commands(commands);
 			return (show_sortedmap());
+		}
 		exporterrorcheck(commands);
-		free_commands(commands);
 	}
+	free_commands(commands);
 }
