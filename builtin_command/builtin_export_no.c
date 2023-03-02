@@ -71,20 +71,18 @@ void	check_smallestword(t_map_copy *copy)
 	while (check_map->sorted == true)
 		check_map = check_map->next;
 	minimum = check_map;
-	printf("minimum is > %s\n", minimum->name);
 	if (map_notsortedcount(check_map) != 1)
 	{
-		printf("checkmap is > %s\n", check_map->name);
 		while (check_map != NULL)
 		{
 			if (check_map->sorted == false && \
-			ft_strcmp(minimum->name, check_map->name) > 0)
+			(ft_strcmp(minimum->name, check_map->name) > 0))
 				minimum = check_map;
 			check_map = check_map->next;
 		}
 	}
 	minimum->sorted = true;
-	printf("declear -x %s=\"%s\"%d\n", minimum->name, minimum->value, minimum->sorted);
+	printf("declear -x %s=\"%s\"\n", minimum->name, minimum->value);
 }
 
 void	show_sortedmap(void)
