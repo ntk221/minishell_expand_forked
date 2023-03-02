@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../minishell.h"//
 
 void	map_copy(t_map_copy *copy)
 {
@@ -46,7 +46,7 @@ bool	sortedcheck(t_map_copy *copy)
 	return (true);
 }
 
-size_t	map_sortedcount(t_map_copy *copy)
+size_t	map_notsortedcount(t_map_copy *copy)
 {
 	size_t		count;
 	t_map_copy	*tentative;
@@ -71,8 +71,10 @@ void	check_smallestword(t_map_copy *copy)
 	while (check_map->sorted == true)
 		check_map = check_map->next;
 	minimum = check_map;
-	if (map_sortedcount(check_map) != 1)
+	printf("minimum is > %s\n", minimum->name);
+	if (map_notsortedcount(check_map) != 1)
 	{
+		printf("checkmap is > %s\n", check_map->name);
 		while (check_map != NULL)
 		{
 			if (check_map->sorted == false && \
@@ -82,7 +84,7 @@ void	check_smallestword(t_map_copy *copy)
 		}
 	}
 	minimum->sorted = true;
-	printf("declear -x %s=\"%s\"\n", minimum->name, minimum->value);
+	printf("declear -x %s=\"%s\"%d\n", minimum->name, minimum->value, minimum->sorted);
 }
 
 void	show_sortedmap(void)
