@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_wd_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:37:59 by user              #+#    #+#             */
-/*   Updated: 2023/03/02 12:33:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/04 01:56:17 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ t_token	*word(char **rest, char *line)
 			if (flag == true)
 				break ;
 		}
+		else if (*line == '\\')
+			line = line + 2;
 		else
 			line++;
 	}
