@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:03:13 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/02 23:52:26 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/03 11:19:41 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	append_single(char **args, char **new)
 	(*args)++;
 }
 
-void	append_double(char **args, char **new, char *args_dummy)
+void	append_double(char **args, char **new)
 {
 	bool	noaction;
 
@@ -57,10 +57,7 @@ void	append_double(char **args, char **new, char *args_dummy)
 	{
 		noaction = false;
 		if (**args == '$')
-		{
-			expand_doller_dq(&(*new), &(*args), args_dummy);
-			args_dummy = *args;
-		}
+			expand_doller_dq(&(*new), &(*args), *args);
 		else
 		{
 			append_char(&(*new), **args);

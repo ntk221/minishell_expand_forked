@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_doller.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:04:15 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/02 12:41:23 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/03 11:17:45 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	expand_doller_dq(char **dst, char **rest, char *p)
 	if (name == NULL)
 		fatal_error("calloc");
 	p++;
-	if (!ft_isalpha(*p) && *p != '_')
+	if (ft_isalpha(*p) != 1 && *p != '_')
 	{
 		append_char(dst, *(p - 1));
 		append_char(dst, *(p));

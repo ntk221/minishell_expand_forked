@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/03/02 12:50:19 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/03 11:19:13 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ char		*expand_args_quote(char *args, char *args_free);
 char		*expand_args_doller(char *args);
 t_redirect	*expand_redirect_ten(t_redirect *redirect);
 void		append_single(char **args, char **new);
-void		append_double(char **args, char **new, char *args_dummy);
+void		append_double(char **args, char **new);
 bool		word_blankcheck(char *string);
 void		re_token_in_null(t_token **token, t_token **re_token);
 void		re_token_make(t_token **retoken, t_token *token);
