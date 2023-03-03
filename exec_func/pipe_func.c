@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kazuki <kazuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:16:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/02/28 22:08:23 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 20:21:55 by kazuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,28 @@ void	prepare_pipe_parent(t_node *node)
 
 void	wait_pipeline(pid_t last_pid)
 {
-	pid_t	wait_result;
 	int		wstatus;
-	int		signal;
+	bool	last;
 
+	last = false;
 	while (1)
 	{
-		wait_result = wait(&wstatus);
-		if (wait_result == last_pid)
-			g_env->err_status = WEXITSTATUS(wstatus);
+		if (wait(&wstatus) == last_pid)
+			last = true;
 		else if (WIFSIGNALED(wstatus))
 		{
-			signal = WTERMSIG(wstatus);
-			if (signal == SIGQUIT)
+			if (WTERMSIG(wstatus) == SIGQUIT && !last)
 				ft_putendl_fd("Quit: 3", STDERR_FILENO);
-			if (signal == SIGINT)
+			else if (WTERMSIG(wstatus) == SIGQUIT && last)
+				ft_putstr_fd("", STDERR_FILENO);
+			if (WTERMSIG(wstatus) == SIGINT)
 				ft_putendl_fd("", STDERR_FILENO);
-			g_env->err_status = signal + 128;
+			g_env->err_status = WTERMSIG(wstatus) + 128;
 			break ;
 		}
-		else if (wait_result < 0)
-			if (errno == ECHILD)
-				break ;
+		else if (last)
+			break ;
 	}
+	if (last && WIFSIGNALED(wstatus))
+		g_env->err_status = WEXITSTATUS(wstatus);
 }

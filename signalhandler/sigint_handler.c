@@ -15,6 +15,7 @@
 void	sigint_handler(int sig)
 {
 	(void)sig;
+	g_env->err_status = 1;
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
