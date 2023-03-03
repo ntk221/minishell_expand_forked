@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/02 12:41:46 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/03 11:21:07 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*expand_args(char *args, char *args_free)
 			if (*(args - 1) == '\'')
 				append_single(&args, &new_word);
 			else if (*(args - 1) == '\"')
-				append_double(&args, &new_word, args);
+				append_double(&args, &new_word);
 			args++;
 		}
 		else if (*args == '$' && *(args + 1) == '?')

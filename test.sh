@@ -62,3 +62,11 @@ export hoge=HOGE
 assert 'echo $hoge'
 assert 'echo $$hoge'
 
+# quote
+assert 'echo "$hoge"'
+assert 'echo "                    $hoge"'
+assert 'echo "$PATH"'
+assert 'echo "                    $PATH"'
+assert 'echo "$hoge" | cat < in'
+assert 'echo "           $hoge" | cat < in'
+assert 'echo "           $PATH" | cat < in'
