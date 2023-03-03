@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokencheck.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 18:01:14 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/02 11:32:06 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/03 18:52:18 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ bool	wdcheck(char **str)
 		type = **str;
 		(*str)++;
 		while (**str != type && **str != '\0')
+		{
+			if (**str == '\\')
+				(*str)++;
 			(*str)++;
+		}
 		if (**str == '\0')
 		{
 			printf("bash: syntax error near quote `%s'\n", tmp_str);

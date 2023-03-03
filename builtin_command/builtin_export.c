@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:22:25 by user              #+#    #+#             */
-/*   Updated: 2023/03/02 23:57:33 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/03 11:42:50 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,7 @@ void	replace_word(char *src)
 	while (*src != '\0')
 	{
 		if (*src == '"')
-		{
-			printf("check\n");
 			*src = '\"';
-		}
-		// if (*src == '$')
-		// 	*src = '\$';
 		if (*src == '\\')
 			*src = '\\';
 		src++;

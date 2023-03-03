@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/03/03 11:19:13 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/03 20:14:32 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,8 @@ void		re_token_in_null(t_token **token, t_token **re_token);
 void		re_token_make(t_token **retoken, t_token *token);
 void		remake_token(t_token *token, t_token *re_token);
 void		split_tokenword(t_token **token, t_token **re_token);
+void		expand_export(t_token *token);
+void		export_argsremake(t_token *token);
 
 /************* signal handler ************/
 

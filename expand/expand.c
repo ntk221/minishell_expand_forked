@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/03 11:21:07 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/03 20:25:37 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ t_token	*expand_simplecommand(t_token *token)
 	else
 	{
 		free(re_token);
-		expand_quote(token);
+		expand_export(token);
+		export_argsremake(token);
 		return (token);
 	}
 }
