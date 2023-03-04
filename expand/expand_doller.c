@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:04:15 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/03 11:17:45 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/03 19:04:45 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	quote_append(char type, char **new, char **args)
 {
 	append_char(&(*new), **args);
 	(*args)++;
+	if (**args == '\0')
+		return ;
 	while (**args != type)
 	{
 		append_char(&(*new), **args);
@@ -32,7 +34,13 @@ char	*expand_args_doller(char *args)
 	new_word = NULL;
 	while (*args != '\0')
 	{
-		if (*args == '\'' || *args == '\"')
+		if (*args == '\\')
+		{
+			append_char(&new_word, *args++);
+			if (*args != '\0')
+				append_char(&new_word, *args++);
+		}
+		else if (*args == '\'' || *args == '\"')
 			quote_append(*args, &new_word, &args);
 		else if (*args == '$' && (*(args + 1) == '\0' || *(args + 1) == '\'' \
 		|| *(args + 1) == '\"'))

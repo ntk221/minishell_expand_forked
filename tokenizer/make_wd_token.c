@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_wd_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:37:59 by user              #+#    #+#             */
-/*   Updated: 2023/03/02 12:33:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/04 21:10:48 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ t_token	*word(char **rest, char *line)
 	flag = false;
 	while (*line != '\0' && !is_metacharactert(*line) && !is_blank(*line))
 	{
-		if (*line == '\'' || *line == '\"')
+		if (*line == '\\')
+			line = line + 2;
+		else if (*line == '\'' || *line == '\"')
 		{
 			lackquote_check(&line, &flag, *line);
 			if (flag == true)

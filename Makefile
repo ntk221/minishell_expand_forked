@@ -3,7 +3,7 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/create_token.c\
 			tokenizer/make_op_token.c tokenizer/make_redirect_token.c tokenizer/make_wd_token.c\
 			syntax_check/syntax_check.c syntax_check/tokencheck.c\
 			parser/parser.c parser/parse_word.c parser/parse_redirect.c parser/parser_utils.c\
-			expand/expand.c expand/expand_doller.c expand/expand_appendchar.c expand/expand_specialchar.c\
+			expand/expand.c expand/expand_doller.c expand/expand_appendchar.c expand/expand_specialchar.c expand/export_expand.c\
 			expand/expand_simplecommand.c expand/expand_redirection.c expand/simplecommand_utils.c\
 			exec_func/exec_func.c exec_func/exec_builtin.c exec_func/pipe_func.c exec_func/redirect_file.c\
 			exec_func/exec_absolutepath.c exec_func/exec_utils.c exec_func/stashfd_helper.c\

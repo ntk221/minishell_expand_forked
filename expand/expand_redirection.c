@@ -25,7 +25,7 @@ char	*expand_args_redirect(char *args, char *args_free)
 			if (*(args - 1) == '\'')
 				append_single(&args, &new_word);
 			else if (*(args - 1) == '\"')
-				append_double(&args, &new_word, args);
+				append_double(&args, &new_word);
 			args++;
 		}
 		else if (*args == '$' && *(args + 1) == '?')
