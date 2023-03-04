@@ -6,11 +6,19 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 18:01:14 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/03 18:52:18 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/04 21:23:52 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+bool	only_twowd(char	*str)
+{
+	if (*str == '\\' && (*(str + 1) == '\"' || \
+	*(str + 1) == '\'') && *(str + 2) == '\0')
+		return (true);
+	return (false);
+}
 
 bool	wdcheck(char **str)
 {
@@ -46,11 +54,14 @@ bool	tokwdcheck(t_token *tok)
 	while (tok != NULL && tok->kind != TK_EOF)
 	{
 		str = tok->word;
-		while (*str != '\0')
+		if (only_twowd(str) != true)
 		{
-			if (false == wdcheck(&str))
-				return (false);
-			str++;
+			while (*str != '\0')
+			{
+				if (false == wdcheck(&str))
+					return (false);
+				str++;
+			}
 		}
 		tok = tok->next;
 	}
