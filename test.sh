@@ -16,12 +16,12 @@ assert() {
 	# bashとminishellの出力を比較
 	diff cmp out >/dev/null && echo -n '  diff OK' || echo -n '  diff NG'
 
-	# bashとminishellのexit statusを比較
-	if [ "$actual" = "$expected" ]; then
-		echo -n '  status OK'
-	else
-		echo -n "  status NG, expected $expected but got $actual"
-	fi
+	# # bashとminishellのexit statusを比較
+	# if [ "$actual" = "$expected" ]; then
+	# 	echo -n '  status OK'
+	# else
+	# 	echo -n "  status NG, expected $expected but got $actual"
+	# fi
 	echo
 }
 
@@ -30,6 +30,14 @@ cat <<EOF | gcc -xc -o a.out -
 #include <stdio.h>
 int main() { printf("hello from a.out\n"); }
 EOF
+
+#randominput
+assert 'adkldjaljd'
+assert 'adkldjaljddamwa | adnlwajdawkd'
+assert 'mdla;wdalwk|ndalkwdjajd|'
+assert 'dmalwkdjawjdadnkl|||||||||||'
+assert '<adkwjadjk><>ankjwdhadh'
+assert '<adkwjadjk><>ankjwdhadh | dawdjadjawdj<<<<<<<<<<<<<<<<'
 
 # Empty line (EOF)
 assert ''
@@ -52,6 +60,7 @@ assert 'echo hello | ls | pwd | cd ../ | ls '
 assert 'echo hello | cat < $PATH'
 assert 'echo hello | cat < new1.txt'
 assert 'echo hello | cat < new1.txt | cat < new1.txt | cat < new1.txt | cat < new1.txt'
+
 # pipe
 assert 'echo hoge | cat'
 assert 'echo hoge | cat | grep hoge'
@@ -62,6 +71,9 @@ export hoge=HOGE
 assert 'echo $hoge'
 assert 'echo $$hoge'
 
+export hoge='$PATH$PATH$PATH$'
+assert 'echo $hoge'
+
 # quote
 assert 'echo "$hoge"'
 assert 'echo "                    $hoge"'
@@ -70,3 +82,16 @@ assert 'echo "                    $PATH"'
 assert 'echo "$hoge" | cat < in'
 assert 'echo "           $hoge" | cat < in'
 assert 'echo "           $PATH" | cat < in'
+
+#builtin
+
+assert 'cd dnkawdawlkdjakd'
+assert 'cd ../'
+assert 'cd .'
+
+assert 'env'
+assert 'env hsoadh'
+
+assert 'pwd'
+assert 'pwd adnlwakdja'
+

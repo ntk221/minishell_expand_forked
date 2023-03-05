@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:04:15 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/03 19:04:45 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/05 14:50:26 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ void	expand_doller(char **dst, char **rest, char *p)
 	p++;
 	if (!isalpha(*p) && *p != '_')
 	{
+		if (*p == '\\')
+		{
+			append_char(dst, *(p - 1));
+			*rest = p;
+			return ;
+		}
 		append_char(dst, *(p - 1));
 		append_char(dst, *(p));
 		*rest = p + 1;
