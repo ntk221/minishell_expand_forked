@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:32:50 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/02 11:16:31 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/05 18:24:56 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	ready_redirectionfile(t_node *node)
 void	inout_reconnect(int file_fd, int fd, t_command *command)
 {
 	dup2(file_fd, fd);
-	close(file_fd);
+	if (file_fd != -1)
+		close(file_fd);
 	command->now_in = file_fd;
 }
 
