@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:03:13 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/05 15:54:10 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/05 17:16:41 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ void	append_char(char **s, char c)
 
 void	append_single(char **args, char **new)
 {
-	bool	noaction;
+	//bool	noaction;
 
-	noaction = true;
+	//noaction = true;
 	while (**args != '\'')
 	{
-		noaction = false;
+		//noaction = false;
 		append_char(&(*new), **args);
 		(*args)++;
 	}
-	if (noaction == true)
-		*new = ft_strdup("");
+	//if (noaction == true)
+		//*new = ft_strdup("");
 	(*args)++;
 }
 
