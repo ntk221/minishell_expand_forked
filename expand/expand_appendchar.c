@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:03:13 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/03 19:38:30 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/05 15:54:10 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ static bool	slush_char_ch(char c)
 
 void	append_double(char **args, char **new)
 {
-	bool	noaction;
+	//bool	noaction;
 
-	noaction = true;
+	//noaction = true;
 	while (**args != '\"')
 	{
-		noaction = false;
+		//noaction = false;
 		if (**args == '\\' && slush_char_ch(*(*args + 1)) == true)
 		{
 			(*args)++;
@@ -77,7 +77,7 @@ void	append_double(char **args, char **new)
 			(*args)++;
 		}
 	}
-	if (noaction == true)
-		*new = ft_strdup("");
+	//if (noaction == true)
+		//*new = ft_strdup("");
 	(*args)++;
 }
