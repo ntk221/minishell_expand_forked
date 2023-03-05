@@ -22,14 +22,14 @@ void	ms_cd(char *line, t_command *command)
 	commands = command_to_array(command);
 	if (!commands)
 		fatal_error("malloc");
-	if (commands[1] == NULL)
+	if (commands[1] == NULL || commands[2] != NULL)
 	{
 		free_commands(commands);
 		puts("TODO: print usage");
 		return ;
 	}
 	path = commands[1];
-	if (chdir(path) < 0)
+	if (chdir(path) < 0 || getcwd(NULL, 0) == NULL)
 	{
 		perror("chdir");
 		free_commands(commands);
