@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:04:15 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/05 14:50:26 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/05 16:58:43 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ char	*expand_args_doller(char *args)
 		}
 		else if (*args == '\'' || *args == '\"')
 			quote_append(*args, &new_word, &args);
-		else if (*args == '$' && (*(args + 1) == '\0' || *(args + 1) == '\'' \
-		|| *(args + 1) == '\"'))
+		else if (*args == '$' && *(args + 1) == '\0')
 			append_char(&new_word, *args++);
+		else if (*args == '$' && (*(args + 1) == '\'' \
+		|| *(args + 1) == '\"'))
+			args++;
 		else if (*args == '$' && *(args + 1) == '?')
 			expand_dolleeques(&new_word, &args, args);
 		else if (*args == '$')
